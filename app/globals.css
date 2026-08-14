@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────────────────────────────────────────────────────
+   Design tokens — light, minimal, warm off-white with an orange accent.
+   Serif (Newsreader) for display, grotesk sans (Inter) for body,
+   mono (JetBrains) for labels / metadata / numbers.
+   ─────────────────────────────────────────────────────────────────────── */
+:root {
+  --bg: #fbfaf6;          /* page background — warm paper white */
+  --bg-panel: #f3efe6;    /* recessed panels / cards */
+  --bg-note: #f7f2e7;     /* sticky-note base */
+  --ink: #1b1a17;         /* primary text — warm near-black */
+  --ink-soft: #4a463f;    /* secondary text */
+  --muted: #7c766b;       /* tertiary / captions */
+  --line: rgba(27, 26, 23, 0.12);
+  --line-strong: rgba(27, 26, 23, 0.22);
+  --orange: #e4571b;      /* primary accent */
+  --orange-ink: #b8410f;  /* accent text on light bg (AA) */
+  --orange-wash: rgba(228, 87, 27, 0.1);
+  --red: #c23b2c;         /* secondary accent (bulletin marker) */
+  --blue-rule: #9db7d6;   /* notebook-paper lines */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--orange);
+  color: #fff;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+section[id] {
+  scroll-margin-top: 88px;
+}
+
+/* ── Font role helpers ─────────────────────────────────────────────────── */
+/* League Spartan display — bold + tight. Applied to every heading. */
+.font-display {
+  font-family: var(--font-league), var(--font-inter), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Small uppercase League Spartan eyebrow used across sections. */
+.eyebrow {
+  font-family: var(--font-league), var(--font-inter), sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+
+/* ── Typing caret ──────────────────────────────────────────────────────── */
+.caret::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--orange);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+/* ── Reveal-on-scroll ──────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+/* Hydration watchdog fallback: if JS never boots, force content visible. */
+.no-hydrate .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Sticky-note paper textures ────────────────────────────────────────── */
+.note {
+  background: var(--bg-note);
+  box-shadow:
+    0 1px 1px rgba(27, 26, 23, 0.04),
+    0 8px 22px rgba(27, 26, 23, 0.12);
+  transition: box-shadow 0.2s ease, transform 0.05s ease;
+  touch-action: none;
+}
+.note:hover {
+  box-shadow:
+    0 2px 2px rgba(27, 26, 23, 0.06),
+    0 16px 34px rgba(27, 26, 23, 0.18);
+}
+.note.dragging {
+  box-shadow:
+    0 4px 4px rgba(27, 26, 23, 0.08),
+    0 26px 48px rgba(27, 26, 23, 0.26);
+  cursor: grabbing;
+}
+/* ruled index-card paper */
+.note-ruled {
+  background-color: #f7f2e6;
+  background-image:
+    linear-gradient(var(--blue-rule) 1px, transparent 1px);
+  background-size: 100% 30px;
+  background-position: 0 14px;
+}
+.note-ruled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 26px;
+  width: 1.5px;
+  background: rgba(194, 59, 44, 0.55);
+}
+/* engineering grid paper */
+.note-grid {
+  background-color: #eceae2;
+  background-image:
+    linear-gradient(rgba(27, 26, 23, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 26, 23, 0.1) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+/* manila / plain torn paper */
+.note-plain {
+  background-color: #e7e0d0;
+}
+/* orange accent note */
+.note-accent {
+  background-color: var(--orange);
+  color: #fff2e9;
+}
+
+.hand {
+  font-family: var(--font-caveat), 'Bradley Hand', cursive;
+  font-weight: 600;
+}
+
+/* ── Shelf cards (music · film · books) ────────────────────────────────── */
+/* One shell for all three so the row reads as a single shelf. Dark on warm
+   paper, matching the Listening card this site started from. */
+.shelf-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #0f0f12;
+  color: #e8e8e8;
+  box-shadow: 0 12px 34px rgba(27, 26, 23, 0.18);
+}
+.shelf-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+/* Fixed height, not min-height: the Listening card's three tabs have different
+   natural heights, and letting the tallest win would resize the whole row every
+   time you switched tabs. Sized to the tallest panel (genre). */
+.shelf-card-body {
+  height: 284px;
+  overflow: hidden;
+  padding: 16px;
+}
+.shelf-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+/* ── Expandable work rows ──────────────────────────────────────────────── */
+details.row > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details.row > summary::-webkit-details-marker {
+  display: none;
+}
+details.row[open] .row-chev {
+  transform: rotate(90deg);
+}
+.row-chev {
+  transition: transform 0.25s ease;
+}
+
+/* ── Marquee-free utility: subtle underline sweep on links ─────────────── */
+.link-underline {
+  background-image: linear-gradient(var(--orange), var(--orange));
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: left 100%;
+  transition: background-size 0.3s ease;
+  padding-bottom: 1px;
+}
+.link-underline:hover {
+  background-size: 100% 1.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* Skip link */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  font-weight: 600;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 12px; }
