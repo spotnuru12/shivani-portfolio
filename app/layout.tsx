@@ -4,6 +4,7 @@ import './globals.css'
 import { PROFILE, SITE_URL } from '@/lib/data'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/sections/Footer'
+import { ThemeProvider } from '@/components/ui/ThemeProvider'
 
 // Self-hosted variable fonts (no runtime Google dependency). Files live in
 // app/fonts. League Spartan = bold display; Inter = body/UI; Caveat = the
@@ -52,6 +53,10 @@ export const metadata: Metadata = {
 // bundle never boots, force-reveal after 3.5s so the page is never blank.
 const revealInit = `window.__t=setTimeout(function(){document.documentElement.className+=" no-hydrate"},3500)`
 
+// Runs before first paint so a dark-mode visitor never sees a flash of the
+// light palette. Stored choice wins over the OS preference.
+const themeInit = `(function(){try{var s=localStorage.getItem('shivani-theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;var r=document.documentElement;r.classList.add(d?'theme-dark':'theme-light');r.dataset.theme=d?'dark':'light';r.style.colorScheme=d?'dark':'light'}catch(e){}})()`
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -60,13 +65,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <script dangerouslySetInnerHTML={{ __html: revealInit }} />
       </head>
       <body>
-        <a href="#main" className="skip-link">Skip to content</a>
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <a href="#main" className="skip-link">Skip to content</a>
+          <Navbar />
+          <main id="main">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )

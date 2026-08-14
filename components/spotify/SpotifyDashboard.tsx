@@ -81,7 +81,7 @@ export default function SpotifyDashboard({ className = '' }: { className?: strin
         </div>
         <div
           className="flex shrink-0 items-center gap-1 rounded-full p-1 text-[10px] font-semibold uppercase tracking-[0.12em]"
-          style={{ background: 'rgba(255,255,255,0.07)' }}
+          style={{ background: 'var(--card-line)' }}
         >
           {tabs.map(([key, label]) => (
             <button
@@ -89,10 +89,10 @@ export default function SpotifyDashboard({ className = '' }: { className?: strin
               type="button"
               onClick={() => setTab(key)}
               aria-pressed={tab === key}
-              className="rounded-full px-2.5 py-1 transition-colors"
+              className={`rounded-full px-2.5 py-1 transition-colors ${tab === key ? '' : 'opacity-60'}`}
               style={{
-                background: tab === key ? '#fff' : 'transparent',
-                color: tab === key ? '#0F0F12' : '#b9b9b9',
+                background: tab === key ? 'var(--card-ink)' : 'transparent',
+                color: tab === key ? 'var(--card-bg)' : undefined,
               }}
             >
               {label}
@@ -141,7 +141,7 @@ function NowPanel({ now, recent }: { now: NowPlayingDisplay; recent: RecentTrack
         <>
           <div
             className="mt-4 border-t pt-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] opacity-55"
-            style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+            style={{ borderColor: 'var(--card-line)' }}
           >
             Recently
           </div>
@@ -208,7 +208,7 @@ function GenrePanel({ genres }: { genres: GenreSlice[] }) {
             </div>
             <div
               className="mt-0.5 h-[3px] overflow-hidden rounded-full"
-              style={{ background: 'rgba(255,255,255,0.09)' }}
+              style={{ background: 'var(--card-line)' }}
             >
               <div
                 className="h-full rounded-full"

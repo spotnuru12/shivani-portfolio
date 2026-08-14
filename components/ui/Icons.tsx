@@ -36,8 +36,11 @@ export function LiveDot({
       role="img"
       className="inline-block h-[6px] w-[6px] shrink-0 rounded-full"
       style={{
-        background: live ? '#1DB954' : 'rgba(232,232,232,0.3)',
+        background: live ? '#1DB954' : 'var(--card-line)',
         boxShadow: live ? '0 0 0 3px rgba(29,185,84,0.18)' : 'none',
+        outline: live ? 'none' : '1px solid currentColor',
+        outlineOffset: '-1px',
+        opacity: live ? 1 : 0.5,
       }}
     />
   )

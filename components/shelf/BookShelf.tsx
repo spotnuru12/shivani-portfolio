@@ -44,7 +44,7 @@ export default function BookShelf() {
 
           <div
             className="mt-4 border-t pt-2.5 shelf-label opacity-55"
-            style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+            style={{ borderColor: 'var(--card-line)' }}
           >
             Also on the shelf
           </div>

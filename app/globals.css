@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 /* ───────────────────────────────────────────────────────────────────────
-   Design tokens — light, minimal, warm off-white with an orange accent.
-   Serif (Newsreader) for display, grotesk sans (Inter) for body,
-   mono (JetBrains) for labels / metadata / numbers.
+   Design tokens. Every surface colour is a variable, so the two themes are
+   just two token sets: light is warm paper, dark is the navy/cream pairing.
+   Orange keeps its identity in both, only shifting lightness enough to stay
+   legible on each background.
    ─────────────────────────────────────────────────────────────────────── */
-:root {
+:root,
+.theme-light {
   --bg: #fbfaf6;          /* page background — warm paper white */
   --bg-panel: #f3efe6;    /* recessed panels / cards */
-  --bg-note: #f7f2e7;     /* sticky-note base */
   --ink: #1b1a17;         /* primary text — warm near-black */
   --ink-soft: #4a463f;    /* secondary text */
   --muted: #7c766b;       /* tertiary / captions */
@@ -21,6 +22,46 @@
   --orange-wash: rgba(228, 87, 27, 0.1);
   --red: #c23b2c;         /* secondary accent (bulletin marker) */
   --blue-rule: #9db7d6;   /* notebook-paper lines */
+
+  /* Shelf cards read as dark objects sitting on the paper. */
+  --card-bg: #0f0f12;
+  --card-ink: #e8e8e8;
+  --card-line: rgba(255, 255, 255, 0.07);
+
+  /* Ink line around the portrait on paper; cream on navy (see .theme-dark). */
+  --portrait-outline: #1b1a17;
+  /* Diagonal hatch behind the bulletin board. */
+  --hatch: rgba(27, 26, 23, 0.02);
+}
+
+.theme-dark {
+  --bg: #00314f;
+  --bg-panel: #01243a;
+  --ink: #ffefd2;
+  --ink-soft: rgba(255, 239, 210, 0.82);
+  --muted: rgba(255, 239, 210, 0.6);
+  --line: rgba(255, 239, 210, 0.16);
+  --line-strong: rgba(255, 239, 210, 0.3);
+  --orange: #f29b58;
+  --orange-ink: #f9b478;
+  --orange-wash: rgba(242, 155, 88, 0.12);
+  --red: #e2685b;
+  --blue-rule: #4d6f92;
+
+  /* On navy, a near-black card would read as a hole; lift it instead. */
+  --card-bg: #01243a;
+  --card-ink: #ffefd2;
+  --card-line: rgba(255, 239, 210, 0.16);
+
+  --portrait-outline: #ffefd2;
+  --hatch: rgba(255, 239, 210, 0.045);
+}
+
+/* Sticky notes are physical paper in both themes, so their ink stays dark
+   rather than following --ink (cream on cream would vanish). */
+:root {
+  --bg-note: #f7f2e7;
+  --note-ink: #1b1a17;
 }
 
 * {
@@ -42,6 +83,8 @@ body {
   color: var(--ink);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   line-height: 1.5;
+  /* Ease the theme swap so it reads as a dimmer, not a strobe. */
+  transition: background-color 220ms ease, color 220ms ease;
 }
 
 a {
@@ -51,7 +94,7 @@ a {
 
 ::selection {
   background: var(--orange);
-  color: #fff;
+  color: var(--bg);
 }
 
 *:focus-visible {
@@ -76,8 +119,8 @@ section[id] {
 .eyebrow {
   font-family: var(--font-league), var(--font-inter), sans-serif;
   font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.18em;
+  font-size: 13.5px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--orange-ink);
 }
@@ -117,6 +160,7 @@ section[id] {
 /* ── Sticky-note paper textures ────────────────────────────────────────── */
 .note {
   background: var(--bg-note);
+  color: var(--note-ink);
   box-shadow:
     0 1px 1px rgba(27, 26, 23, 0.04),
     0 8px 22px rgba(27, 26, 23, 0.12);
@@ -182,8 +226,9 @@ section[id] {
   flex-direction: column;
   overflow: hidden;
   border-radius: 16px;
-  background: #0f0f12;
-  color: #e8e8e8;
+  background: var(--card-bg);
+  color: var(--card-ink);
+  border: 1px solid var(--card-line);
   box-shadow: 0 12px 34px rgba(27, 26, 23, 0.18);
 }
 .shelf-card-head {
@@ -192,7 +237,7 @@ section[id] {
   justify-content: space-between;
   gap: 8px;
   padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid var(--card-line);
 }
 /* Fixed height, not min-height: the Listening card's three tabs have different
    natural heights, and letting the tallest win would resize the whole row every
@@ -207,21 +252,6 @@ section[id] {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-}
-
-/* ── Expandable work rows ──────────────────────────────────────────────── */
-details.row > summary {
-  list-style: none;
-  cursor: pointer;
-}
-details.row > summary::-webkit-details-marker {
-  display: none;
-}
-details.row[open] .row-chev {
-  transform: rotate(90deg);
-}
-.row-chev {
-  transition: transform 0.25s ease;
 }
 
 /* ── Marquee-free utility: subtle underline sweep on links ─────────────── */
