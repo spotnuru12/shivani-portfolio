@@ -146,11 +146,11 @@ function TimelineRow({
 
 function Mark({ logo, initials }: { logo?: string; initials: string }) {
   return (
-    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-black/10">
+    <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-black/10">
       {logo ? (
         <Image src={logo} alt="" fill className="object-contain p-1.5" sizes="56px" />
       ) : (
-        <span className="grid h-full w-full place-items-center font-display text-[16px] text-ink">
+        <span className="grid h-full w-full place-items-center font-display text-[18px] text-ink">
           {initials}
         </span>
       )}

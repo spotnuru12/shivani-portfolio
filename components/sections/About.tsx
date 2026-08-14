@@ -58,7 +58,7 @@ export default function About() {
             <p className="text-[12px] text-muted mb-4">
               a few pictures. drop yours in when you have them
             </p>
-            <div className="relative h-[420px] md:h-[460px]">
+            <div className="relative h-[520px] md:h-[580px]">
               {POLAROIDS.map((shot, i) => (
                 <Polaroid key={shot.id} shot={shot} index={i} />
               ))}

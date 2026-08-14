@@ -375,9 +375,9 @@ section[id] {
 .polaroid-caption {
   font-family: var(--font-caveat), 'Bradley Hand', cursive;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1.2;
-  padding: 12px 4px 14px;
+  padding: 14px 6px 16px;
   text-align: center;
 }
 
