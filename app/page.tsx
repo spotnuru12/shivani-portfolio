@@ -12,9 +12,9 @@ export default function Home() {
       <Hero />
       <Work />
       <About />
+      <Shelf />
       <Projects />
       <Toolkit />
-      <Shelf />
       <Contact />
     </>
   )

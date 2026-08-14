@@ -10,7 +10,7 @@ export default function Contact() {
           <h2 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[1.02] tracking-[-0.03em]">
             let&apos;s build
             <br />
-            something <span className="word-cool">cool</span>
+            something <span className="word-cool text-[1.05em]">cool</span>
             <span className="inline-block ml-2" style={{ verticalAlign: '-6px' }}>
               <SmileMascot size={64} />
             </span>

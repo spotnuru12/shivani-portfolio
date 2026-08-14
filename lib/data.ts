@@ -18,10 +18,10 @@ export const PROFILE = {
   linkedin: 'https://linkedin.com/in/shivanipotnuru',
   resume:
     'https://1drv.ms/b/c/796c1c094714b749/IQBpbMNQIu_fTKxRTsmsHhXdAd6jGVWQFeYLjr3sCK_E8wg',
-  // Verb-first claim in place of the usual "intersection of X, Y, Z" line —
-  // the fields still rotate, just inside the hero's code card.
+  // Verb-first claim. The rotating fields live in the about polaroids now,
+  // not in a fake source file.
   lead:
-    'I build data and AI systems, then check whether they actually hold up for the people using them.',
+    'I study CS and stats at UW–Madison. Most of what I make is for people the default design forgot: a label they cannot read, a form that was not written for them, a model that sounds confident and is wrong.',
   // Rotating values for the `focus` key in the hero code card.
   typing: [
     'human-computer interaction',
@@ -31,7 +31,7 @@ export const PROFILE = {
     'health tech',
   ],
   intro:
-    "I'm a Computer Science + Statistics student at UW–Madison who likes taking projects end to end — from research and design through the engineering that ships them.",
+    "I've worked across pharma and clinical data, HCI research, and health insurance. Same thread through all of it: sit with the people who have to use the thing, then build until it stops being confusing.",
 } as const
 
 // Big animated stat blocks in the hero (Peter-style). `live` counters are
@@ -61,6 +61,20 @@ export const BELIEFS: Sticky[] = [
   { id: 'moments', text: 'Design for real moments, not demos.', kind: 'plain', rotate: -2, font: 'serif' },
   { id: 'research', text: 'Good research is just careful listening.', kind: 'accent', rotate: 3, font: 'hand' },
   { id: 'ship', text: 'Ship, then learn. Repeat.', kind: 'plain', rotate: 6, font: 'mono' },
+]
+
+// Tilted Polaroids in About. `src` is optional so empty frames can sit as
+// placeholders until you drop photos in public/.
+export interface PolaroidShot {
+  id: string
+  caption: string
+  src?: string
+}
+export const POLAROIDS: PolaroidShot[] = [
+  { id: 'lab', caption: 'MadAbility Lab' },
+  { id: 'di', caption: 'Design Interactive' },
+  { id: 'madison', caption: 'Madison, obviously' },
+  { id: 'pharavo', caption: 'Pharavo, still in progress' },
 ]
 
 // ── Experience ───────────────────────────────────────────────────────────

@@ -20,7 +20,14 @@ export default function BlobPortrait({
     'M100,8 C140,2 178,28 188,68 C198,108 178,148 150,172 C122,196 78,200 50,176 C22,152 4,116 6,80 C8,44 36,18 64,12 C72,10 84,10 100,8 Z'
 
   return (
-    <svg viewBox="0 0 200 200" width={size} height={size} role="img" aria-label={label}>
+    <svg
+      viewBox="0 0 200 200"
+      width={size}
+      height={size}
+      role="img"
+      aria-label={label}
+      className="h-full w-full"
+    >
       <defs>
         <clipPath id={`blob-${id}`}>
           <path d={path} />

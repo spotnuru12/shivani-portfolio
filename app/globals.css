@@ -28,8 +28,8 @@
   --card-ink: #e8e8e8;
   --card-line: rgba(255, 255, 255, 0.07);
 
-  /* Ink line around the portrait on paper; cream on navy (see .theme-dark). */
-  --portrait-outline: #1b1a17;
+  /* Orange outline around the portrait in both themes. */
+  --portrait-outline: var(--orange);
   /* Diagonal hatch behind the bulletin board. */
   --hatch: rgba(27, 26, 23, 0.02);
   /* Shelf ledge: drawn in ink rather than faked as wood, so it sits with the
@@ -63,7 +63,7 @@
   --card-ink: #ffefd2;
   --card-line: rgba(255, 239, 210, 0.16);
 
-  --portrait-outline: #ffefd2;
+  --portrait-outline: var(--orange);
   --hatch: rgba(255, 239, 210, 0.045);
   --ledge-top: rgba(255, 239, 210, 0.5);
   --ledge-face: rgba(255, 239, 210, 0.22);
@@ -144,11 +144,12 @@ section[id] {
 }
 
 /* One italic serif word — "cool" in the closer. Georgia so we don't load a
-   fourth webfont for a single glyph. */
+   fourth webfont for a single glyph. !important beats the heading's display font. */
 .word-cool {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 400;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  letter-spacing: 0;
   color: var(--orange);
 }
 
@@ -344,6 +345,40 @@ section[id] {
   border-color: var(--orange);
   transform: scale(1.25);
   box-shadow: 0 0 0 4px var(--orange-wash);
+}
+
+/* ── Polaroids ─────────────────────────────────────────────────────────── */
+.polaroid {
+  background: #f7f4ec;
+  color: #1b1a17;
+  padding: 10px 10px 0;
+  box-shadow:
+    0 1px 1px rgba(27, 26, 23, 0.06),
+    0 12px 28px rgba(27, 26, 23, 0.16);
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+.polaroid:hover {
+  z-index: 4;
+  box-shadow:
+    0 2px 2px rgba(27, 26, 23, 0.08),
+    0 18px 36px rgba(27, 26, 23, 0.22);
+}
+.polaroid-photo {
+  aspect-ratio: 1;
+  background:
+    repeating-linear-gradient(
+      -18deg,
+      #e8e2d4 0 8px,
+      #efe9db 8px 16px
+    );
+}
+.polaroid-caption {
+  font-family: var(--font-caveat), 'Bradley Hand', cursive;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.2;
+  padding: 12px 4px 14px;
+  text-align: center;
 }
 
 /* ── Marquee-free utility: subtle underline sweep on links ─────────────── */
