@@ -74,7 +74,7 @@ export interface Experience {
   loc: string
   blurb: string
   stack: string[]
-  status?: 'current'
+  status?: 'incoming' | 'current'
 }
 
 export const EXPERIENCE: Experience[] = [
@@ -114,7 +114,7 @@ export const EXPERIENCE: Experience[] = [
     role: 'AI/ML Project Intern',
     org: 'Spectacle Health',
     logo: '/logos/spectacle-health.png',
-    dates: 'Jan – May 2025',
+    dates: 'Jan 2025 – May 2025',
     loc: 'Madison, WI',
     blurb:
       'Built a document Q&A system over dense health-insurance paperwork using Python, NLP, semantic search, and RAG — a Dockerized Weaviate vector database with Hugging Face embeddings across 20+ schemas. Traced retrieval failure modes through edge-case testing and shipped the system to the client.',
@@ -403,6 +403,12 @@ export const SKILL_DEFINITIONS: Record<string, string> = {
 export const SHELF_HEADING = 'What I’m into lately'
 export const SHELF_BLURB =
   'Outside of classes and labs. The music and film shelves update themselves; the books I keep by hand.'
+
+/**
+ * The handwritten strip above the shelf. `reading` comes from BOOKS and
+ * `watching` from the Letterboxd feed, so only the last one is by hand.
+ */
+export const CURRENTLY_INTO = 'buttons that tell you what they do'
 
 /**
  * Letterboxd handle, e.g. 'petezha' for letterboxd.com/petezha.

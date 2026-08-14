@@ -12,34 +12,34 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line">
+    <footer className="closer border-t" style={{ borderColor: 'rgba(255, 239, 210, 0.16)' }}>
       <div className="max-w-content mx-auto px-6 md:px-10 py-10 flex flex-wrap items-center justify-between gap-8">
         <div>
           <div className="font-display text-[16px] inline-flex items-center gap-2">
             Designed and built by {PROFILE.name}
             <Smile size={17} strokeWidth={2} className="text-orange" />
           </div>
-          <div className="mt-1.5 text-[13.5px] text-ink-soft">
+          <div className="mt-1.5 text-[13.5px]" style={{ color: 'rgba(255, 239, 210, 0.82)' }}>
             Built with{' '}
             {BUILT_WITH.map((tech, i) => (
               <span key={tech}>
-                <span className="text-orange-ink">{tech}</span>
+                <span className="text-orange">{tech}</span>
                 {i < BUILT_WITH.length - 1 ? ', ' : ' '}
               </span>
             ))}
-            · deployed on <span className="text-orange-ink">Vercel</span> · designed in{' '}
-            <span className="text-orange-ink">Figma</span> · © {new Date().getFullYear()}
+            · deployed on <span className="text-orange">Vercel</span> · designed in{' '}
+            <span className="text-orange">Figma</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-5 text-ink-soft">
+        <div className="flex items-center gap-5" style={{ color: 'rgba(255, 239, 210, 0.85)' }}>
           {LINKS.map(({ href, label, Icon, external }) => (
             <a
               key={label}
               href={href}
               aria-label={label}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="hover:text-orange-ink transition-colors"
+              className="hover:text-orange transition-colors"
             >
               <Icon size={18} strokeWidth={1.75} />
             </a>

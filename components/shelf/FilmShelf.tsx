@@ -20,13 +20,6 @@ export default async function FilmShelf() {
         }))
       : FILMS.map((f) => ({ title: f.title, year: f.year, rating: f.rating, poster: null }))
 
-  const aside =
-    data?.avgRecentRating != null
-      ? `${data.avgRecentRating.toFixed(1)}★ avg`
-      : data?.filmsThisYear != null
-        ? `${data.filmsThisYear} this year`
-        : null
-
   return (
     <div className="shelf-card h-full">
       <div className="shelf-card-head">
@@ -35,10 +28,7 @@ export default async function FilmShelf() {
           <span className="truncate text-[13px] font-semibold">Watching</span>
           <LiveDot live={!!data} label="Letterboxd" />
         </div>
-        <div className="flex shrink-0 items-center gap-2">
-          {aside && <span className="text-[10px] tabular-nums opacity-55">{aside}</span>}
-          <RefreshFilms />
-        </div>
+        <RefreshFilms />
       </div>
 
       <div className="shelf-card-body">

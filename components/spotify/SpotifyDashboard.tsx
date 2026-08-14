@@ -24,21 +24,21 @@ function useDashboardView() {
     song: mock.nowPlaying.song,
     artist: mock.nowPlaying.artist,
     album: mock.nowPlaying.album,
-    cover: null,
+    cover: mock.nowPlaying.cover ?? null,
     elapsed: mock.nowPlaying.duration,
     duration: mock.nowPlaying.duration,
   }
   const fallbackRecent: RecentTrackDisplay[] = mock.recent.map((t) => ({
     song: t.song,
     artist: t.artist,
-    cover: null,
+    cover: t.cover ?? null,
     when: t.when ?? '',
   }))
   const fallbackTopTracks: TopTrackDisplay[] = mock.topTracks.map((t) => ({
     song: t.song,
     artist: t.artist,
     album: t.album ?? '',
-    cover: null,
+    cover: t.cover ?? null,
     duration: t.duration ?? '',
   }))
   const fallbackTopArtist: TopArtistSummary = { ...mock.topArtist, cover: null }

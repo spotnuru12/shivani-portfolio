@@ -53,7 +53,7 @@ export default function Navbar() {
                 <a
                   href={`#${id}`}
                   aria-current={active === id ? 'true' : undefined}
-                  className="relative text-[16px] md:text-[17px] px-3 py-1.5 rounded-md transition-colors hover:text-orange-ink"
+                  className="relative text-[18px] md:text-[19px] px-3 py-1.5 rounded-md transition-colors hover:text-orange-ink"
                   style={{ color: active === id ? 'var(--orange-ink)' : 'var(--ink-soft)' }}
                 >
                   {label}

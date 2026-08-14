@@ -13,7 +13,7 @@ export default function SectionHeading({
     <>
       <p className="eyebrow mb-4">{eyebrow}</p>
       <div className="flex items-center gap-6">
-        <h2 className="font-display text-[36px] md:text-[52px] leading-[1.02] sm:whitespace-nowrap">
+        <h2 className="font-display text-[42px] md:text-[60px] leading-[1.02] sm:whitespace-nowrap">
           {title}
         </h2>
         {rule && <span aria-hidden className="hidden sm:block h-px flex-1 bg-line" />}
