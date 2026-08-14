@@ -1,6 +1,7 @@
-import { BELIEFS, BELIEFS_HEADING, EDUCATION, SKILLS } from '@/lib/data'
+import { BELIEFS, BELIEFS_HEADING, EDUCATION } from '@/lib/data'
 import StickyNote from '@/components/ui/StickyNote'
 import Reveal from '@/components/ui/Reveal'
+import SectionHeading from '@/components/ui/SectionHeading'
 
 // Scatter positions for the bulletin board (left/top %, and pixel size).
 const SPOTS = [
@@ -21,11 +22,10 @@ export default function About() {
   return (
     <section id="about" className="max-w-content mx-auto px-6 md:px-10 py-20 md:py-24">
       <Reveal>
-        <p className="eyebrow mb-3">about</p>
-        <h2 className="font-display text-[30px] md:text-[38px] leading-[1.05]">A bit about me.</h2>
+        <SectionHeading eyebrow="about" title="A bit about me" />
       </Reveal>
 
-      <div className="mt-9 grid md:grid-cols-12 gap-10">
+      <div className="mt-11 grid md:grid-cols-12 gap-10">
         <div className="md:col-span-6">
           <Reveal className="space-y-4 text-ink-soft leading-relaxed max-w-prose">
             <p className="text-[19px] md:text-[21px] text-ink leading-snug">
@@ -39,27 +39,28 @@ export default function About() {
             <p className="text-[16px] md:text-[17px]">
               These days I&apos;m focused on <span className="text-orange-ink font-medium">accessibility and
               vision-language models</span> at the MadAbility Lab, building a medication-companion
-              app called <span className="text-orange-ink font-medium">Pharavo</span>, and supporting CRM
-              data quality at TruStage.
+              app called <span className="text-orange-ink font-medium">Pharavo</span>, and turning
+              campaign and web data into something readable at TruStage.
             </p>
           </Reveal>
 
-          {/* Education + skills */}
+          {/* Education. The tools themselves live in the Toolkit section. */}
           <Reveal delay={80} className="mt-8 rounded-2xl border border-line bg-panel/60 p-6">
             <div className="font-display text-[20px]">{EDUCATION.school}</div>
-            <div className="font-sans text-[13px] text-orange-ink mt-1">{EDUCATION.degree}</div>
+            <div className="text-[13.5px] text-orange-ink mt-1">{EDUCATION.degree}</div>
             <div className="text-[13px] text-muted mt-0.5">{EDUCATION.dates} · {EDUCATION.honors}</div>
-            <div className="mt-5 space-y-3">
-              {Object.entries(SKILLS).map(([group, items]) => (
-                <div key={group} className="grid grid-cols-[90px_1fr] gap-3 items-start">
-                  <div className="font-sans text-[11px] uppercase tracking-wider text-muted pt-0.5">{group}</div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {items.map((s) => (
-                      <span key={s} className="font-sans text-[11px] rounded border border-line px-1.5 py-0.5 text-ink-soft">{s}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            <div className="mt-5">
+              <div className="text-[11px] uppercase tracking-wider text-muted mb-2">Coursework</div>
+              <div className="flex flex-wrap gap-1.5">
+                {EDUCATION.coursework.map((c) => (
+                  <span
+                    key={c}
+                    className="text-[12px] rounded border border-line px-2 py-0.5 text-ink-soft"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>
@@ -68,7 +69,7 @@ export default function About() {
         <div className="md:col-span-6">
           <Reveal>
             <p className="font-sans text-[12px] text-muted mb-3">{BELIEFS_HEADING} <span className="text-orange-ink">— drag them around</span></p>
-            <div className="relative h-[440px] rounded-2xl border border-dashed border-line bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(27,26,23,0.015)_10px,rgba(27,26,23,0.015)_20px)] overflow-hidden">
+            <div className="relative h-[440px] rounded-2xl border border-dashed border-line bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--hatch)_10px,var(--hatch)_20px)] overflow-hidden">
               {BELIEFS.map((b, i) => (
                 <StickyNote
                   key={b.id}

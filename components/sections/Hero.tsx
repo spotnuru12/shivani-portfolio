@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { PROFILE } from '@/lib/data'
-import Typewriter from '@/components/ui/Typewriter'
 import Reveal from '@/components/ui/Reveal'
+import BlobPortrait from '@/components/ui/BlobPortrait'
+import CodeCard from '@/components/ui/CodeCard'
 
 const SOCIALS = [
   { href: PROFILE.linkedin, label: 'LinkedIn', Icon: Linkedin, external: true },
@@ -19,15 +19,13 @@ export default function Hero() {
             <h1 className="font-display text-[56px] md:text-[84px] leading-[0.92] tracking-[-0.03em]">
               Hi, I&apos;m {PROFILE.first}.
             </h1>
-            <p className="mt-6 text-[20px] md:text-[24px] text-ink-soft leading-snug">
-              I work at the intersection of{' '}
-              <span className="text-orange-ink font-medium">
-                <Typewriter words={[...PROFILE.typing]} />
-              </span>
+            <p className="mt-6 max-w-prose text-[19px] md:text-[22px] text-ink-soft leading-snug">
+              {PROFILE.lead}
             </p>
-            <p className="mt-6 max-w-prose text-[16px] md:text-[17px] text-ink-soft leading-relaxed">
-              {PROFILE.intro}
-            </p>
+
+            <div className="mt-7">
+              <CodeCard />
+            </div>
 
             <div className="mt-8 flex items-center gap-3">
               {SOCIALS.map(({ href, label, Icon, external }) => (
@@ -45,19 +43,25 @@ export default function Hero() {
                 href={PROFILE.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 inline-flex items-center rounded-full bg-orange text-white px-5 h-11 text-[15px] font-medium hover:opacity-90 transition-opacity"
+                className="ml-1 inline-flex items-center rounded-full bg-orange text-bg px-5 h-11 text-[15px] font-medium hover:opacity-90 transition-opacity"
               >
-                Résumé
+                Resume
               </a>
             </div>
           </Reveal>
         </div>
 
         <div className="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-end">
-          <Reveal className="relative">
-            <div className="absolute -inset-3 rounded-[30px] bg-orange/10 rotate-[2.5deg]" aria-hidden />
-            <div className="relative h-[280px] w-[280px] md:h-[330px] md:w-[330px] overflow-hidden rounded-[26px] border border-line shadow-sm">
-              <Image src="/headshot.jpeg" alt={PROFILE.name} fill className="object-cover" priority sizes="330px" />
+          <Reveal>
+            {/* Blob-masked portrait with an outline and loose accent dots. */}
+            <div className="relative h-[320px] w-[320px]">
+              <span className="absolute -top-1 left-[58%] h-4 w-4 rounded-full bg-orange" aria-hidden />
+              <span className="absolute top-[14%] -right-1 h-2.5 w-2.5 rounded-full bg-ink opacity-70" aria-hidden />
+              <span className="absolute bottom-7 -left-2 h-3 w-3 rounded-full bg-ink opacity-50" aria-hidden />
+              <span className="absolute bottom-[16%] right-[6%] h-2 w-2 rounded-full bg-orange opacity-85" aria-hidden />
+              <div className="absolute inset-[10px]">
+                <BlobPortrait size={300} label={`Portrait of ${PROFILE.name}`} />
+              </div>
             </div>
           </Reveal>
         </div>

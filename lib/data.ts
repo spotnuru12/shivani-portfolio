@@ -18,8 +18,18 @@ export const PROFILE = {
   linkedin: 'https://linkedin.com/in/shivanipotnuru',
   resume:
     'https://1drv.ms/b/c/796c1c094714b749/IQBpbMNQIu_fTKxRTsmsHhXdAd6jGVWQFeYLjr3sCK_E8wg',
-  // Rotating words for the typing hero.
-  typing: ['HCI', 'machine learning', 'data', 'accessibility', 'health tech'],
+  // Verb-first claim in place of the usual "intersection of X, Y, Z" line —
+  // the fields still rotate, just inside the hero's code card.
+  lead:
+    'I build data and AI systems, then check whether they actually hold up for the people using them.',
+  // Rotating values for the `focus` key in the hero code card.
+  typing: [
+    'human-computer interaction',
+    'machine learning',
+    'accessibility',
+    'data engineering',
+    'health tech',
+  ],
   intro:
     "I'm a Computer Science + Statistics student at UW–Madison who likes taking projects end to end — from research and design through the engineering that ships them.",
 } as const
@@ -54,6 +64,8 @@ export const BELIEFS: Sticky[] = [
 ]
 
 // ── Experience ───────────────────────────────────────────────────────────
+// `blurb` carries the substance directly — the timeline shows everything up
+// front instead of hiding bullets behind a disclosure.
 export interface Experience {
   role: string
   org: string
@@ -61,25 +73,20 @@ export interface Experience {
   dates: string
   loc: string
   blurb: string
-  did: string[] // "what I actually did" expandable bullets
   stack: string[]
-  status?: 'incoming' | 'current'
+  status?: 'current'
 }
 
 export const EXPERIENCE: Experience[] = [
   {
     role: 'Data Operations Intern',
     org: 'TruStage · Filene Research Institute',
-    dates: 'May – Aug 2026',
+    dates: 'May 2026 – Present',
     loc: 'Madison, WI',
-    status: 'incoming',
+    status: 'current',
     blurb:
-      'Supporting Salesforce CRM data quality, reporting, and automation for Filene Research Institute.',
-    did: [
-      'Improving CRM data quality and reporting workflows across the research org.',
-      'Building automation to cut manual reporting overhead.',
-    ],
-    stack: ['Salesforce', 'Data Quality', 'Reporting'],
+      'Built an engagement analytics dashboard consolidating campaign and web data across Salesforce and GA4, and Python reconciliation scripts that cut 5–6 hours of manual cleanup per cycle. Supporting the Salesforce-to-Data 360 migration by mapping data flows and piloting Tableau Next workflows.',
+    stack: ['Salesforce', 'GA4', 'Python', 'Tableau'],
   },
   {
     role: 'Undergraduate Research Assistant',
@@ -89,25 +96,18 @@ export const EXPERIENCE: Experience[] = [
     loc: 'Madison, WI',
     status: 'current',
     blurb:
-      'Evaluating vision-language models in MR/AR for an HCI accessibility project.',
-    did: [
-      'Analyzed 500+ Meta Quest apps with a structured classification framework to surface accessibility trends.',
-      'Evaluating VLMs for MR/AR accessibility; contributing to a paper in preparation.',
-    ],
-    stack: ['HCI', 'Accessibility', 'VLM Eval', 'MR/AR'],
+      'Leading user-needs discovery for an HCI accessibility project — evaluating vision-language models to find where they fall short of genuinely useful audio descriptions for blind and low-vision users. Analyzed 500+ Meta Quest apps with a structured MR framework; contributing to a paper in preparation.',
+    stack: ['HCI', 'Accessibility', 'LLM Eval', 'MR/AR'],
   },
   {
-    role: 'Vice President · Product Manager',
+    role: 'Vice President',
     org: 'Design Interactive · UW–Madison',
     logo: '/logos/design-interactive.png',
-    dates: 'May 2025 – Present',
+    dates: 'Jan 2025 – Present',
     loc: 'Madison, WI',
+    status: 'current',
     blurb:
-      'Lead operations across a 14-member exec team spanning marketing, comms, and web design.',
-    did: [
-      'Oversee managers across 3+ local client projects each semester.',
-      'Support execution and delivery of human-centered design solutions.',
-    ],
+      'Lead operations for a 14-member exec team — strategy, sponsorship, finances, and agile workflows — and oversee 3+ Madison-area client projects each semester, helping teams carry user needs from discovery through delivery.',
     stack: ['Leadership', 'Product', 'UX Strategy'],
   },
   {
@@ -117,11 +117,7 @@ export const EXPERIENCE: Experience[] = [
     dates: 'Jan – May 2025',
     loc: 'Madison, WI',
     blurb:
-      'Engineered an end-to-end RAG pipeline over health-insurance documents.',
-    did: [
-      'Built a Dockerized Weaviate vector DB with Hugging Face embeddings across 20+ document schemas.',
-      'Delivered the production semantic-search system to the client.',
-    ],
+      'Built a document Q&A system over dense health-insurance paperwork using Python, NLP, semantic search, and RAG — a Dockerized Weaviate vector database with Hugging Face embeddings across 20+ schemas. Traced retrieval failure modes through edge-case testing and shipped the system to the client.',
     stack: ['RAG', 'Weaviate', 'Hugging Face', 'Python', 'Docker'],
   },
   {
@@ -131,12 +127,8 @@ export const EXPERIENCE: Experience[] = [
     dates: 'Jun 2022 – Sep 2024',
     loc: 'Middleton, WI',
     blurb:
-      'Built ETL pipelines and validation tooling across multiple clinical studies.',
-    did: [
-      'Built ETL pipelines in Python and R for 10+ workflows across 3 studies, cutting audit prep time by 45%.',
-      'Designed 25+ SQL-based validation checks and 6+ Tableau dashboards for cross-study monitoring.',
-    ],
-    stack: ['SQL', 'Python', 'R', 'Tableau', 'AWS'],
+      'Built automated ETL pipelines in Python and R for 10+ recurring workflows across 3 clinical studies, cutting audit prep time 45% while holding 100% IRB compliance. Designed 25+ SQL validation checks and 6+ Tableau dashboards to catch bad data before it reached downstream analytics.',
+    stack: ['SQL', 'Python', 'R', 'Tableau', 'ETL'],
   },
   {
     role: 'Research Intern',
@@ -145,11 +137,7 @@ export const EXPERIENCE: Experience[] = [
     dates: 'Jun 2022 – Feb 2024',
     loc: 'Santa Cruz, CA',
     blurb:
-      'HCI research on gratitude in online communities (PACMHCI / CSCW 2025).',
-    did: [
-      'Co-authored “Exploring Communal Gratitude in Online Communities.”',
-      'Ran thematic analysis on user-research data and synthesized behavioral patterns.',
-    ],
+      'Co-authored “Exploring Communal Gratitude in Online Communities” (PACMHCI / CSCW 2025) — ran thematic analysis on user-research data and turned it into design implications for prosocial platform features.',
     stack: ['HCI Research', 'Thematic Analysis'],
   },
 ]
@@ -330,17 +318,89 @@ export const EDUCATION = {
 }
 
 export const SKILLS: Record<string, string[]> = {
-  Languages: ['Python', 'SQL', 'R', 'Java', 'C', 'JavaScript', 'TypeScript'],
-  'ML & Data': ['RAG', 'NLP', 'LLM Evaluation', 'ETL', 'Pandas', 'Scikit-learn'],
-  Technologies: ['React Native', 'React', 'Next.js', 'FastAPI', 'Weaviate', 'Docker'],
-  Tools: ['PostgreSQL', 'MongoDB', 'AWS', 'Git', 'Figma', 'Tableau'],
+  Languages: ['Python', 'SQL', 'R', 'Java', 'C', 'JavaScript', 'TypeScript', 'HTML/CSS'],
+  Technologies: [
+    'React Native',
+    'React',
+    'Next.js',
+    'FastAPI',
+    'Weaviate',
+    'Hugging Face',
+    'Pandas',
+    'Scikit-learn',
+    'Docker',
+    'Tailwind CSS',
+  ],
+  Methods: [
+    'RAG',
+    'NLP',
+    'LLM Evaluation',
+    'ETL',
+    'Data Validation',
+    'User Research',
+    'A/B Testing',
+    'Usability Testing',
+  ],
+  Tools: [
+    'PostgreSQL',
+    'SQLite',
+    'MongoDB',
+    'AWS',
+    'Node.js',
+    'Git',
+    'Figma',
+    'Tableau',
+    'GA4',
+    'Salesforce',
+  ],
+}
+
+// Hover/focus copy for each chip in the Toolkit. Plain-English, so a recruiter
+// reading the grid learns something instead of just scanning logos.
+export const SKILL_DEFINITIONS: Record<string, string> = {
+  Python: 'General-purpose language. Daily driver for data, ML, and backend work.',
+  SQL: 'Structured Query Language. Pulling, joining, and validating data.',
+  R: 'Statistical programming language. My go-to for regression and data viz.',
+  Java: 'Object-oriented language. Class projects and algorithms coursework.',
+  C: 'Low-level systems programming. Memory, pointers, the classics.',
+  JavaScript: 'The language of the web. Interactive UIs and scripting.',
+  TypeScript: 'Typed JavaScript. Catches bugs before they ship.',
+  'HTML/CSS': 'The building blocks of every web page I make.',
+  'React Native': 'Cross-platform mobile. What Pharavo is built on.',
+  React: 'Component-driven UI library for the web.',
+  'Next.js': 'React framework for fast, production-ready sites — including this one.',
+  FastAPI: 'Python web framework for building APIs quickly.',
+  Weaviate: 'Open-source vector database. Powered the RAG over insurance docs.',
+  'Hugging Face': 'Open-source model and embeddings hub.',
+  Pandas: 'Python data analysis library. Dataframe-everything.',
+  'Scikit-learn': 'Classical ML in Python — regression, classification, clustering.',
+  Docker: 'Container runtime. Ship the environment, not just the code.',
+  'Tailwind CSS': 'Utility-first CSS framework. Used to build this site.',
+  RAG: 'Retrieval-Augmented Generation — grounding LLMs in your own documents.',
+  NLP: 'Natural Language Processing — making sense of text at scale.',
+  'LLM Evaluation': 'Scoring model outputs against structured criteria to find capability gaps.',
+  ETL: 'Extract, Transform, Load — the plumbing under every data pipeline.',
+  'Data Validation': 'Business-rule checks that catch bad data before it spreads.',
+  'User Research': 'Interviews and discovery work to learn what people actually need.',
+  'A/B Testing': 'Shipping two versions and letting the data pick the winner.',
+  'Usability Testing': 'Watching real people use it. How the WCV redesign hit a 91 SUS.',
+  PostgreSQL: 'Open-source relational database. Boring — in the good way.',
+  SQLite: 'Lightweight embedded database. Perfect for prototypes.',
+  MongoDB: 'Document-store NoSQL database.',
+  AWS: 'Cloud infrastructure. EC2, S3, Lambda, the usual suspects.',
+  'Node.js': 'JavaScript runtime. Server-side JS and build tooling.',
+  Git: 'Version control. Branches, PRs, the works.',
+  Figma: 'Where every design starts. UI, prototyping, and handoff.',
+  Tableau: 'BI dashboards. Built 6+ for cross-study clinical monitoring.',
+  GA4: 'Google Analytics 4. Web engagement data for the TruStage dashboard.',
+  Salesforce: 'CRM platform. Campaign and audience data at Filene.',
 }
 
 // ── The shelf: music · film · books ──────────────────────────────────────
 // Music is live from Spotify, film is live from the Letterboxd RSS diary, and
 // books are hand-curated here. Michelle Liu's "Shelf", but three-up.
 
-export const SHELF_HEADING = 'What I’m into lately.'
+export const SHELF_HEADING = 'What I’m into lately'
 export const SHELF_BLURB =
   'Outside of classes and labs. The music and film shelves update themselves; the books I keep by hand.'
 

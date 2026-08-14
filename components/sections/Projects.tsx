@@ -1,16 +1,16 @@
 import Link from 'next/link'
 import { PROJECTS } from '@/lib/data'
 import Reveal from '@/components/ui/Reveal'
+import SectionHeading from '@/components/ui/SectionHeading'
 
 export default function Projects() {
   return (
     <section id="projects" className="max-w-content mx-auto px-6 md:px-10 py-20 md:py-24">
       <Reveal>
-        <p className="eyebrow mb-4">projects</p>
-        <h2 className="font-display text-[30px] md:text-[38px] leading-tight">Things I&apos;ve built.</h2>
+        <SectionHeading eyebrow="projects" title="Things I've built" />
       </Reveal>
 
-      <div className="mt-10 grid sm:grid-cols-2 gap-5">
+      <div className="mt-11 grid sm:grid-cols-2 gap-5">
         {PROJECTS.map((p, i) => (
           <Reveal key={p.slug} as="article" delay={i * 50}>
             <Link
