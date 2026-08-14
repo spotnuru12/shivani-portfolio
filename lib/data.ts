@@ -348,7 +348,7 @@ export const SHELF_BLURB =
  * Letterboxd handle, e.g. 'petezha' for letterboxd.com/petezha.
  * Leave empty to keep the curated FILMS list below instead.
  */
-export const LETTERBOXD_USERNAME = ''
+export const LETTERBOXD_USERNAME = 'spotnuru'
 
 /** Shown when Letterboxd isn't wired up yet (or the feed is unreachable). */
 export interface Film {
