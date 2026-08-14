@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { LetterboxdIcon, LiveDot } from '@/components/ui/Icons'
+import RefreshFilms from '@/components/shelf/RefreshFilms'
 import { FILMS } from '@/lib/data'
 import { getLetterboxd, stars, type Film } from '@/lib/letterboxd'
 
@@ -34,9 +35,10 @@ export default async function FilmShelf() {
           <span className="truncate text-[13px] font-semibold">Watching</span>
           <LiveDot live={!!data} label="Letterboxd" />
         </div>
-        {aside && (
-          <span className="shrink-0 text-[10px] tabular-nums opacity-55">{aside}</span>
-        )}
+        <div className="flex shrink-0 items-center gap-2">
+          {aside && <span className="text-[10px] tabular-nums opacity-55">{aside}</span>}
+          <RefreshFilms />
+        </div>
       </div>
 
       <div className="shelf-card-body">
