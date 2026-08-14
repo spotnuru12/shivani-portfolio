@@ -1,32 +1,31 @@
 import { PROFILE } from '@/lib/data'
 import Reveal from '@/components/ui/Reveal'
+import SmileMascot from '@/components/ui/SmileMascot'
 
 export default function Contact() {
   return (
     <section id="contact" className="max-w-content mx-auto px-6 md:px-10 py-24 md:py-32">
       <Reveal className="text-center">
-        <p className="eyebrow mb-5">contact</p>
-        <h2 className="font-display text-[38px] md:text-[54px] leading-[1.0] tracking-[-0.02em]">
-          Let&apos;s build<br />something good.
+        <h2 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[1.02] tracking-[-0.03em]">
+          let&apos;s build
+          <br />
+          something <span className="text-orange">cool</span>
+          <span className="inline-block ml-2" style={{ verticalAlign: '-6px' }}>
+            <SmileMascot size={64} />
+          </span>
+          .
         </h2>
-        <p className="mt-6 max-w-[46ch] mx-auto text-[16px] md:text-[18px] text-ink-soft leading-relaxed">
-          I&apos;m always up for talking about research, internships, or a project that could
-          use a hand. I reply quickly.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3 font-sans text-[13px]">
-          <a href={`mailto:${PROFILE.email}`}
-             className="rounded-full bg-orange text-white px-6 py-3 hover:opacity-90 transition-opacity">
-            {PROFILE.email}
-          </a>
-          <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer"
-             className="rounded-full border border-line px-6 py-3 hover:border-orange hover:text-orange-ink transition-colors">
-            LinkedIn ↗
-          </a>
-          <a href={PROFILE.github} target="_blank" rel="noopener noreferrer"
-             className="rounded-full border border-line px-6 py-3 hover:border-orange hover:text-orange-ink transition-colors">
-            GitHub ↗
-          </a>
-        </div>
+
+        <a
+          href={`mailto:${PROFILE.email}`}
+          className="mt-10 md:mt-12 inline-flex items-center gap-3 flex-wrap justify-center font-display text-[24px] md:text-[36px] hover:opacity-90 transition-opacity"
+          // .font-display hardcodes weight 700; the email wants to read lighter
+          // than the headline above it.
+          style={{ fontWeight: 500 }}
+        >
+          spotnuru <span className="text-orange">[at]</span> wisc.edu
+          <span aria-hidden className="text-[0.7em]">↗</span>
+        </a>
       </Reveal>
     </section>
   )
