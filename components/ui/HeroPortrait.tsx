@@ -1,11 +1,14 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useId, useRef } from 'react'
 
 const N = 6
 const BASE = [0.462, 0.436, 0.47, 0.442, 0.458, 0.432]
 const AMP = [0.03, 0.034, 0.026, 0.032, 0.028, 0.036]
 const PHASE = [0, 1.9, 3.4, 0.8, 4.6, 2.7]
+const LERP = 0.12
+const PUSH_R = 150
 
 function blobPath(scale: number, t: number) {
   const pts: [number, number][] = []
@@ -39,11 +42,18 @@ export default function HeroPortrait({
   const wrapRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const wrap = wrapRef.current
+    if (!wrap) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const dots = wrapRef.current
-      ? Array.from(wrapRef.current.querySelectorAll<HTMLElement>('[data-dot]'))
-      : []
-    const state = dots.map((el) => ({ el, x: 0, y: 0, s: 1 }))
+    const dots = Array.from(wrap.querySelectorAll<HTMLElement>('[data-dot]'))
+    const state = dots.map((el) => ({
+      el,
+      x: 0,
+      y: 0,
+      s: 1,
+      ox: el.offsetLeft + el.offsetWidth / 2,
+      oy: el.offsetTop + el.offsetHeight / 2,
+    }))
     const pointer = { x: -9999, y: -9999 }
     const onMove = (e: MouseEvent) => {
       pointer.x = e.clientX
@@ -55,40 +65,50 @@ export default function HeroPortrait({
       return () => window.removeEventListener('mousemove', onMove)
     }
 
+    let inView = true
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting
+      },
+      { rootMargin: '80px' },
+    )
+    io.observe(wrap)
+
     let last = 0
     let raf = 0
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick)
+      if (document.hidden || !inView) return
       if (now - last < 32) return
       last = now
       const t = now / 1000
       clipRef.current?.setAttribute('d', blobPath(1, t))
       ringRef.current?.setAttribute('d', blobPath(200, t))
 
-      const R0 = 150
+      const box = wrap.getBoundingClientRect()
       state.forEach((d) => {
-        const r = d.el.getBoundingClientRect()
-        const dx = r.left + r.width / 2 - d.x - pointer.x
-        const dy = r.top + r.height / 2 - d.y - pointer.y
+        const dx = box.left + d.ox + d.x - pointer.x
+        const dy = box.top + d.oy + d.y - pointer.y
         const dist = Math.hypot(dx, dy)
         let tx = 0
         let ty = 0
         let ts = 1
-        if (dist < R0 && dist > 0.01) {
-          const push = 1 - dist / R0
+        if (dist < PUSH_R && dist > 0.01) {
+          const push = 1 - dist / PUSH_R
           tx = (dx / dist) * push * 34
           ty = (dy / dist) * push * 34
           ts = 1 + push * 0.75
         }
-        d.x += (tx - d.x) * 0.12
-        d.y += (ty - d.y) * 0.12
-        d.s += (ts - d.s) * 0.12
+        d.x += (tx - d.x) * LERP
+        d.y += (ty - d.y) * LERP
+        d.s += (ts - d.s) * LERP
         d.el.style.transform = `translate(${d.x.toFixed(2)}px, ${d.y.toFixed(2)}px) scale(${d.s.toFixed(3)})`
       })
     }
     raf = requestAnimationFrame(tick)
     return () => {
       cancelAnimationFrame(raf)
+      io.disconnect()
       window.removeEventListener('mousemove', onMove)
     }
   }, [])
@@ -126,12 +146,16 @@ export default function HeroPortrait({
             </clipPath>
           </defs>
         </svg>
-        <img
-          src={src}
-          alt={label}
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ clipPath: `url(#blob-${rawId})` }}
-        />
+        <div className="absolute inset-0" style={{ clipPath: `url(#blob-${rawId})` }}>
+          <Image
+            src={src}
+            alt={label}
+            fill
+            priority
+            sizes="384px"
+            className="object-cover"
+          />
+        </div>
         <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full overflow-visible" aria-hidden>
           <path
             ref={ringRef}

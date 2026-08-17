@@ -21,19 +21,39 @@ export default function Navbar() {
   useEffect(() => {
     // React is alive — cancel the "force-reveal" hydration watchdog set in layout.
     clearTimeout((window as unknown as { __t?: number }).__t)
-    const onScroll = () => {
-      const y = window.scrollY + 130
-      for (let i = SECTIONS.length - 1; i >= 0; i--) {
-        const el = document.getElementById(SECTIONS[i])
-        if (el && el.offsetTop <= y) {
-          setActive(SECTIONS[i])
-          break
+
+    const ratios = new Map<string, number>()
+    const pick = () => {
+      let best: string = 'home'
+      let bestRatio = 0
+      for (const id of SECTIONS) {
+        const ratio = ratios.get(id) ?? 0
+        if (ratio > bestRatio) {
+          bestRatio = ratio
+          best = id
         }
       }
+      setActive((prev) => (prev === best ? prev : best))
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0)
+        }
+        pick()
+      },
+      {
+        rootMargin: '-18% 0px -62% 0px',
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+      },
+    )
+
+    for (const id of SECTIONS) {
+      const el = document.getElementById(id)
+      if (el) io.observe(el)
+    }
+    return () => io.disconnect()
   }, [])
 
   return (

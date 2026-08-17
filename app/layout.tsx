@@ -30,7 +30,7 @@ const caveat = localFont({
   weight: '400 700',
 })
 
-const description = `${PROFILE.name} — ${PROFILE.role} at ${PROFILE.school}, working at the intersection of HCI, machine learning, and data.`
+const description = `${PROFILE.name} is a CS and Statistics student at ${PROFILE.school} building accessible, data-driven tools.`
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

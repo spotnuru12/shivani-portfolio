@@ -20,8 +20,8 @@
   --orange: #e4571b;      /* primary accent */
   --orange-ink: #b8410f;  /* accent text on light bg (AA) */
   --orange-wash: rgba(228, 87, 27, 0.1);
-  --red: #c23b2c;         /* secondary accent (bulletin marker) */
-  --blue-rule: #9db7d6;   /* notebook-paper lines */
+  --red: #c23b2c;
+  --blue-rule: #9db7d6;
 
   /* Shelf cards read as dark objects sitting on the paper. */
   --card-bg: #0f0f12;
@@ -30,12 +30,6 @@
 
   /* Orange outline around the portrait in both themes. */
   --portrait-outline: var(--orange);
-  /* Diagonal hatch behind the bulletin board. */
-  --hatch: rgba(27, 26, 23, 0.02);
-  /* Shelf ledge: drawn in ink rather than faked as wood, so it sits with the
-     rest of the page instead of introducing a new material. */
-  --ledge-top: rgba(27, 26, 23, 0.34);
-  --ledge-face: rgba(27, 26, 23, 0.15);
 
   /* Work cards sit on the paper as white tiles. */
   --work-card: #ffffff;
@@ -64,9 +58,6 @@
   --card-line: rgba(255, 239, 210, 0.16);
 
   --portrait-outline: var(--orange);
-  --hatch: rgba(255, 239, 210, 0.045);
-  --ledge-top: rgba(255, 239, 210, 0.5);
-  --ledge-face: rgba(255, 239, 210, 0.22);
 
   /* Cream cards on navy — the treatment from the old work section. */
   --work-card: #ffefd2;
@@ -226,6 +217,13 @@ section[id] {
   transform-box: fill-box;
   animation: scan 3.4s ease-in-out infinite;
 }
+.offscreen .merid,
+.offscreen .flap,
+.offscreen .scan,
+.offscreen .bobarrow,
+.offscreen.caret::after {
+  animation-play-state: paused;
+}
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(7px); }
@@ -282,67 +280,6 @@ section[id] {
   transform: none;
 }
 
-/* ── Sticky-note paper textures ────────────────────────────────────────── */
-.note {
-  background: var(--bg-note);
-  color: var(--note-ink);
-  box-shadow:
-    0 1px 1px rgba(27, 26, 23, 0.04),
-    0 8px 22px rgba(27, 26, 23, 0.12);
-  transition: box-shadow 0.2s ease, transform 0.05s ease;
-  touch-action: none;
-}
-.note:hover {
-  box-shadow:
-    0 2px 2px rgba(27, 26, 23, 0.06),
-    0 16px 34px rgba(27, 26, 23, 0.18);
-}
-.note.dragging {
-  box-shadow:
-    0 4px 4px rgba(27, 26, 23, 0.08),
-    0 26px 48px rgba(27, 26, 23, 0.26);
-  cursor: grabbing;
-}
-/* ruled index-card paper */
-.note-ruled {
-  background-color: #f7f2e6;
-  background-image:
-    linear-gradient(var(--blue-rule) 1px, transparent 1px);
-  background-size: 100% 30px;
-  background-position: 0 14px;
-}
-.note-ruled::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 26px;
-  width: 1.5px;
-  background: rgba(194, 59, 44, 0.55);
-}
-/* engineering grid paper */
-.note-grid {
-  background-color: #eceae2;
-  background-image:
-    linear-gradient(rgba(27, 26, 23, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(27, 26, 23, 0.1) 1px, transparent 1px);
-  background-size: 18px 18px;
-}
-/* manila / plain torn paper */
-.note-plain {
-  background-color: #e7e0d0;
-}
-/* orange accent note */
-.note-accent {
-  background-color: var(--orange);
-  color: #fff2e9;
-}
-
-.hand {
-  font-family: var(--font-caveat), 'Bradley Hand', cursive;
-  font-weight: 600;
-}
-
 /* ── Shelf cards (music · film · books) ────────────────────────────────── */
 /* One shell for all three so the row reads as a single shelf. Dark on warm
    paper, matching the Listening card this site started from. */
@@ -371,34 +308,6 @@ section[id] {
   height: 284px;
   overflow: hidden;
   padding: 16px;
-}
-/* The ledge the three cards sit on. Two bands — a lit top surface and a darker
-   front face — is enough to read as a shelf without pretending to be wood. */
-.shelf-ledge {
-  height: 11px;
-  border-radius: 0 0 4px 4px;
-  background: linear-gradient(
-    180deg,
-    var(--ledge-top) 0 4px,
-    var(--ledge-face) 4px 100%
-  );
-  box-shadow: 0 14px 20px -14px rgba(27, 26, 23, 0.55);
-}
-/* Brackets tucked under each end. */
-.shelf-bracket {
-  position: absolute;
-  top: 11px;
-  width: 0;
-  height: 0;
-  border-top: 13px solid var(--ledge-face);
-}
-.shelf-bracket-l {
-  left: 6%;
-  border-right: 13px solid transparent;
-}
-.shelf-bracket-r {
-  right: 6%;
-  border-left: 13px solid transparent;
 }
 
 .shelf-label {
@@ -488,42 +397,6 @@ section[id] {
 }
 .reveal-arrow {
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.bulletin {
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    var(--hatch) 10px,
-    var(--hatch) 20px
-  );
-}
-
-/* Dachshund walks the section rule, wrench in its mouth. */
-@keyframes dachshund-walk {
-  from { left: -140px; }
-  to { left: 100%; }
-}
-.doodle-walk {
-  position: absolute;
-  top: 0;
-  animation: dachshund-walk 16s linear infinite;
-}
-@keyframes doodle-step {
-  from { transform: rotate(10deg); }
-  to { transform: rotate(-10deg); }
-}
-.doodle-legs-a {
-  animation: doodle-step 0.28s ease-in-out infinite alternate;
-}
-.doodle-legs-b {
-  animation: doodle-step 0.28s ease-in-out infinite alternate-reverse;
-}
-@media (prefers-reduced-motion: reduce) {
-  .doodle-walk { animation: none; left: 28%; }
-  .doodle-legs-a,
-  .doodle-legs-b { animation: none; }
 }
 
 /* ── Marquee-free utility: subtle underline sweep on links ─────────────── */

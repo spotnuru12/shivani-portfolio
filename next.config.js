@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
   images: {
+    formats: ['image/avif', 'image/webp'],
     // Album art from Spotify and posters from Letterboxd.
     remotePatterns: [
       { protocol: 'https', hostname: 'i.scdn.co' },

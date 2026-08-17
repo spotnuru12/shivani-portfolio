@@ -98,6 +98,8 @@ export const EXPERIENCE: Experience[] = [
   {
     role: 'Data Operations Intern',
     org: 'TruStage · Filene Research Institute',
+    logo: '/logos/filene.png',
+    logoFit: 'cover',
     dates: 'May 2026 – Present',
     loc: 'Madison, WI',
     status: 'current',
@@ -148,7 +150,7 @@ export const EXPERIENCE: Experience[] = [
     role: 'Data Science Intern',
     org: 'LAVIS Research Informatics',
     logo: '/logos/lavis.png',
-    logoFit: 'contain',
+    logoFit: 'cover',
     dates: 'Jun 2022 – Sep 2024',
     loc: 'Middleton, WI',
     url: 'https://lavisresearch.com/',
@@ -332,6 +334,7 @@ export const PROJECTS: Project[] = [
 
 export const EDUCATION = {
   school: 'University of Wisconsin–Madison',
+  logo: '/logos/cdis.png',
   degree: 'B.S. Computer Science & Statistics',
   dates: 'Sep 2024 – May 2028',
   honors: 'L&S Honors Program',

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { EDUCATION, POLAROIDS } from '@/lib/data'
 import Reveal from '@/components/ui/Reveal'
 import Polaroid from '@/components/ui/Polaroid'
@@ -5,6 +6,7 @@ import Draggable from '@/components/ui/Draggable'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { Highlight } from '@/components/ui/Highlight'
 import { GlobeDoodle, HeadsetDoodle, PaperDoodle } from '@/components/ui/Doodles'
+import PauseOffscreen from '@/components/ui/PauseOffscreen'
 
 const PHOTO_SPOTS = [
   { left: '2%', top: '4%', rotate: -7, w: 188, z: 3 },
@@ -21,6 +23,7 @@ export default function About() {
       </Reveal>
 
       <div className="mt-11 grid md:grid-cols-2 gap-10 md:gap-14">
+        <PauseOffscreen>
         <Reveal className="flex flex-col gap-5 text-ink-soft leading-[1.6] max-w-[65ch]">
           <p className="text-[20px] md:text-[22px] leading-[1.45]">
             Hi! I&apos;m Shivani. I work on <span className="word-em">software</span>,{' '}
@@ -109,6 +112,7 @@ export default function About() {
             improve their products.
           </p>
         </Reveal>
+        </PauseOffscreen>
 
         <div>
           <Reveal>
@@ -132,6 +136,9 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={80} className="mt-2 flex items-start gap-4">
+            <div className="relative h-[52px] w-[52px] shrink-0 overflow-hidden rounded-[14px] bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]">
+              <Image src={EDUCATION.logo} alt="" fill className="object-cover" sizes="52px" />
+            </div>
             <div className="pt-0.5">
               <h3 className="font-display text-[22px] leading-[1.15]">
                 {EDUCATION.school} <span aria-hidden>🦡</span>

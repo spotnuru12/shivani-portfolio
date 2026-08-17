@@ -1,5 +1,3 @@
-'use client'
-
 import { SKILL_DEFINITIONS } from '@/lib/data'
 
 export default function SkillChip({ name }: { name: string }) {

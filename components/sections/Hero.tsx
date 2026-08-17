@@ -3,6 +3,7 @@ import { PROFILE } from '@/lib/data'
 import Reveal from '@/components/ui/Reveal'
 import HeroPortrait from '@/components/ui/HeroPortrait'
 import Typewriter from '@/components/ui/Typewriter'
+import PauseOffscreen from '@/components/ui/PauseOffscreen'
 
 const SOCIALS = [
   { href: PROFILE.linkedin, label: 'LinkedIn', Icon: Linkedin, external: true },
@@ -60,7 +61,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="mt-11 flex justify-center">
+      <PauseOffscreen className="mt-11 flex justify-center">
         <a href="#work" className="scrollcue inline-flex flex-col items-center text-orange" aria-label="Scroll to experience">
           <span className="bobarrow inline-flex" aria-hidden>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -69,7 +70,7 @@ export default function Hero() {
             </svg>
           </span>
         </a>
-      </div>
+      </PauseOffscreen>
     </section>
   )
 }

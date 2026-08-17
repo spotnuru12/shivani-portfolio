@@ -3,7 +3,7 @@
 A warm, minimal personal site built with Next.js (App Router), TypeScript, and
 Tailwind. Self-hosted variable fonts, so there's no runtime Google Fonts call:
 **League Spartan** for display/headings, **Inter** for body and UI, **Caveat**
-for the handwritten sticky notes.
+for Polaroid captions.
 
 ## Run it
 
@@ -30,7 +30,7 @@ components/
   sections/              Hero, Work, About, Projects, Shelf, Contact, Footer
   shelf/                 FilmShelf (Letterboxd), BookShelf
   spotify/               SpotifyDashboard + its data hook
-  ui/                    Typewriter, StatCounter, Reveal, StickyNote, Icons
+  ui/                    Typewriter, HeroPortrait, Reveal, Polaroid, Icons
 lib/
   data.ts                ALL content lives here — edit this to update the site
   spotify.ts             Listening types + sample fallback
@@ -44,7 +44,6 @@ public/                  headshot + org logos
 Everything is data-driven from `lib/data.ts`:
 
 - **Profile / typing words / intro** → `PROFILE`
-- **Sticky-note beliefs** → `BELIEFS`
 - **Work timeline** → `EXPERIENCE`
 - **Projects + case studies** → `PROJECTS`
 - **Education / skills** → `EDUCATION`, `SKILLS`
@@ -89,7 +88,7 @@ Hand-curated in `BOOKS` (Goodreads retired its API and StoryGraph has none).
 Conventional Commits, single author:
 
 ```
-feat: add sticky-note bulletin board
-fix: correct case-study TOC active state
+feat: add work timeline logos
+fix: pause idle animations off-screen
 chore: update resume.pdf
 ```
