@@ -56,7 +56,7 @@ export default function SmileMascot({ size = 64 }: { size?: number }) {
             cy="46"
             rx={blink ? 4.5 : 3.8}
             ry={blink ? 0.6 : 6.5}
-            fill="var(--bg)"
+            fill="#00314f"
             style={{ transition: 'rx 140ms ease-in-out, ry 140ms ease-in-out' }}
           />
           <ellipse
@@ -64,14 +64,14 @@ export default function SmileMascot({ size = 64 }: { size?: number }) {
             cy="46"
             rx={blink ? 4.5 : 3.8}
             ry={blink ? 0.6 : 6.5}
-            fill="var(--bg)"
+            fill="#00314f"
             style={{ transition: 'rx 140ms ease-in-out, ry 140ms ease-in-out' }}
           />
         </g>
         <path
           d="M 36 60 Q 50 74 64 60"
           fill="none"
-          stroke="var(--bg)"
+          stroke="#00314f"
           strokeWidth="3.4"
           strokeLinecap="round"
         />

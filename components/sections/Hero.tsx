@@ -1,7 +1,8 @@
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { PROFILE } from '@/lib/data'
 import Reveal from '@/components/ui/Reveal'
-import BlobPortrait from '@/components/ui/BlobPortrait'
+import HeroPortrait from '@/components/ui/HeroPortrait'
+import Typewriter from '@/components/ui/Typewriter'
 
 const SOCIALS = [
   { href: PROFILE.linkedin, label: 'LinkedIn', Icon: Linkedin, external: true },
@@ -18,8 +19,14 @@ export default function Hero() {
             <h1 className="font-display text-[56px] md:text-[84px] leading-[0.92] tracking-[-0.03em]">
               Hi, I&apos;m {PROFILE.first}
             </h1>
-            <p className="mt-6 max-w-[34em] text-[19px] md:text-[22px] text-ink-soft leading-snug">
+            <p className="mt-6 max-w-[33em] text-[19px] md:text-[22px] text-ink leading-[1.4]">
               {PROFILE.lead}
+            </p>
+            <p className="mt-[18px] text-[18px] text-ink">
+              the work so far has been in{' '}
+              <span className="text-orange-ink font-medium">
+                <Typewriter words={PROFILE.typing} />
+              </span>
             </p>
 
             <div className="mt-8 flex items-center gap-3">
@@ -48,21 +55,20 @@ export default function Hero() {
 
         <div className="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-end">
           <Reveal>
-            <div className="relative h-[400px] w-[400px] md:h-[440px] md:w-[440px]">
-              <span className="absolute top-1 left-[58%] h-4 w-4 rounded-full bg-orange" aria-hidden />
-              <span className="absolute top-[12%] -right-0.5 h-2.5 w-2.5 rounded-full bg-ink opacity-70" aria-hidden />
-              <span className="absolute bottom-8 -left-1 h-3 w-3 rounded-full bg-ink opacity-50" aria-hidden />
-              <span className="absolute bottom-[14%] right-[4%] h-2 w-2 rounded-full bg-orange opacity-85" aria-hidden />
-              <div className="absolute inset-[8px]">
-                <BlobPortrait
-                  size={424}
-                  strokeWidth={5}
-                  label={`Portrait of ${PROFILE.name}`}
-                />
-              </div>
-            </div>
+            <HeroPortrait label={`Portrait of ${PROFILE.name}`} />
           </Reveal>
         </div>
+      </div>
+
+      <div className="mt-11 flex justify-center">
+        <a href="#work" className="scrollcue inline-flex flex-col items-center text-orange" aria-label="Scroll to experience">
+          <span className="bobarrow inline-flex" aria-hidden>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14" />
+              <path d="m19 12-7 7-7-7" />
+            </svg>
+          </span>
+        </a>
       </div>
     </section>
   )

@@ -1,48 +1,71 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-// Cycling typewriter: types a word, holds, deletes, moves to the next.
-// The blinking caret is a CSS pseudo-element (.caret) so it never desyncs.
+const GLYPHS = '$&#@*R%!?<>/\\|=+^~'
+
+function noise(len: number) {
+  let out = ''
+  for (let i = 0; i < len; i++) {
+    out += GLYPHS[(Math.random() * GLYPHS.length) | 0]
+  }
+  return out
+}
+
+// Cycles words by scrambling through code glyphs, then locking in left to right.
+// Reduced motion just swaps the word, no flicker.
 export default function Typewriter({
   words,
   className = '',
-  typeMs = 90,
-  deleteMs = 45,
-  holdMs = 1400,
+  tickMs = 36,
+  holdMs = 1700,
 }: {
-  words: string[]
+  words: readonly string[]
   className?: string
-  typeMs?: number
-  deleteMs?: number
+  tickMs?: number
   holdMs?: number
 }) {
-  const [index, setIndex] = useState(0)
-  const [text, setText] = useState('')
-  const [phase, setPhase] = useState<'typing' | 'holding' | 'deleting'>('typing')
+  const [text, setText] = useState(words[0] ?? '')
+  const idx = useRef(0)
+  const revealed = useRef(0)
+  const phase = useRef<'hold' | 'decode'>('hold')
+  const holdUntil = useRef(0)
 
   useEffect(() => {
-    const word = words[index % words.length]
-    let t: ReturnType<typeof setTimeout>
-
-    if (phase === 'typing') {
-      if (text.length < word.length) {
-        t = setTimeout(() => setText(word.slice(0, text.length + 1)), typeMs)
-      } else {
-        t = setTimeout(() => setPhase('holding'), holdMs)
-      }
-    } else if (phase === 'holding') {
-      t = setTimeout(() => setPhase('deleting'), 200)
-    } else {
-      if (text.length > 0) {
-        t = setTimeout(() => setText(word.slice(0, text.length - 1)), deleteMs)
-      } else {
-        setIndex((i) => (i + 1) % words.length)
-        setPhase('typing')
-      }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) {
+      const t = setInterval(() => {
+        idx.current = (idx.current + 1) % words.length
+        setText(words[idx.current] ?? '')
+      }, holdMs)
+      return () => clearInterval(t)
     }
-    return () => clearTimeout(t)
-  }, [text, phase, index, words, typeMs, deleteMs, holdMs])
+
+    holdUntil.current = Date.now() + holdMs
+    const id = window.setInterval(() => {
+      if (phase.current === 'hold') {
+        if (Date.now() < holdUntil.current) return
+        phase.current = 'decode'
+        idx.current = (idx.current + 1) % words.length
+        revealed.current = 0
+      }
+
+      const target = words[idx.current] ?? ''
+      if (revealed.current < target.length) {
+        if (Math.random() > 0.5) revealed.current += 1
+        setText(
+          target.slice(0, revealed.current) +
+            noise(Math.max(0, target.length - revealed.current)),
+        )
+      } else {
+        setText(target)
+        phase.current = 'hold'
+        holdUntil.current = Date.now() + holdMs
+      }
+    }, tickMs)
+
+    return () => window.clearInterval(id)
+  }, [words, tickMs, holdMs])
 
   return (
     <span className={`caret ${className}`} aria-live="polite">

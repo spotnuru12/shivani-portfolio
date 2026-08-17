@@ -18,17 +18,18 @@ export const PROFILE = {
   linkedin: 'https://linkedin.com/in/shivanipotnuru',
   resume:
     'https://1drv.ms/b/c/796c1c094714b749/IQBpbMNQIu_fTKxRTsmsHhXdAd6jGVWQFeYLjr3sCK_E8wg',
-  // Verb-first claim. The rotating fields live in the about polaroids now,
-  // not in a fake source file.
+  // Opening claim. Rotating domains live on the line under it.
   lead:
-    'I study CS and stats at UW–Madison. Most of what I make is for people the default design forgot: a label they cannot read, a form that was not written for them, a model that sounds confident and is wrong.',
-  // Rotating values for the `focus` key in the hero code card.
+    "A software engineer with a passion for accessible, data-driven, human-centered tools. Currently I'm studying CS + Statistics at UW–Madison.",
   typing: [
-    'human-computer interaction',
-    'machine learning',
     'accessibility',
-    'data engineering',
-    'health tech',
+    'credit unions',
+    'clinical trials',
+    'health insurance',
+    'assistive technology',
+    'public health data',
+    'civic technology',
+    'medication access',
   ],
   intro:
     "I've worked across pharma and clinical data, HCI research, and health insurance. Same thread through all of it: sit with the people who have to use the thing, then build until it stops being confusing.",
@@ -84,10 +85,12 @@ export interface Experience {
   role: string
   org: string
   logo?: string
+  logoFit?: 'cover' | 'contain'
   dates: string
   loc: string
   blurb: string
   stack: string[]
+  url?: string
   status?: 'incoming' | 'current'
 }
 
@@ -98,60 +101,71 @@ export const EXPERIENCE: Experience[] = [
     dates: 'May 2026 – Present',
     loc: 'Madison, WI',
     status: 'current',
+    url: 'https://filene.org/',
     blurb:
-      'Built an engagement analytics dashboard consolidating campaign and web data across Salesforce and GA4, and Python reconciliation scripts that cut 5–6 hours of manual cleanup per cycle. Supporting the Salesforce-to-Data 360 migration by mapping data flows and piloting Tableau Next workflows.',
+      'I built an engagement analytics dashboard that pulls campaign and web data out of Salesforce and GA4 into one view, plus Python reconciliation scripts that cut 5 to 6 hours of manual cleanup per cycle. I am also mapping data flows for the Salesforce to Data 360 migration.',
     stack: ['Salesforce', 'GA4', 'Python', 'Tableau'],
   },
   {
     role: 'Undergraduate Research Assistant',
     org: 'MadAbility Lab · UW–Madison CDIS',
     logo: '/logos/madability-cdis.png',
+    logoFit: 'contain',
     dates: 'Feb 2026 – Present',
     loc: 'Madison, WI',
     status: 'current',
+    url: 'https://madability.cs.wisc.edu/',
     blurb:
-      'Leading user-needs discovery for an HCI accessibility project — evaluating vision-language models to find where they fall short of genuinely useful audio descriptions for blind and low-vision users. Analyzed 500+ Meta Quest apps with a structured MR framework; contributing to a paper in preparation.',
+      'I lead user-needs discovery for an accessibility project, testing where vision-language models fall short of audio descriptions that blind and low vision users can actually rely on. The findings feed a paper in preparation.',
     stack: ['HCI', 'Accessibility', 'LLM Eval', 'MR/AR'],
   },
   {
     role: 'Vice President',
     org: 'Design Interactive · UW–Madison',
     logo: '/logos/design-interactive.png',
+    logoFit: 'cover',
     dates: 'Jan 2025 – Present',
     loc: 'Madison, WI',
     status: 'current',
+    url: 'https://www.designinteractive-uw.com/',
     blurb:
-      'Lead operations for a 14-member exec team — strategy, sponsorship, finances, and agile workflows — and oversee 3+ Madison-area client projects each semester, helping teams carry user needs from discovery through delivery.',
+      'I run operations for a 14-member exec team (strategy, sponsorship, finances, agile workflows) and oversee 3+ Madison-area client projects each semester, from discovery through delivery.',
     stack: ['Leadership', 'Product', 'UX Strategy'],
   },
   {
     role: 'AI/ML Project Intern',
     org: 'Spectacle Health',
     logo: '/logos/spectacle-health.png',
+    logoFit: 'cover',
     dates: 'Jan 2025 – May 2025',
     loc: 'Madison, WI',
+    url: 'https://spectacle.health/',
     blurb:
-      'Built a document Q&A system over dense health-insurance paperwork using Python, NLP, semantic search, and RAG — a Dockerized Weaviate vector database with Hugging Face embeddings across 20+ schemas. Traced retrieval failure modes through edge-case testing and shipped the system to the client.',
+      'I built a document Q&A system over dense health insurance paperwork using Python, NLP, semantic search, and RAG, then traced its failure modes through edge case testing and shipped it to the client.',
     stack: ['RAG', 'Weaviate', 'Hugging Face', 'Python', 'Docker'],
   },
   {
     role: 'Data Science Intern',
     org: 'LAVIS Research Informatics',
     logo: '/logos/lavis.png',
+    logoFit: 'contain',
     dates: 'Jun 2022 – Sep 2024',
     loc: 'Middleton, WI',
+    url: 'https://lavisresearch.com/',
     blurb:
-      'Built automated ETL pipelines in Python and R for 10+ recurring workflows across 3 clinical studies, cutting audit prep time 45% while holding 100% IRB compliance. Designed 25+ SQL validation checks and 6+ Tableau dashboards to catch bad data before it reached downstream analytics.',
+      'I built automated ETL pipelines in Python and R for 10+ recurring workflows across 3 clinical studies. They cut audit prep time by 45% while holding 100% IRB compliance.',
     stack: ['SQL', 'Python', 'R', 'Tableau', 'ETL'],
   },
   {
     role: 'Research Intern',
     org: 'Tech4Good Lab · UC Santa Cruz',
     logo: '/logos/tech4good.png',
+    logoFit: 'cover',
     dates: 'Jun 2022 – Feb 2024',
     loc: 'Santa Cruz, CA',
+    url: 'https://tech4good.soe.ucsc.edu/',
     blurb:
-      'Co-authored “Exploring Communal Gratitude in Online Communities” (PACMHCI / CSCW 2025) — ran thematic analysis on user-research data and turned it into design implications for prosocial platform features.',
+      'I co-authored "Exploring Communal Gratitude in Online Communities" (PACMHCI, CSCW 2025). I ran the thematic analysis and turned it into design implications for prosocial platform features.',
     stack: ['HCI Research', 'Thematic Analysis'],
   },
 ]
@@ -180,7 +194,7 @@ export const PROJECTS: Project[] = [
     title: 'Pharavo',
     sub: 'An AI medication companion for ESL patients & older adults',
     blurb:
-      'Reads prescription labels with Gemini vision and offers multilingual, NLP-driven translation to support adherence.',
+      'Reads a prescription label with Gemini vision, then translates it into language the patient actually uses.',
     tags: ['React Native', 'Gemini API', 'OCR', 'NLP'],
     year: '2026',
     timeline: 'Feb 2026 – Present',
@@ -414,9 +428,9 @@ export const SKILL_DEFINITIONS: Record<string, string> = {
 // Music is live from Spotify, film is live from the Letterboxd RSS diary, and
 // books are hand-curated here. Michelle Liu's "Shelf", but three-up.
 
-export const SHELF_HEADING = 'What I’m into lately'
+export const SHELF_HEADING = "What I'm into lately"
 export const SHELF_BLURB =
-  'Outside of classes and labs. The music and film shelves update themselves; the books I keep by hand.'
+  "What I've been listening to, watching, and reading outside of class. Album art pulls in live (the films and books I keep by hand)."
 
 /**
  * The handwritten strip above the shelf. `reading` comes from BOOKS and

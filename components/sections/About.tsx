@@ -1,67 +1,149 @@
 import { EDUCATION, POLAROIDS } from '@/lib/data'
 import Reveal from '@/components/ui/Reveal'
 import Polaroid from '@/components/ui/Polaroid'
+import Draggable from '@/components/ui/Draggable'
 import SectionHeading from '@/components/ui/SectionHeading'
+import { Highlight } from '@/components/ui/Highlight'
+import { GlobeDoodle, HeadsetDoodle, PaperDoodle } from '@/components/ui/Doodles'
+
+const PHOTO_SPOTS = [
+  { left: '2%', top: '4%', rotate: -7, w: 188, z: 3 },
+  { left: '48%', top: '0%', rotate: 5, w: 188, z: 4 },
+  { left: '6%', top: '46%', rotate: 3, w: 188, z: 2 },
+  { left: '50%', top: '44%', rotate: -4, w: 188, z: 5 },
+]
 
 export default function About() {
   return (
     <section id="about" className="max-w-content mx-auto px-6 md:px-10 py-20 md:py-24">
       <Reveal>
-        <SectionHeading eyebrow="about" title="A bit about me" />
+        <SectionHeading eyebrow="about" title="About me" />
       </Reveal>
 
-      <div className="mt-11 grid md:grid-cols-12 gap-10 md:gap-14">
-        <div className="md:col-span-6">
-          <Reveal className="space-y-5 text-ink-soft leading-relaxed max-w-prose">
-            <p className="text-[19px] md:text-[22px] text-ink leading-snug">
-              I&apos;ve worked across{' '}
-              <span className="text-orange-ink font-medium">pharma and clinical data</span>,{' '}
-              <span className="text-orange-ink font-medium">HCI research</span>, and{' '}
-              <span className="text-orange-ink font-medium">health insurance</span>. Same thread
-              through all of it: sit with the people who have to use the thing, then build until
-              it stops being confusing.
-            </p>
-            <p className="text-[16px] md:text-[17.5px]">
-              These days that looks like accessibility and vision-language models at the{' '}
-              <span className="text-orange-ink font-medium">MadAbility Lab</span>, a medication
-              app called <span className="text-orange-ink font-medium">Pharavo</span> for ESL
-              patients and older adults, and CRM data at TruStage. I also help run Design
-              Interactive, which is a long way of saying I spend a lot of time in Figma with other
-              students who care about this stuff too.
-            </p>
-          </Reveal>
+      <div className="mt-11 grid md:grid-cols-2 gap-10 md:gap-14">
+        <Reveal className="flex flex-col gap-5 text-ink-soft leading-[1.6] max-w-[65ch]">
+          <p className="text-[20px] md:text-[22px] leading-[1.45]">
+            Hi! I&apos;m Shivani. I work on <span className="word-em">software</span>,{' '}
+            <span className="word-em">data</span>, and <span className="word-em">HCI research</span>.
+            I like building things end to end, and figuring out who they&apos;re actually for while I
+            do it.
+          </p>
 
-          <Reveal delay={80} className="mt-8 rounded-2xl border border-line bg-panel/60 p-6">
-            <div className="font-display text-[20px]">{EDUCATION.school}</div>
-            <div className="text-[13.5px] text-orange-ink mt-1">{EDUCATION.degree}</div>
-            <div className="text-[13px] text-muted mt-0.5">
-              {EDUCATION.dates} · {EDUCATION.honors}
-            </div>
-            <div className="mt-5">
-              <div className="text-[11px] uppercase tracking-wider text-muted mb-2">Coursework</div>
-              <div className="flex flex-wrap gap-1.5">
-                {EDUCATION.coursework.map((c) => (
-                  <span
-                    key={c}
-                    className="text-[12px] rounded border border-line px-2 py-0.5 text-ink-soft"
-                  >
-                    {c}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
+          <div className="flex gap-[18px] items-start">
+            <span className="shrink-0 w-10 h-10 mt-[3px] text-orange" aria-hidden>
+              <GlobeDoodle />
+            </span>
+            <p className="m-0 text-[17px]">
+              My segue into tech was recognizing the <Highlight>digital divide</Highlight>: the gap
+              between who a technology is built for and who can actually use it. That&apos;s still
+              what decides what I work on.
+            </p>
+          </div>
 
-        <div className="md:col-span-6">
+          <div className="flex gap-[18px] items-start">
+            <a
+              href="https://dl.acm.org/doi/10.1145/3710972"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="paperdoodle shrink-0 w-10 h-10 mt-[3px] text-orange"
+              aria-label="Read the paper on the ACM Digital Library"
+            >
+              <PaperDoodle />
+            </a>
+            <p className="m-0 text-[17px]">
+              Then I <Highlight>co-authored my first paper</Highlight> with the{' '}
+              <a
+                href="https://tech4good.soe.ucsc.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="orglink text-orange-ink font-medium"
+              >
+                Tech4Good Lab
+              </a>{' '}
+              at UC Santa Cruz. Running the thematic analysis was my first real exposure to HCI, and
+              it changed what I wanted from the work: to develop with a specific person in mind.
+            </p>
+          </div>
+
+          <div className="flex gap-[18px] items-start">
+            <span className="shrink-0 w-10 h-10 mt-[3px] text-orange" aria-hidden>
+              <HeadsetDoodle />
+            </span>
+            <p className="m-0 text-[17px]">
+              Now I care about innovation that doesn&apos;t leave people behind. Mixed reality is
+              where software is heading, and at the{' '}
+              <a
+                href="https://madability.cs.wisc.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="orglink text-orange-ink font-medium"
+              >
+                MadAbility Lab
+              </a>{' '}
+              I&apos;m testing where vision-language models still fail blind and low vision users.
+            </p>
+          </div>
+
+          <p className="m-0 text-[17px]">
+            Currently I&apos;m building <span className="word-em">Pharavo</span>, a medication
+            companion for ESL patients and older adults, and working as a data operations intern at{' '}
+            <a
+              href="https://filene.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="orglink text-orange-ink font-medium"
+            >
+              Filene Research Institute
+            </a>
+            , a think tank that helps credit unions compete with the largest players in the market.
+            I&apos;m also vice president of{' '}
+            <a
+              href="https://www.designinteractive-uw.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="orglink text-orange-ink font-medium"
+            >
+              Design Interactive
+            </a>
+            , a human-centered design org on campus that works with local community partners to
+            improve their products.
+          </p>
+        </Reveal>
+
+        <div>
           <Reveal>
-            <p className="text-[12px] text-muted mb-4">
-              a few pictures. drop yours in when you have them
-            </p>
-            <div className="relative h-[520px] md:h-[580px]">
-              {POLAROIDS.map((shot, i) => (
-                <Polaroid key={shot.id} shot={shot} index={i} />
-              ))}
+            <div className="relative h-[480px] md:h-[520px]">
+              {POLAROIDS.map((shot, i) => {
+                const spot = PHOTO_SPOTS[i]
+                if (!spot) return null
+                return (
+                  <Draggable
+                    key={shot.id}
+                    rotate={spot.rotate}
+                    z={spot.z}
+                    className="w-[188px]"
+                    style={{ left: spot.left, top: spot.top, width: spot.w }}
+                  >
+                    <Polaroid shot={shot} className="w-full" />
+                  </Draggable>
+                )
+              })}
+            </div>
+          </Reveal>
+
+          <Reveal delay={80} className="mt-2 flex items-start gap-4">
+            <div className="pt-0.5">
+              <h3 className="font-display text-[22px] leading-[1.15]">
+                {EDUCATION.school} <span aria-hidden>🦡</span>
+              </h3>
+              <p className="mt-1.5 text-[15px] text-orange-ink font-medium">{EDUCATION.degree}</p>
+              <p className="mt-1 text-[14px] text-muted">
+                {EDUCATION.dates} · {EDUCATION.honors}
+              </p>
+              <p className="mt-3.5 text-[14px] text-muted leading-[1.6] max-w-[46ch]">
+                <span className="text-ink-soft font-medium">Coursework</span> -{' '}
+                {EDUCATION.coursework.join(', ')}
+              </p>
             </div>
           </Reveal>
         </div>

@@ -10,7 +10,7 @@ export default function SkillChip({ name }: { name: string }) {
           variants can actually win — inline styles can't be overridden. */}
       <span
         tabIndex={0}
-        className="text-[13.5px] md:text-[14.5px] px-3.5 py-1.5 rounded-full border border-line-strong text-ink-soft cursor-help transition-colors group-hover:bg-ink group-hover:text-bg group-hover:border-ink focus:bg-ink focus:text-bg focus:outline-none"
+        className="text-[13.5px] md:text-[14.5px] px-3.5 py-1.5 rounded-full border border-line-strong text-ink-soft cursor-help transition-colors group-hover:bg-transparent group-hover:text-orange-ink group-hover:border-orange focus:bg-transparent focus:text-orange-ink focus:border-orange focus:outline-none"
       >
         {name}
       </span>

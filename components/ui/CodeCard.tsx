@@ -29,7 +29,7 @@ export default function CodeCard() {
           <span className="text-orange-ink">focus</span>:{' '}
           <span className="text-ink">
             &quot;
-            <Typewriter words={[...PROFILE.typing]} />
+            <Typewriter words={PROFILE.typing} />
             &quot;
           </span>
           ,

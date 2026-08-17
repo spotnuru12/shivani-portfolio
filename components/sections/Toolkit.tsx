@@ -5,7 +5,7 @@ import SectionHeading from '@/components/ui/SectionHeading'
 
 export default function Toolkit() {
   return (
-    <section id="toolkit" className="max-w-content mx-auto px-6 md:px-10 py-20 md:py-24">
+    <section id="toolkit" className="max-w-content mx-auto px-6 md:px-10 pt-10 pb-20 md:pb-24">
       <Reveal>
         <SectionHeading eyebrow="stack" title="Toolkit" />
       </Reveal>
