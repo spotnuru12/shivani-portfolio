@@ -4,7 +4,6 @@ import Reveal from '@/components/ui/Reveal'
 import Polaroid from '@/components/ui/Polaroid'
 import Draggable from '@/components/ui/Draggable'
 import SectionHeading from '@/components/ui/SectionHeading'
-import { Highlight } from '@/components/ui/Highlight'
 import { GlobeDoodle, HeadsetDoodle, PaperDoodle } from '@/components/ui/Doodles'
 import PauseOffscreen from '@/components/ui/PauseOffscreen'
 
@@ -26,8 +25,7 @@ export default function About() {
         <PauseOffscreen>
         <Reveal className="flex flex-col gap-5 text-ink-soft leading-[1.6] max-w-[65ch]">
           <p className="text-[20px] md:text-[22px] leading-[1.45]">
-            Hi! I&apos;m Shivani. I work on <span className="word-em">software</span>,{' '}
-            <span className="word-em">data</span>, and <span className="word-em">HCI research</span>.
+            Hi! I&apos;m Shivani. I work on software, data, and HCI research.
             I like building things end to end, and figuring out who they&apos;re actually for while I
             do it.
           </p>
@@ -37,7 +35,7 @@ export default function About() {
               <GlobeDoodle />
             </span>
             <p className="m-0 text-[17px]">
-              My segue into tech was recognizing the <Highlight>digital divide</Highlight>: the gap
+              My segue into tech was recognizing the digital divide: the gap
               between who a technology is built for and who can actually use it. That&apos;s still
               what decides what I work on.
             </p>
@@ -54,12 +52,12 @@ export default function About() {
               <PaperDoodle />
             </a>
             <p className="m-0 text-[17px]">
-              Then I <Highlight>co-authored my first paper</Highlight> with the{' '}
+              Then I co-authored my first paper with the{' '}
               <a
                 href="https://tech4good.soe.ucsc.edu/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="orglink text-orange-ink font-medium"
+              className="orglink text-orange font-medium"
               >
                 Tech4Good Lab
               </a>{' '}
@@ -79,7 +77,7 @@ export default function About() {
                 href="https://madability.cs.wisc.edu/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="orglink text-orange-ink font-medium"
+              className="orglink text-orange font-medium"
               >
                 MadAbility Lab
               </a>{' '}
@@ -88,13 +86,13 @@ export default function About() {
           </div>
 
           <p className="m-0 text-[17px]">
-            Currently I&apos;m building <span className="word-em">Pharavo</span>, a medication
+            Currently I&apos;m building <span className="font-semibold text-ink">Pharavo</span>, a medication
             companion for ESL patients and older adults, and working as a data operations intern at{' '}
             <a
               href="https://filene.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="orglink text-orange-ink font-medium"
+              className="orglink text-orange font-medium"
             >
               Filene Research Institute
             </a>
@@ -104,7 +102,7 @@ export default function About() {
               href="https://www.designinteractive-uw.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="orglink text-orange-ink font-medium"
+              className="orglink text-orange font-medium"
             >
               Design Interactive
             </a>
@@ -136,14 +134,14 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={80} className="mt-2 flex items-start gap-4">
-            <div className="relative h-[52px] w-[52px] shrink-0 overflow-hidden rounded-[14px] bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]">
+            <div className="relative h-[52px] w-[52px] shrink-0 overflow-hidden rounded-[14px]">
               <Image src={EDUCATION.logo} alt="" fill className="object-cover" sizes="52px" />
             </div>
             <div className="pt-0.5">
               <h3 className="font-display text-[22px] leading-[1.15]">
                 {EDUCATION.school} <span aria-hidden>🦡</span>
               </h3>
-              <p className="mt-1.5 text-[15px] text-orange-ink font-medium">{EDUCATION.degree}</p>
+              <p className="mt-1.5 text-[15px] text-orange font-medium">{EDUCATION.degree}</p>
               <p className="mt-1 text-[14px] text-muted">
                 {EDUCATION.dates} · {EDUCATION.honors}
               </p>

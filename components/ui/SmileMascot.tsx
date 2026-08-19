@@ -88,7 +88,7 @@ export default function SmileMascot({ size = 64 }: { size?: number }) {
   return (
     <span ref={ref} className="inline-block align-middle" style={{ lineHeight: 0 }}>
       <svg viewBox="0 0 100 100" width={size} height={size} aria-hidden="true">
-        <circle cx="50" cy="50" r="42" fill="var(--orange)" />
+        <circle cx="50" cy="50" r="42" fill="#e4571b" />
         <g ref={pupilsRef}>
           <ellipse
             cx="38"

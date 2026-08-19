@@ -17,8 +17,8 @@
   --muted: #7c766b;       /* tertiary / captions */
   --line: rgba(27, 26, 23, 0.12);
   --line-strong: rgba(27, 26, 23, 0.22);
-  --orange: #e4571b;      /* primary accent */
-  --orange-ink: #b8410f;  /* accent text on light bg (AA) */
+  --orange: #e4571b;
+  --orange-ink: #e4571b;
   --orange-wash: rgba(228, 87, 27, 0.1);
   --red: #c23b2c;
   --blue-rule: #9db7d6;
@@ -46,10 +46,9 @@
   --muted: rgba(255, 239, 210, 0.6);
   --line: rgba(255, 239, 210, 0.16);
   --line-strong: rgba(255, 239, 210, 0.3);
-  --orange: #f29b58;
-  --orange-ink: #f9b478;
-  --orange-wash: rgba(242, 155, 88, 0.12);
-  --red: #e2685b;
+  --orange: #e4571b;
+  --orange-ink: #e4571b;
+  --orange-wash: rgba(228, 87, 27, 0.12);
   --blue-rule: #4d6f92;
 
   /* On navy, a near-black card would read as a hole; lift it instead. */
@@ -146,6 +145,9 @@ section[id] {
   letter-spacing: 0;
   color: var(--orange);
 }
+.closer .word-cool {
+  color: #ffefd2;
+}
 
 .word-em {
   font-family: Georgia, 'Times New Roman', serif;
@@ -176,7 +178,7 @@ section[id] {
 }
 
 .hl {
-  background-image: linear-gradient(rgba(242, 155, 88, 0.45), rgba(242, 155, 88, 0.45));
+  background-image: linear-gradient(rgba(228, 87, 27, 0.38), rgba(228, 87, 27, 0.38));
   background-repeat: no-repeat;
   background-position: 0 88%;
   background-size: 0% 42%;
@@ -241,11 +243,21 @@ section[id] {
 .scrollcue:hover .bobarrow {
   animation-duration: 1.1s;
 }
+@media (prefers-reduced-motion: reduce) {
+  .bobarrow {
+    animation: none;
+  }
+}
 
-/* Contact + footer share a navy band in both themes, matching the old closer. */
+/* Contact + footer: navy band. In dark mode the page is already navy, so
+   the closer drops a shade and picks up a cream hairline. */
 .closer {
   background: #00314f;
   color: #ffefd2;
+}
+.theme-dark .closer {
+  background: #001e32;
+  box-shadow: inset 0 1px 0 rgba(255, 239, 210, 0.14);
 }
 
 /* ── Typing caret ──────────────────────────────────────────────────────── */
@@ -309,6 +321,9 @@ section[id] {
   overflow: hidden;
   padding: 16px;
 }
+.stats-card-body {
+  padding: 16px 16px 20px;
+}
 
 .shelf-label {
   font-size: 10.5px;
@@ -343,6 +358,73 @@ section[id] {
 .timeline-dot.present {
   background: var(--orange);
   border-color: var(--orange);
+}
+
+.jobmore {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.jobmore.open {
+  grid-template-rows: 1fr;
+}
+.jobmore-inner {
+  overflow: hidden;
+}
+.morebtn {
+  margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  width: 22px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1.5px solid var(--orange);
+  background: transparent;
+  color: var(--orange);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.morebtn:hover,
+.morebtn.open {
+  background: var(--orange);
+  color: var(--work-card);
+}
+.morebtn .movbar {
+  transform-origin: 50% 50%;
+  transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.morebtn.open .movbar {
+  transform: rotate(90deg);
+}
+
+.reveal-cta {
+  position: absolute;
+  z-index: 20;
+  right: 24px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-league), sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1b1a18;
+  pointer-events: none;
+  transition: color 0.35s ease;
+}
+.reveal-trigger:hover .reveal-cta {
+  color: #ffefd2;
+}
+.reveal-cta .cta-open {
+  display: none;
+}
+.reveal-trigger:hover .reveal-cta .cta-idle {
+  display: none;
+}
+.reveal-trigger:hover .reveal-cta .cta-open {
+  display: inline;
 }
 
 /* ── Polaroids ─────────────────────────────────────────────────────────── */

@@ -38,8 +38,37 @@ function ProjectCard({
     <Link
       href={`/case-study/${project.slug}`}
       className="reveal-trigger relative block rounded-2xl overflow-hidden group border border-black/10"
-      style={{ background: '#ffffff', color: '#1b1a18', height: 340 }}
+      style={{ background: NAVY, color: '#1b1a18', height: 340 }}
     >
+      <div
+        className="absolute inset-0 p-6 flex flex-col justify-between"
+        style={{ color: CREAM }}
+      >
+        <div>
+          <div className="text-[12px]" style={{ color: 'var(--orange)' }}>
+            {project.timeline}
+          </div>
+          <h3 className="font-display text-[24px] md:text-[28px] leading-[1.02] mt-1.5">
+            {project.title}
+          </h3>
+          <div className="italic text-[15px] mt-1" style={{ color: 'var(--orange)' }}>
+            {project.sub}
+          </div>
+          <p className="text-[13.5px] mt-4 leading-[1.55] opacity-90">{hoverCopy}</p>
+        </div>
+        <div className="flex flex-wrap gap-1 pr-36">
+          {project.tags.map((t) => (
+            <span
+              key={t}
+              className="text-[11px] font-semibold px-2 py-1 rounded border"
+              style={{ borderColor: CREAM, color: CREAM }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div
         className="reveal-cover absolute inset-0 z-10 flex flex-col p-6"
         style={{ background: '#ffffff' }}
@@ -59,7 +88,7 @@ function ProjectCard({
           <p className="mt-2.5 text-[13px] leading-[1.5] text-[#4a4640] line-clamp-2">{project.blurb}</p>
         </div>
 
-        <div className="mt-3 pt-3 border-t border-black/10 flex items-end justify-between gap-3">
+        <div className="mt-3 pt-3 border-t border-black/10 flex items-end pr-36">
           <div className="flex flex-wrap gap-1">
             {project.tags.slice(0, 3).map((t) => (
               <span
@@ -71,51 +100,16 @@ function ProjectCard({
               </span>
             ))}
           </div>
-          <span className="font-display text-[14px] flex items-center gap-1 whitespace-nowrap">
-            View{' '}
-            <span className="reveal-arrow inline-flex">
-              <ArrowUpRight size={15} />
-            </span>
-          </span>
         </div>
       </div>
 
-      <div
-        className="absolute inset-0 p-5 flex flex-col justify-between"
-                style={{ background: '#1b1a18', color: '#fbfaf7' }}
-      >
-        <div>
-          <div className="text-[12px]" style={{ color: 'var(--orange)' }}>
-            {project.timeline}
-          </div>
-          <h3 className="font-display text-[24px] md:text-[28px] leading-[1.02] mt-1.5">
-            {project.title}
-          </h3>
-          <div className="italic text-[15px] mt-1" style={{ color: 'var(--orange)' }}>
-            {project.sub}
-          </div>
-          <p className="text-[13.5px] mt-4 leading-[1.55] opacity-90">{hoverCopy}</p>
-        </div>
-        <div>
-          <div className="flex flex-wrap gap-1 mb-3">
-            {project.tags.map((t) => (
-              <span
-                key={t}
-                className="text-[11px] font-semibold px-2 py-1 rounded border"
-                style={{ borderColor: CREAM, color: CREAM }}
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-          <span
-            className="font-display text-[16px] flex items-center gap-1.5"
-            style={{ color: 'var(--orange)' }}
-          >
-            Read case study <ArrowUpRight size={16} />
-          </span>
-        </div>
-      </div>
+      <span className="reveal-cta">
+        <span className="cta-idle">View</span>
+        <span className="cta-open">View case study</span>
+        <span className="reveal-arrow inline-flex">
+          <ArrowUpRight size={15} />
+        </span>
+      </span>
     </Link>
   )
 }

@@ -61,7 +61,7 @@ export default function Navbar() {
       <div className="max-w-content mx-auto flex items-center justify-between px-6 md:px-10 py-3.5">
         <a
           href="#home"
-          className="font-display text-[19px] tracking-tight hover:text-orange-ink transition-colors"
+          className="font-display text-[19px] tracking-tight hover:text-orange transition-colors"
         >
           {PROFILE.name}
         </a>
@@ -73,8 +73,9 @@ export default function Navbar() {
                 <a
                   href={`#${id}`}
                   aria-current={active === id ? 'true' : undefined}
-                  className="relative text-[14px] px-2.5 py-1.5 rounded-md transition-colors hover:text-orange-ink"
-                  style={{ color: active === id ? 'var(--orange-ink)' : 'var(--ink-soft)' }}
+                  className={`relative text-[14px] px-2.5 py-1.5 rounded-md transition-colors hover:text-orange ${
+                    active === id ? 'text-orange' : 'text-ink-soft'
+                  }`}
                 >
                   {label}
                   {active === id && (
@@ -108,7 +109,7 @@ function ThemeToggle() {
       onClick={toggle}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Light mode' : 'Dark mode'}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft hover:text-orange-ink hover:border-orange transition-colors"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft hover:text-orange hover:border-orange transition-colors"
     >
       {isDark ? <Sun size={17} strokeWidth={1.75} /> : <Moon size={17} strokeWidth={1.75} />}
     </button>

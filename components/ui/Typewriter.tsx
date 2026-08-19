@@ -2,35 +2,27 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-const GLYPHS = '$&#@*R%!?<>/\\|=+^~'
+type Phase = 'type' | 'hold' | 'delete'
 
-function noise(len: number) {
-  let out = ''
-  for (let i = 0; i < len; i++) {
-    out += GLYPHS[(Math.random() * GLYPHS.length) | 0]
-  }
-  return out
-}
-
-// Cycles words by scrambling through code glyphs, then locking in left to right.
-// Reduced motion just swaps the word, no flicker. Pauses when off-screen.
+// Types a word, holds, deletes it, then types the next. Pauses off-screen.
 export default function Typewriter({
   words,
   className = '',
-  tickMs = 36,
-  holdMs = 1700,
+  typeMs = 52,
+  holdMs = 1600,
+  deleteMs = 28,
 }: {
   words: readonly string[]
   className?: string
-  tickMs?: number
+  typeMs?: number
   holdMs?: number
+  deleteMs?: number
 }) {
-  const [text, setText] = useState(words[0] ?? '')
+  const [text, setText] = useState('')
   const spanRef = useRef<HTMLSpanElement>(null)
   const idx = useRef(0)
-  const revealed = useRef(0)
-  const phase = useRef<'hold' | 'decode'>('hold')
-  const holdUntil = useRef(0)
+  const pos = useRef(0)
+  const phase = useRef<Phase>('type')
   const visible = useRef(true)
 
   useEffect(() => {
@@ -54,8 +46,9 @@ export default function Typewriter({
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) {
+      setText(words[0] ?? '')
       const t = setInterval(() => {
-        if (!visible.current || document.hidden) return
+        if (!visible.current) return
         idx.current = (idx.current + 1) % words.length
         setText(words[idx.current] ?? '')
       }, holdMs)
@@ -66,36 +59,44 @@ export default function Typewriter({
       }
     }
 
-    holdUntil.current = Date.now() + holdMs
-    const id = window.setInterval(() => {
-      if (!visible.current || document.hidden) return
-      if (phase.current === 'hold') {
-        if (Date.now() < holdUntil.current) return
-        phase.current = 'decode'
-        idx.current = (idx.current + 1) % words.length
-        revealed.current = 0
+    let timeout = 0
+    const step = () => {
+      if (!visible.current) {
+        timeout = window.setTimeout(step, typeMs)
+        return
       }
-
       const target = words[idx.current] ?? ''
-      if (revealed.current < target.length) {
-        if (Math.random() > 0.5) revealed.current += 1
-        setText(
-          target.slice(0, revealed.current) +
-            noise(Math.max(0, target.length - revealed.current)),
-        )
+      let wait = typeMs
+      if (phase.current === 'type') {
+        pos.current = Math.min(target.length, pos.current + 1)
+        setText(target.slice(0, pos.current))
+        if (pos.current >= target.length) {
+          phase.current = 'hold'
+          wait = holdMs
+        }
+      } else if (phase.current === 'hold') {
+        phase.current = 'delete'
+        wait = deleteMs
       } else {
-        setText(target)
-        phase.current = 'hold'
-        holdUntil.current = Date.now() + holdMs
+        pos.current = Math.max(0, pos.current - 1)
+        setText(target.slice(0, pos.current))
+        wait = deleteMs
+        if (pos.current === 0) {
+          idx.current = (idx.current + 1) % words.length
+          phase.current = 'type'
+          wait = 240
+        }
       }
-    }, tickMs)
+      timeout = window.setTimeout(step, wait)
+    }
+    timeout = window.setTimeout(step, 400)
 
     return () => {
-      window.clearInterval(id)
+      window.clearTimeout(timeout)
       io.disconnect()
       document.removeEventListener('visibilitychange', sync)
     }
-  }, [words, tickMs, holdMs])
+  }, [words, typeMs, holdMs, deleteMs])
 
   return (
     <span ref={spanRef} className={`caret ${className}`} aria-live="polite">

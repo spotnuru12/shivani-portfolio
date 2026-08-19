@@ -73,14 +73,13 @@ export interface PolaroidShot {
 }
 export const POLAROIDS: PolaroidShot[] = [
   { id: 'lab', caption: 'MadAbility Lab' },
-  { id: 'di', caption: 'Design Interactive' },
-  { id: 'madison', caption: 'Madison, obviously' },
-  { id: 'pharavo', caption: 'Pharavo, still in progress' },
+  { id: 'di', caption: 'Design Interactive', src: '/polaroids/design-interactive.jpg' },
+  { id: 'madison', caption: 'Madison' },
+  { id: 'pharavo', caption: 'Pharavo' },
 ]
 
 // ── Experience ───────────────────────────────────────────────────────────
-// `blurb` carries the substance directly — the timeline shows everything up
-// front instead of hiding bullets behind a disclosure.
+// Summary sits on the card. `bullets` live behind the + drawer.
 export interface Experience {
   role: string
   org: string
@@ -89,6 +88,7 @@ export interface Experience {
   dates: string
   loc: string
   blurb: string
+  bullets: string[]
   stack: string[]
   url?: string
   status?: 'incoming' | 'current'
@@ -106,6 +106,12 @@ export const EXPERIENCE: Experience[] = [
     url: 'https://filene.org/',
     blurb:
       'I built an engagement analytics dashboard that pulls campaign and web data out of Salesforce and GA4 into one view, plus Python reconciliation scripts that cut 5 to 6 hours of manual cleanup per cycle. I am also mapping data flows for the Salesforce to Data 360 migration.',
+    bullets: [
+      'Built an engagement dashboard that pulls campaign and web data into one view',
+      'Wrote Python reconciliation scripts that cut 5 to 6 hours of cleanup per cycle',
+      'Mapping data flows for the Salesforce to Data 360 migration',
+      'Piloting Tableau Next workflows for the analytics team',
+    ],
     stack: ['Salesforce', 'GA4', 'Python', 'Tableau'],
   },
   {
@@ -119,6 +125,12 @@ export const EXPERIENCE: Experience[] = [
     url: 'https://madability.cs.wisc.edu/',
     blurb:
       'I lead user-needs discovery for an accessibility project, testing where vision-language models fall short of audio descriptions that blind and low vision users can actually rely on. The findings feed a paper in preparation.',
+    bullets: [
+      'Testing where vision-language models break down on audio description',
+      'Studying what blind and low vision users need from a description, not what the model defaults to',
+      'Analyzed 500+ Meta Quest apps against a structured MR accessibility framework',
+      'Contributing to a paper in preparation with the lab',
+    ],
     stack: ['HCI', 'Accessibility', 'LLM Eval', 'MR/AR'],
   },
   {
@@ -132,6 +144,12 @@ export const EXPERIENCE: Experience[] = [
     url: 'https://www.designinteractive-uw.com/',
     blurb:
       'I run operations for a 14-member exec team (strategy, sponsorship, finances, agile workflows) and oversee 3+ Madison-area client projects each semester, from discovery through delivery.',
+    bullets: [
+      'Lead a 14-member exec team across strategy, sponsorship, and finances',
+      'Run agile workflows that keep semester-long projects on schedule',
+      'Oversee 3+ Madison-area client projects each semester',
+      'Help teams carry user needs from discovery through delivery',
+    ],
     stack: ['Leadership', 'Product', 'UX Strategy'],
   },
   {
@@ -144,6 +162,12 @@ export const EXPERIENCE: Experience[] = [
     url: 'https://spectacle.health/',
     blurb:
       'I built a document Q&A system over dense health insurance paperwork using Python, NLP, semantic search, and RAG, then traced its failure modes through edge case testing and shipped it to the client.',
+    bullets: [
+      'Built a Dockerized Weaviate vector database with Hugging Face embeddings',
+      'Set up retrieval across 20+ document schemas',
+      'Ran edge case testing that surfaced where retrieval returned the wrong section',
+      'Shipped the finished system to the client',
+    ],
     stack: ['RAG', 'Weaviate', 'Hugging Face', 'Python', 'Docker'],
   },
   {
@@ -156,6 +180,12 @@ export const EXPERIENCE: Experience[] = [
     url: 'https://lavisresearch.com/',
     blurb:
       'I built automated ETL pipelines in Python and R for 10+ recurring workflows across 3 clinical studies. They cut audit prep time by 45% while holding 100% IRB compliance.',
+    bullets: [
+      'Automated 10+ recurring workflows across 3 clinical studies in Python and R',
+      'Cut audit prep time by 45% while holding 100% IRB compliance',
+      'Wrote 25+ SQL validation checks that caught bad data before analytics saw it',
+      'Built 6+ Tableau dashboards for cross-study monitoring',
+    ],
     stack: ['SQL', 'Python', 'R', 'Tableau', 'ETL'],
   },
   {
@@ -168,6 +198,11 @@ export const EXPERIENCE: Experience[] = [
     url: 'https://tech4good.soe.ucsc.edu/',
     blurb:
       'I co-authored "Exploring Communal Gratitude in Online Communities" (PACMHCI, CSCW 2025). I ran the thematic analysis and turned it into design implications for prosocial platform features.',
+    bullets: [
+      'Co-authored "Exploring Communal Gratitude in Online Communities," PACMHCI at CSCW 2025',
+      'Ran thematic analysis on user research data',
+      'Turned the themes into design implications for prosocial platform features',
+    ],
     stack: ['HCI Research', 'Thematic Analysis'],
   },
 ]

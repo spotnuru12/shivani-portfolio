@@ -77,6 +77,7 @@ export interface SpotifyDashboardData {
   recentTracks: RecentTrackDisplay[]
   topTracks: TopTrackDisplay[]
   topArtist: TopArtistSummary | null
+  topArtistNames: string[]
   topGenres: GenreSlice[]
 }
 
@@ -235,6 +236,7 @@ export function useSpotifyDashboardData(): SpotifyDashboardData {
     recentTracks: [],
     topTracks: [],
     topArtist: null,
+    topArtistNames: [],
     topGenres: [],
   })
 
@@ -299,6 +301,7 @@ export function useSpotifyDashboardData(): SpotifyDashboardData {
         recentTracks,
         topTracks,
         topArtist: deriveTopArtist(topTracksRaw),
+        topArtistNames: topArtistsRaw.map((a) => a.name),
         topGenres: deriveGenres(topArtistsRaw),
       })
     })()

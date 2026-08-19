@@ -25,7 +25,7 @@ export default function Hero() {
             </p>
             <p className="mt-[18px] text-[18px] text-ink">
               the work so far has been in{' '}
-              <span className="text-orange-ink font-medium">
+              <span className="text-orange font-medium">
                 <Typewriter words={PROFILE.typing} />
               </span>
             </p>
@@ -37,7 +37,7 @@ export default function Hero() {
                   href={href}
                   aria-label={label}
                   {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink-soft hover:text-orange-ink hover:border-orange hover:-translate-y-0.5 transition-all"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink-soft hover:text-orange hover:border-orange hover:-translate-y-0.5 transition-all"
                 >
                   <Icon size={19} strokeWidth={1.75} />
                 </a>
@@ -62,9 +62,9 @@ export default function Hero() {
       </div>
 
       <PauseOffscreen className="mt-11 flex justify-center">
-        <a href="#work" className="scrollcue inline-flex flex-col items-center text-orange" aria-label="Scroll to experience">
+        <a href="#work" className="scrollcue inline-flex items-center text-orange" aria-label="Scroll to experience">
           <span className="bobarrow inline-flex" aria-hidden>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e4571b" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14" />
               <path d="m19 12-7 7-7-7" />
             </svg>

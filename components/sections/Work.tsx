@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import { EXPERIENCE, type Experience } from '@/lib/data'
 import Reveal from '@/components/ui/Reveal'
@@ -29,6 +32,7 @@ export default function Work() {
 function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
   const [start, end] = splitDates(job.dates)
   const initials = initialsFor(job.org)
+  const [open, setOpen] = useState(false)
 
   return (
     <article className="relative flex flex-col md:flex-row md:items-start gap-3 md:gap-8">
@@ -67,10 +71,7 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
               <h3 className="font-display text-[20px] md:text-[24px] leading-[1.15]">{job.role}</h3>
               <div className="text-[13.5px] opacity-65">{job.loc}</div>
             </div>
-            <div
-              className="mt-0.5 text-[16px] md:text-[18px] font-medium"
-              style={{ color: present ? 'var(--orange)' : 'inherit' }}
-            >
+            <div className="mt-0.5 text-[16px] md:text-[18px] font-medium" style={{ color: 'var(--orange)' }}>
               {job.url ? (
                 <a href={job.url} target="_blank" rel="noopener noreferrer" className="orglink">
                   {job.org}{' '}
@@ -83,7 +84,23 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
               )}
             </div>
             <p className="mt-3 text-[14.5px] md:text-[15.5px] leading-[1.55] opacity-90">{job.blurb}</p>
-            <div className="mt-4 flex flex-wrap gap-1.5">
+
+            <div className={`jobmore ${open ? 'open' : ''}`}>
+              <div className="jobmore-inner">
+                <div className="mt-3.5">
+                  <div className="text-[14px] font-medium text-orange">What I did</div>
+                  <ul className="mt-2 pl-[18px] text-[15px] leading-[1.6] opacity-85 list-disc">
+                    {job.bullets.map((item) => (
+                      <li key={item} className="mt-1">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center gap-1.5">
               {job.stack.map((tag) => (
                 <span
                   key={tag}
@@ -93,6 +110,18 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
                   {tag}
                 </span>
               ))}
+              <button
+                type="button"
+                className={`morebtn ${open ? 'open' : ''}`}
+                aria-expanded={open}
+                aria-label={open ? 'Hide details' : 'Show what I did'}
+                onClick={() => setOpen((v) => !v)}
+              >
+                <span className="relative inline-block h-2.5 w-2.5" aria-hidden>
+                  <span className="absolute left-0 top-[4px] h-0.5 w-2.5 rounded-sm bg-current" />
+                  <span className="movbar absolute left-[4px] top-0 h-2.5 w-0.5 rounded-sm bg-current" />
+                </span>
+              </button>
             </div>
           </div>
         </div>
@@ -111,17 +140,17 @@ function Mark({
   initials: string
 }) {
   return (
-    <div className="relative h-[52px] w-[52px] shrink-0 overflow-hidden rounded-[14px] bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]">
+    <div className="relative h-[52px] w-[52px] shrink-0 overflow-hidden rounded-[14px] bg-transparent">
       {logo ? (
         <Image
           src={logo}
           alt=""
           fill
-          className={fit === 'cover' ? 'object-cover' : 'object-contain p-1.5'}
+          className={fit === 'cover' ? 'object-cover' : 'object-contain p-1'}
           sizes="52px"
         />
       ) : (
-        <span className="grid h-full w-full place-items-center font-display text-[15px] text-ink">
+        <span className="grid h-full w-full place-items-center font-display text-[15px]">
           {initials}
         </span>
       )}
