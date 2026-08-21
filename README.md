@@ -23,7 +23,7 @@ app/
   fonts/                 self-hosted variable woff2
   case-study/[slug]/     case-study template
   api/spotify/*          live Spotify proxies (top tracks, top artists, recent)
-  api/auth/*             Spotify OAuth: login, callback, status, export-token
+  api/auth/*             Spotify OAuth: login, callback, status
 components/
   Navbar.tsx             sticky nav with scroll-spy
   CaseStudyNav.tsx       sticky table of contents for case studies
@@ -65,9 +65,11 @@ Copy `.env.example` to `.env.local` and fill it in:
 2. Set `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REDIRECT_URI`, and
    any random string for `COOKIE_SECRET`.
 3. Run the app, visit `/api/auth/login`, and authorize.
-4. Open `/api/auth/export-token`, copy the `refresh_token`, and set it as
-   `SPOTIFY_REFRESH_TOKEN`. That's what lets *every* visitor see your listening
-   data rather than only you. In production, add the same vars in Vercel.
+4. The callback sets an httpOnly cookie. For a one-time setup you can restore
+   `app/api/auth/export-token` from git, copy `refresh_token`, set it as
+   `SPOTIFY_REFRESH_TOKEN`, then delete the route again. That's what lets
+   *every* visitor see your listening data rather than only you. In production,
+   add the same vars in Vercel.
 
 Genres are folded into families and weighted by artist rank before display, so
 the five rows aren't five near-duplicate spellings of "indie folk".

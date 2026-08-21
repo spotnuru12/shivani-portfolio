@@ -3,17 +3,14 @@
 // from here so copy edits never require touching component code.
 // ─────────────────────────────────────────────────────────────────────────
 
-export const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : 'http://localhost:3000'
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://shivanipotnuru.com'
 
 export const PROFILE = {
   name: 'Shivani Potnuru',
   first: 'Shivani',
-  role: 'CS + Statistics student',
   school: 'UW–Madison',
   email: 'spotnuru@wisc.edu',
-  location: 'Madison, WI',
   github: 'https://github.com/spotnuru12',
   linkedin: 'https://linkedin.com/in/shivanipotnuru',
   resume:
@@ -31,38 +28,7 @@ export const PROFILE = {
     'civic technology',
     'medication access',
   ],
-  intro:
-    "I've worked across pharma and clinical data, HCI research, and health insurance. Same thread through all of it: sit with the people who have to use the thing, then build until it stops being confusing.",
 } as const
-
-// Big animated stat blocks in the hero (Peter-style). `live` counters are
-// handled in the component (e.g. seconds on page).
-export const STATS: { value: string; label: string; live?: 'seconds' }[] = [
-  { value: '2', label: 'majors' },
-  { value: '6', label: 'roles across research, data & design' },
-  { value: '4', label: 'projects shipped' },
-  { value: '', label: 'seconds you’ve spent here', live: 'seconds' },
-]
-
-// ── Sticky-note bulletin board ───────────────────────────────────────────
-// Draggable, tilted notes. `kind` drives the paper texture/color.
-export type StickyKind = 'ruled' | 'grid' | 'plain' | 'accent'
-export interface Sticky {
-  id: string
-  text: string
-  kind: StickyKind
-  rotate: number // initial tilt in degrees
-  font?: 'hand' | 'mono' | 'serif'
-}
-
-export const BELIEFS_HEADING = 'a few things I believe'
-export const BELIEFS: Sticky[] = [
-  { id: 'clarity', text: 'Tirelessly pursue clarity.', kind: 'ruled', rotate: -5, font: 'hand' },
-  { id: 'empower', text: 'Software should empower.', kind: 'grid', rotate: 4, font: 'mono' },
-  { id: 'moments', text: 'Design for real moments, not demos.', kind: 'plain', rotate: -2, font: 'serif' },
-  { id: 'research', text: 'Good research is just careful listening.', kind: 'accent', rotate: 3, font: 'hand' },
-  { id: 'ship', text: 'Ship, then learn. Repeat.', kind: 'plain', rotate: 6, font: 'mono' },
-]
 
 // Tilted Polaroids in About. `src` is optional so empty frames can sit as
 // placeholders until you drop photos in public/.
@@ -469,12 +435,6 @@ export const SKILL_DEFINITIONS: Record<string, string> = {
 export const SHELF_HEADING = "What I'm into lately"
 export const SHELF_BLURB =
   "What I've been listening to, watching, and reading outside of class. Album art pulls in live (the films and books I keep by hand)."
-
-/**
- * The handwritten strip above the shelf. `reading` comes from BOOKS and
- * `watching` from the Letterboxd feed, so only the last one is by hand.
- */
-export const CURRENTLY_INTO = 'buttons that tell you what they do'
 
 /**
  * Letterboxd handle, e.g. 'petezha' for letterboxd.com/petezha.

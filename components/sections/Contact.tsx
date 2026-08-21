@@ -22,8 +22,8 @@ export default function Contact() {
             className="mt-10 md:mt-12 inline-flex items-center gap-2 flex-wrap justify-center text-[22px] md:text-[32px] hover:opacity-90 transition-opacity"
             style={{ fontWeight: 500 }}
           >
-            spotnuru<span className="text-orange">[@]</span>wisc.edu
-            <span aria-hidden className="text-[0.75em] text-orange">↗</span>
+            spotnuru<span className="text-orange-ink">[@]</span>wisc.edu
+            <span aria-hidden className="text-[0.75em] text-orange-ink">↗</span>
           </a>
         </Reveal>
       </div>

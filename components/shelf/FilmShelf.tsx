@@ -1,13 +1,10 @@
 import Image from 'next/image'
 import { LetterboxdIcon, LiveDot } from '@/components/ui/Icons'
-import RefreshFilms from '@/components/shelf/RefreshFilms'
 import { FILMS } from '@/lib/data'
-import { getLetterboxd, stars, type Film } from '@/lib/letterboxd'
+import { stars, type Film, type LetterboxdData } from '@/lib/letterboxd'
 
-// Server component: the diary feed is fetched at render time and revalidated
-// hourly by lib/letterboxd, so there's no client request for this card.
-export default async function FilmShelf() {
-  const data = await getLetterboxd()
+// Server component: diary is fetched once in Shelf and passed in.
+export default function FilmShelf({ data }: { data: LetterboxdData | null }) {
 
   const entries: { title: string; year: string; rating: number | null; poster: string | null; url?: string }[] =
     data
@@ -28,7 +25,6 @@ export default async function FilmShelf() {
           <span className="truncate text-[13px] font-semibold">Watching</span>
           <LiveDot live={!!data} label="Letterboxd" />
         </div>
-        <RefreshFilms />
       </div>
 
       <div className="shelf-card-body">

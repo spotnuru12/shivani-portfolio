@@ -1,4 +1,5 @@
 import SpotifyDashboard from '@/components/spotify/SpotifyDashboard'
+import { SpotifyProvider } from '@/components/spotify/SpotifyProvider'
 import FilmShelf from '@/components/shelf/FilmShelf'
 import BookShelf from '@/components/shelf/BookShelf'
 import SpotifyStats from '@/components/shelf/SpotifyStats'
@@ -32,12 +33,13 @@ export default async function Shelf() {
         <p className="mt-4 max-w-prose text-[16px] text-ink-soft leading-relaxed">{SHELF_BLURB}</p>
       </Reveal>
 
+      <SpotifyProvider>
       <div className="mt-10 grid items-stretch gap-5 md:grid-cols-3">
         <Reveal className="h-full">
           <SpotifyDashboard />
         </Reveal>
         <Reveal delay={80} className="h-full">
-          <FilmShelf />
+          <FilmShelf data={letterboxd} />
         </Reveal>
         <Reveal delay={160} className="h-full">
           <BookShelf />
@@ -67,6 +69,7 @@ export default async function Shelf() {
           />
         </Reveal>
       </div>
+      </SpotifyProvider>
     </section>
   )
 }

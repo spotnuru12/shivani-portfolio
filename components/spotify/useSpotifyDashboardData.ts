@@ -210,7 +210,7 @@ function deriveTopArtist(tracks: SpotifyTrack[]): TopArtistSummary | null {
 }
 
 // ── Fetcher ──────────────────────────────────────────────────────────────
-const fetchOpts: RequestInit = { credentials: 'include', cache: 'no-store' }
+const fetchOpts: RequestInit = { credentials: 'include' }
 
 async function safeFetch<T>(url: string): Promise<T | null> {
   try {
@@ -313,3 +313,4 @@ export function useSpotifyDashboardData(): SpotifyDashboardData {
 
   return state
 }
+

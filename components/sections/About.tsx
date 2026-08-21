@@ -57,7 +57,7 @@ export default function About() {
                 href="https://tech4good.soe.ucsc.edu/"
                 target="_blank"
                 rel="noopener noreferrer"
-              className="orglink text-orange font-medium"
+              className="orglink text-orange-ink font-medium"
               >
                 Tech4Good Lab
               </a>{' '}
@@ -77,7 +77,7 @@ export default function About() {
                 href="https://madability.cs.wisc.edu/"
                 target="_blank"
                 rel="noopener noreferrer"
-              className="orglink text-orange font-medium"
+              className="orglink text-orange-ink font-medium"
               >
                 MadAbility Lab
               </a>{' '}
@@ -92,7 +92,7 @@ export default function About() {
               href="https://filene.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="orglink text-orange font-medium"
+              className="orglink text-orange-ink font-medium"
             >
               Filene Research Institute
             </a>
@@ -102,7 +102,7 @@ export default function About() {
               href="https://www.designinteractive-uw.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="orglink text-orange font-medium"
+              className="orglink text-orange-ink font-medium"
             >
               Design Interactive
             </a>
@@ -141,7 +141,7 @@ export default function About() {
               <h3 className="font-display text-[22px] leading-[1.15]">
                 {EDUCATION.school} <span aria-hidden>🦡</span>
               </h3>
-              <p className="mt-1.5 text-[15px] text-orange font-medium">{EDUCATION.degree}</p>
+              <p className="mt-1.5 text-[15px] text-orange-ink font-medium">{EDUCATION.degree}</p>
               <p className="mt-1 text-[14px] text-muted">
                 {EDUCATION.dates} · {EDUCATION.honors}
               </p>

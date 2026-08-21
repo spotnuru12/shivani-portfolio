@@ -4,8 +4,8 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { LiveDot, SpotifyIcon } from '@/components/ui/Icons'
 import { MOCK_LISTENING } from '@/lib/spotify'
+import { useSharedSpotify } from './SpotifyProvider'
 import {
-  useSpotifyDashboardData,
   type GenreSlice,
   type NowPlayingDisplay,
   type RecentTrackDisplay,
@@ -17,7 +17,7 @@ type Tab = 'now' | 'top' | 'genre'
 
 // ── Resolve live -> display, falling back to the sample data ─────────────
 function useDashboardView() {
-  const live = useSpotifyDashboardData()
+  const live = useSharedSpotify()
   const mock = MOCK_LISTENING
 
   const fallbackNow: NowPlayingDisplay = {

@@ -23,12 +23,12 @@ export default function Footer() {
             Built with{' '}
             {BUILT_WITH.map((tech, i) => (
               <span key={tech}>
-                <span className="text-orange">{tech}</span>
+                <span className="text-orange-ink">{tech}</span>
                 {i < BUILT_WITH.length - 1 ? ', ' : ' '}
               </span>
             ))}
-            · deployed on <span className="text-orange">Vercel</span> · designed in{' '}
-            <span className="text-orange">Figma</span>
+            · deployed on <span className="text-orange-ink">Vercel</span> · designed in{' '}
+            <span className="text-orange-ink">Figma</span>
           </div>
         </div>
 
@@ -39,7 +39,7 @@ export default function Footer() {
               href={href}
               aria-label={label}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="hover:text-orange transition-colors"
+              className="hover:text-orange-ink transition-colors"
             >
               <Icon size={18} strokeWidth={1.75} />
             </a>

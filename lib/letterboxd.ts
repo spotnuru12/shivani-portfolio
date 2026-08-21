@@ -25,7 +25,7 @@ export interface LetterboxdData {
   profileUrl: string
 }
 
-/** Cache tag for the diary feed, shared with the on-demand refresh route. */
+/** Cache tag for the diary feed (hourly revalidate). */
 export const LETTERBOXD_TAG = 'letterboxd'
 
 export function letterboxdProfileUrl(): string | null {
@@ -62,8 +62,6 @@ export async function getLetterboxd(): Promise<LetterboxdData | null> {
   if (!profileUrl) return null
 
   try {
-    // Tagged so the refresh button (app/api/letterboxd/refresh) can bust this
-    // entry on demand instead of waiting out the hour.
     const res = await fetch(`${profileUrl}rss/`, {
       next: { revalidate: 3600, tags: [LETTERBOXD_TAG] },
     })

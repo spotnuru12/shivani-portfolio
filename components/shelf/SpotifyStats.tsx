@@ -3,11 +3,11 @@
 import { LiveDot, SpotifyIcon } from '@/components/ui/Icons'
 import { MOCK_LISTENING } from '@/lib/spotify'
 import { artistRankStats, gini, rankWeights } from '@/lib/media-stats'
-import { useSpotifyDashboardData } from '@/components/spotify/useSpotifyDashboardData'
+import { useSharedSpotify } from '@/components/spotify/SpotifyProvider'
 import { HBars, Lorenz } from './Charts'
 
 export default function SpotifyStats() {
-  const live = useSpotifyDashboardData()
+  const live = useSharedSpotify()
   const names =
     live.topArtistNames.length > 0
       ? live.topArtistNames

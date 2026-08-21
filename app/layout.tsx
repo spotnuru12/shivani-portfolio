@@ -29,6 +29,7 @@ const caveat = localFont({
   variable: '--font-caveat',
   display: 'swap',
   weight: '400 700',
+  preload: false,
 })
 
 const description = `${PROFILE.name} is a CS and Statistics student at ${PROFILE.school} building accessible, data-driven tools.`
@@ -40,6 +41,7 @@ export const metadata: Metadata = {
     template: `%s — ${PROFILE.name}`,
   },
   description,
+  alternates: { canonical: '/' },
   openGraph: {
     title: `${PROFILE.name} — Portfolio`,
     description,
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
     siteName: PROFILE.name,
     type: 'website',
   },
-  twitter: { card: 'summary', title: `${PROFILE.name} — Portfolio`, description },
+  twitter: { card: 'summary_large_image', title: `${PROFILE.name} — Portfolio`, description },
 }
 
 // Hydration watchdog: entrance animations render at opacity:0. If the JS
@@ -66,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
+        <link rel="preload" as="image" href="/headshot.jpeg" />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <script dangerouslySetInnerHTML={{ __html: revealInit }} />
       </head>

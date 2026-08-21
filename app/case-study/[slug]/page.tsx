@@ -11,7 +11,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = PROJECTS.find((x) => x.slug === params.slug)
   if (!p) return {}
-  return { title: p.title, description: p.blurb }
+  return { title: p.title, description: p.blurb, alternates: { canonical: `/case-study/${p.slug}` } }
 }
 
 export default function CaseStudy({ params }: { params: { slug: string } }) {

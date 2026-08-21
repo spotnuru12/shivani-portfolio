@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Moon, Sun } from 'lucide-react'
+import { Menu, Moon, Sun, X } from 'lucide-react'
 import { PROFILE } from '@/lib/data'
 import { useTheme } from '@/components/ui/ThemeProvider'
 
@@ -17,6 +17,7 @@ const LINKS: [string, string][] = [
 
 export default function Navbar() {
   const [active, setActive] = useState('home')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     // React is alive — cancel the "force-reveal" hydration watchdog set in layout.
@@ -56,12 +57,22 @@ export default function Navbar() {
     return () => io.disconnect()
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/80 backdrop-blur-md">
       <div className="max-w-content mx-auto flex items-center justify-between px-6 md:px-10 py-3.5">
         <a
           href="#home"
-          className="font-display text-[19px] tracking-tight hover:text-orange transition-colors"
+          className="font-display text-[19px] tracking-tight hover:text-orange-ink transition-colors"
+          onClick={() => setMenuOpen(false)}
         >
           {PROFILE.name}
         </a>
@@ -70,18 +81,7 @@ export default function Navbar() {
           <ul className="hidden sm:flex items-center gap-1">
             {LINKS.map(([id, label]) => (
               <li key={id}>
-                <a
-                  href={`#${id}`}
-                  aria-current={active === id ? 'true' : undefined}
-                  className={`relative text-[14px] px-2.5 py-1.5 rounded-md transition-colors hover:text-orange ${
-                    active === id ? 'text-orange' : 'text-ink-soft'
-                  }`}
-                >
-                  {label}
-                  {active === id && (
-                    <span className="absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-1.5 w-1.5 rounded-full bg-orange" />
-                  )}
-                </a>
+                <NavLink id={id} label={label} active={active} />
               </li>
             ))}
           </ul>
@@ -94,9 +94,61 @@ export default function Navbar() {
           >
             Resume
           </a>
+          <button
+            type="button"
+            className="sm:hidden inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft hover:text-orange-ink hover:border-orange transition-colors"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X size={17} strokeWidth={1.75} /> : <Menu size={17} strokeWidth={1.75} />}
+          </button>
         </nav>
       </div>
+
+      {menuOpen && (
+        <nav id="mobile-nav" className="sm:hidden border-t border-line px-6 pb-4 pt-2">
+          <ul className="flex flex-col">
+            {LINKS.map(([id, label]) => (
+              <li key={id}>
+                <NavLink id={id} label={label} active={active} onClick={() => setMenuOpen(false)} block />
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </header>
+  )
+}
+
+function NavLink({
+  id,
+  label,
+  active,
+  onClick,
+  block,
+}: {
+  id: string
+  label: string
+  active: string
+  onClick?: () => void
+  block?: boolean
+}) {
+  return (
+    <a
+      href={`#${id}`}
+      aria-current={active === id ? 'true' : undefined}
+      onClick={onClick}
+      className={`${block ? 'block px-1 py-2.5 text-[16px]' : 'relative text-[14px] px-2.5 py-1.5 rounded-md'} transition-colors hover:text-orange-ink ${
+        active === id ? 'text-orange-ink' : 'text-ink-soft'
+      }`}
+    >
+      {label}
+      {!block && active === id && (
+        <span className="absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-1.5 w-1.5 rounded-full bg-orange" />
+      )}
+    </a>
   )
 }
 
@@ -109,7 +161,7 @@ function ThemeToggle() {
       onClick={toggle}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Light mode' : 'Dark mode'}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft hover:text-orange hover:border-orange transition-colors"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft hover:text-orange-ink hover:border-orange transition-colors"
     >
       {isDark ? <Sun size={17} strokeWidth={1.75} /> : <Moon size={17} strokeWidth={1.75} />}
     </button>

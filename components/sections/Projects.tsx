@@ -41,17 +41,17 @@ function ProjectCard({
       style={{ background: NAVY, color: '#1b1a18', height: 340 }}
     >
       <div
-        className="absolute inset-0 p-6 flex flex-col justify-between"
+        className="on-navy absolute inset-0 p-6 flex flex-col justify-between"
         style={{ color: CREAM }}
       >
         <div>
-          <div className="text-[12px]" style={{ color: 'var(--orange)' }}>
+          <div className="text-[12px]" style={{ color: 'var(--orange-ink)' }}>
             {project.timeline}
           </div>
           <h3 className="font-display text-[24px] md:text-[28px] leading-[1.02] mt-1.5">
             {project.title}
           </h3>
-          <div className="italic text-[15px] mt-1" style={{ color: 'var(--orange)' }}>
+          <div className="italic text-[15px] mt-1" style={{ color: 'var(--orange-ink)' }}>
             {project.sub}
           </div>
           <p className="text-[13.5px] mt-4 leading-[1.55] opacity-90">{hoverCopy}</p>
@@ -70,7 +70,7 @@ function ProjectCard({
       </div>
 
       <div
-        className="reveal-cover absolute inset-0 z-10 flex flex-col p-6"
+        className="on-cream reveal-cover absolute inset-0 z-10 flex flex-col p-6"
         style={{ background: '#ffffff' }}
       >
         <div className="flex items-start justify-between text-[12px] text-muted">
@@ -82,7 +82,7 @@ function ProjectCard({
 
         <div className="mt-3 flex-1 min-h-0">
           <div className="font-display text-[22px] leading-[1.05]">{project.title}</div>
-          <div className="italic text-[14px] mt-1" style={{ color: 'var(--orange)' }}>
+          <div className="italic text-[14px] mt-1" style={{ color: 'var(--orange-ink)' }}>
             {project.sub}
           </div>
           <p className="mt-2.5 text-[13px] leading-[1.5] text-[#4a4640] line-clamp-2">{project.blurb}</p>

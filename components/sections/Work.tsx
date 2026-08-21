@@ -57,7 +57,7 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
       />
 
       <div
-        className="flex-1 ml-6 md:ml-0 rounded-3xl p-6"
+        className="on-cream flex-1 ml-6 md:ml-0 rounded-3xl p-6"
         style={{
           background: 'var(--work-card)',
           color: 'var(--work-card-ink)',
@@ -71,7 +71,7 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
               <h3 className="font-display text-[20px] md:text-[24px] leading-[1.15]">{job.role}</h3>
               <div className="text-[13.5px] opacity-65">{job.loc}</div>
             </div>
-            <div className="mt-0.5 text-[16px] md:text-[18px] font-medium" style={{ color: 'var(--orange)' }}>
+            <div className="mt-0.5 text-[16px] md:text-[18px] font-medium" style={{ color: 'var(--orange-ink)' }}>
               {job.url ? (
                 <a href={job.url} target="_blank" rel="noopener noreferrer" className="orglink">
                   {job.org}{' '}
@@ -88,7 +88,7 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
             <div className={`jobmore ${open ? 'open' : ''}`}>
               <div className="jobmore-inner">
                 <div className="mt-3.5">
-                  <div className="text-[14px] font-medium text-orange">What I did</div>
+                  <div className="text-[14px] font-medium text-orange-ink">What I did</div>
                   <ul className="mt-2 pl-[18px] text-[15px] leading-[1.6] opacity-85 list-disc">
                     {job.bullets.map((item) => (
                       <li key={item} className="mt-1">

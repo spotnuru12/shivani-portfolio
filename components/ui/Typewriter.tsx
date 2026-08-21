@@ -99,7 +99,7 @@ export default function Typewriter({
   }, [words, typeMs, holdMs, deleteMs])
 
   return (
-    <span ref={spanRef} className={`caret ${className}`} aria-live="polite">
+    <span ref={spanRef} className={`caret ${className}`} aria-hidden="true">
       {text}
     </span>
   )

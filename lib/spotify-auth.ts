@@ -5,6 +5,7 @@
  */
 
 import crypto from 'crypto'
+import { NextRequest, NextResponse } from 'next/server'
 
 const TOKEN_URL = 'https://accounts.spotify.com/api/token'
 const SPOTIFY_API_BASE = 'https://api.spotify.com/v1'
@@ -189,3 +190,45 @@ export function hasOwnerToken(): boolean {
 }
 
 export { COOKIE_NAME }
+
+const CACHE_CONTROL = 'public, s-maxage=900, stale-while-revalidate=3600'
+
+/** Token-refresh + fetch + error wrap shared by the three /api/spotify routes. */
+export async function withSpotify(
+  request: NextRequest,
+  label: string,
+  path: string,
+  params?: Record<string, string>,
+): Promise<NextResponse> {
+  const cookie = request.cookies.get(COOKIE_NAME)?.value
+  const refreshToken = getRefreshToken(cookie)
+  if (!refreshToken) return NextResponse.json({ error: 'Not connected' }, { status: 401 })
+
+  let accessToken: string
+  let newRefreshToken: string | undefined
+  try {
+    const result = await getAccessTokenFromRefresh(refreshToken)
+    accessToken = result.access_token
+    newRefreshToken = result.new_refresh_token
+  } catch (e) {
+    const status = (e as { status?: number })?.status ?? 502
+    const body = (e as { body?: string })?.body ?? ''
+    console.error(`[${label}] token_failed:`, status, body.slice(0, 300))
+    return NextResponse.json({ error: 'token_failed', status }, { status: 502 })
+  }
+
+  try {
+    const data = await fetchSpotifyApi(path, accessToken, params)
+    const res = NextResponse.json(data)
+    res.headers.set('Cache-Control', CACHE_CONTROL)
+    if (newRefreshToken && cookie) {
+      res.cookies.set(COOKIE_NAME, encryptToken(newRefreshToken), cookieOptions())
+    }
+    return res
+  } catch (e) {
+    const status = (e as { status?: number })?.status ?? 502
+    const body = (e as { body?: string })?.body ?? ''
+    console.error(`[${label}] spotify_api_failed:`, status, body.slice(0, 300))
+    return NextResponse.json({ error: 'spotify_api_failed', status }, { status: 502 })
+  }
+}
