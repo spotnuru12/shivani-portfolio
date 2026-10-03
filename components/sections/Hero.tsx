@@ -18,7 +18,7 @@ export default function Hero() {
         <div className="md:col-span-7 order-2 md:order-1">
           <Reveal>
             <h1 className="font-display text-[clamp(2.4rem,11vw,3.5rem)] md:text-[84px] leading-[0.92] tracking-[-0.03em]">
-              Hi, I&apos;m {PROFILE.first}
+              Hi! I&apos;m {PROFILE.first}
             </h1>
             <p className="mt-6 max-w-[33em] text-[17px] md:text-[22px] text-ink leading-[1.45]">
               {PROFILE.lead}
@@ -31,6 +31,12 @@ export default function Hero() {
               <span className="text-orange-ink font-medium" aria-hidden="true">
                 <Typewriter words={PROFILE.typing} />
               </span>
+            </p>
+            <p className="mt-[18px] text-[17px] md:text-[18px] text-ink-soft">
+              Feel free to reach me at{' '}
+              <a href={`mailto:${PROFILE.email}`} className="text-ink font-medium orglink">
+                spotnuru<span className="text-orange-ink">[@]</span>wisc.edu
+              </a>
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">

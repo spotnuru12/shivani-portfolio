@@ -17,7 +17,7 @@ export const PROFILE = {
     'https://1drv.ms/b/c/796c1c094714b749/IQBpbMNQIu_fTKxRTsmsHhXdAd6jGVWQFeYLjr3sCK_E8wg',
   // Opening claim. Rotating domains live on the line under it.
   lead:
-    "A software engineer with a passion for accessible, data-driven, human-centered tools. Currently I'm studying CS + Statistics at UW–Madison.",
+    "A UW–Madison student studying Computer Science + Statistics, interested in technology-driven social impact — whether that's through code, data, or research.",
   typing: [
     'accessibility',
     'credit unions',

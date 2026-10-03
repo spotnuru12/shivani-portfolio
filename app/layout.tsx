@@ -56,19 +56,15 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fbfaf6' },
-    { media: '(prefers-color-scheme: dark)', color: '#00314f' },
-  ],
+  themeColor: '#fbfaf6',
 }
 
 // Hydration watchdog: entrance animations render at opacity:0. If the JS
 // bundle never boots, force-reveal after 3.5s so the page is never blank.
 const revealInit = `window.__t=setTimeout(function(){document.documentElement.className+=" no-hydrate"},3500)`
 
-// Runs before first paint so a dark-mode visitor never sees a flash of the
-// light palette. Stored choice wins over the OS preference.
-const themeInit = `(function(){try{var s=localStorage.getItem('shivani-theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;var r=document.documentElement;r.classList.add(d?'theme-dark':'theme-light');r.dataset.theme=d?'dark':'light';r.style.colorScheme=d?'dark':'light'}catch(e){}})()`
+// Light unless this browser already picked dark. Do not follow the OS.
+const themeInit = `(function(){try{var d=localStorage.getItem('shivani-theme')==='dark';var r=document.documentElement;r.classList.add(d?'theme-dark':'theme-light');r.dataset.theme=d?'dark':'light';r.style.colorScheme=d?'dark':'light'}catch(e){}})()`
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

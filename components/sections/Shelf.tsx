@@ -24,9 +24,9 @@ export default async function Shelf() {
   const films = letterboxd?.films?.length ? letterboxd.films : asDiary(FILMS)
 
   return (
-    <section id="listening" className="max-w-content mx-auto px-6 md:px-10 py-20 md:py-24">
+    <section id="media" className="max-w-content mx-auto px-6 md:px-10 py-20 md:py-24">
       <Reveal>
-        <SectionHeading eyebrow="the shelf" title={SHELF_HEADING} />
+        <SectionHeading eyebrow="media" title={SHELF_HEADING} />
         <p className="mt-4 max-w-prose text-[16px] text-ink-soft leading-relaxed">{SHELF_BLURB}</p>
       </Reveal>
 

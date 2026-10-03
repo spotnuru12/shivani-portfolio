@@ -5,11 +5,11 @@ import { Menu, Moon, Sun, X } from 'lucide-react'
 import { PROFILE } from '@/lib/data'
 import { useTheme } from '@/components/ui/ThemeProvider'
 
-const SECTIONS = ['home', 'work', 'about', 'listening', 'projects', 'toolkit', 'contact'] as const
+const SECTIONS = ['home', 'work', 'about', 'media', 'projects', 'toolkit', 'contact'] as const
 const LINKS: [string, string][] = [
   ['work', 'work'],
   ['about', 'about'],
-  ['listening', 'shelf'],
+  ['media', 'media'],
   ['projects', 'projects'],
   ['toolkit', 'stack'],
   ['contact', 'contact'],
