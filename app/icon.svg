@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <circle cx="50" cy="50" r="46" fill="#e4571b"/>
-  <circle cx="36" cy="42" r="6.5" fill="#ffffff"/>
-  <circle cx="64" cy="42" r="6.5" fill="#ffffff"/>
-  <path d="M 32 58 Q 50 78 68 58" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+  <rect width="100" height="100" fill="#fbfaf6"/>
+  <g transform="translate(50 52) skewX(-16) translate(-50 -50)">
+    <circle cx="30" cy="32" r="7.5" fill="#e4571b"/>
+    <circle cx="30" cy="68" r="7.5" fill="#e4571b"/>
+    <path d="M 58 20 A 30 30 0 0 1 58 80" fill="none" stroke="#e4571b" stroke-width="10" stroke-linecap="round"/>
+  </g>
 </svg>

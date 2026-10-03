@@ -23,7 +23,7 @@ export default function About() {
 
       <div className="mt-11 grid md:grid-cols-2 gap-10 md:gap-14">
         <PauseOffscreen>
-        <Reveal className="flex flex-col gap-5 text-ink-soft leading-[1.6] max-w-[65ch] text-[17px]">
+        <Reveal className="flex flex-col gap-5 font-sans text-[17px] font-normal leading-[1.6] text-ink-soft max-w-[65ch]">
           <p className="m-0 text-ink">
             Hi! I&apos;m Shivani. I work on software, data, and HCI research.
             I like building things end to end, and figuring out who they&apos;re actually for while I
@@ -34,7 +34,7 @@ export default function About() {
             <span className="shrink-0 w-10 h-10 mt-[3px] text-orange" aria-hidden>
               <GlobeDoodle />
             </span>
-            <p className="m-0">
+            <p className="m-0 font-sans text-[17px] font-normal leading-[1.6] text-ink-soft">
               I got into tech because of the digital divide, the gap between who a
               technology is built for and who can actually use it. That&apos;s still
               what decides what I work on.
@@ -51,7 +51,7 @@ export default function About() {
             >
               <PaperDoodle />
             </a>
-            <p className="m-0">
+            <p className="m-0 font-sans text-[17px] font-normal leading-[1.6] text-ink-soft">
               Then I co-authored my first paper with the{' '}
               <a
                 href="https://tech4good.soe.ucsc.edu/"
@@ -70,14 +70,14 @@ export default function About() {
             <span className="shrink-0 w-10 h-10 mt-[3px] text-orange" aria-hidden>
               <HeadsetDoodle />
             </span>
-            <p className="m-0">
+            <p className="m-0 font-sans text-[17px] font-normal leading-[1.6] text-ink-soft">
               Now I care about innovation that doesn&apos;t leave people behind. Mixed reality is
               where software is heading, and at the{' '}
               <a
                 href="https://madability.cs.wisc.edu/"
                 target="_blank"
                 rel="noopener noreferrer"
-              className="orglink text-orange-ink font-medium"
+                className="orglink text-orange-ink font-medium"
               >
                 MadAbility Lab
               </a>{' '}
@@ -85,8 +85,8 @@ export default function About() {
             </p>
           </div>
 
-          <p className="m-0">
-            Currently I&apos;m building <span className="font-semibold text-ink">Pharavo</span>, a medication
+          <p className="m-0 font-sans text-[17px] font-normal leading-[1.6] text-ink-soft">
+            Currently I&apos;m building <span className="text-orange-ink font-medium">Pharavo</span>, a medication
             companion for ESL patients and older adults, and working as a data operations intern at{' '}
             <a
               href="https://filene.org/"
