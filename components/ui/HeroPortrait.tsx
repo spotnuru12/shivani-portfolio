@@ -66,7 +66,7 @@ export default function HeroPortrait({
   return (
     <div
       ref={wrapRef}
-      className="relative h-[320px] w-[320px] md:h-[384px] md:w-[384px]"
+      className="relative w-[min(320px,calc(100vw-3rem))] aspect-square md:h-[384px] md:w-[384px]"
       role="img"
       aria-label={label}
     >

@@ -112,3 +112,16 @@ export const MOCK_LISTENING: ListeningData = {
     { name: 'ambient', pct: 12, artists: ['Ludovico Einaudi'] },
   ],
 }
+
+export const MOCK_TOP_ARTISTS = [
+  'Billy Joel',
+  'Frank Ocean',
+  'Niall Horan',
+  'Hozier',
+  'Jeff Buckley',
+  'Sufjan Stevens',
+  'Phoebe Bridgers',
+  'Daniel Caesar',
+  'Fleet Foxes',
+  'Ludovico Einaudi',
+]

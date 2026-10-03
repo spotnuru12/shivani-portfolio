@@ -37,11 +37,11 @@ function ProjectCard({
   return (
     <Link
       href={`/case-study/${project.slug}`}
-      className="reveal-trigger relative block rounded-2xl overflow-hidden group border border-black/10"
-      style={{ background: NAVY, color: '#1b1a18', height: 340 }}
+      className="reveal-trigger relative block h-[300px] sm:h-[340px] rounded-2xl overflow-hidden group border border-black/10"
+      style={{ background: NAVY, color: '#1b1a18' }}
     >
       <div
-        className="on-navy absolute inset-0 p-6 flex flex-col justify-between"
+        className="on-navy absolute inset-0 p-5 md:p-6 flex flex-col justify-between"
         style={{ color: CREAM }}
       >
         <div>
@@ -56,7 +56,7 @@ function ProjectCard({
           </div>
           <p className="text-[13.5px] mt-4 leading-[1.55] opacity-90">{hoverCopy}</p>
         </div>
-        <div className="flex flex-wrap gap-1 pr-36">
+        <div className="flex flex-wrap gap-1 pr-20 md:pr-36">
           {project.tags.map((t) => (
             <span
               key={t}
@@ -70,7 +70,7 @@ function ProjectCard({
       </div>
 
       <div
-        className="on-cream reveal-cover absolute inset-0 z-10 flex flex-col p-6"
+        className="on-cream reveal-cover absolute inset-0 z-10 flex flex-col p-5 md:p-6"
         style={{ background: '#ffffff' }}
       >
         <div className="flex items-start justify-between text-[12px] text-muted">
@@ -88,7 +88,7 @@ function ProjectCard({
           <p className="mt-2.5 text-[13px] leading-[1.5] text-[#4a4640] line-clamp-2">{project.blurb}</p>
         </div>
 
-        <div className="mt-3 pt-3 border-t border-black/10 flex items-end pr-36">
+        <div className="mt-3 pt-3 border-t border-black/10 flex items-end pr-20 md:pr-36">
           <div className="flex flex-wrap gap-1">
             {project.tags.slice(0, 3).map((t) => (
               <span

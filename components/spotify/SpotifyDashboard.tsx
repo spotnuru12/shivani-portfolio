@@ -71,7 +71,7 @@ export default function SpotifyDashboard({ className = '' }: { className?: strin
 
   return (
     <div className={`shelf-card h-full ${className}`}>
-      <div className="shelf-card-head">
+      <div className="shelf-card-head flex-col items-stretch gap-2 sm:flex-row sm:items-center">
         <div className="flex min-w-0 items-center gap-2">
           <span style={{ color: '#1DB954' }}>
             <SpotifyIcon size={17} />
@@ -80,16 +80,19 @@ export default function SpotifyDashboard({ className = '' }: { className?: strin
           <LiveDot live={data.live} loading={data.loading} label="Spotify" />
         </div>
         <div
-          className="flex shrink-0 items-center gap-1 rounded-full p-1 text-[10px] font-semibold uppercase tracking-[0.12em]"
+          role="tablist"
+          aria-label="Listening views"
+          className="flex shrink-0 items-center gap-1 self-start rounded-full p-1 text-[10px] font-semibold uppercase tracking-[0.12em] sm:self-auto"
           style={{ background: 'var(--card-line)' }}
         >
           {tabs.map(([key, label]) => (
             <button
               key={key}
               type="button"
+              role="tab"
               onClick={() => setTab(key)}
-              aria-pressed={tab === key}
-              className={`rounded-full px-2.5 py-1 transition-colors ${tab === key ? '' : 'opacity-60'}`}
+              aria-selected={tab === key}
+              className={`min-h-8 rounded-full px-2.5 py-1 transition-colors ${tab === key ? '' : 'opacity-60'}`}
               style={{
                 background: tab === key ? 'var(--card-ink)' : 'transparent',
                 color: tab === key ? 'var(--card-bg)' : undefined,

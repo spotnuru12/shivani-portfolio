@@ -1,29 +1,44 @@
+'use client'
+
+import { useId, useState } from 'react'
 import { SKILL_DEFINITIONS } from '@/lib/data'
 
 export default function SkillChip({ name }: { name: string }) {
   const def = SKILL_DEFINITIONS[name]
-  const tipId = def ? `skill-tip-${name.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}` : undefined
-  return (
-    <span className="relative inline-flex group">
-      {/* Colours stay as classes rather than inline styles so the group-hover
-          variants can actually win — inline styles can't be overridden. */}
-      <span
-        tabIndex={0}
-        aria-describedby={tipId}
-        className="text-[13.5px] md:text-[14.5px] px-3.5 py-1.5 rounded-full border border-line-strong text-ink-soft cursor-help transition-colors group-hover:bg-transparent group-hover:text-orange-ink group-hover:border-orange focus:bg-transparent focus:text-orange-ink focus:border-orange focus:outline-none"
-      >
+  const uid = useId()
+  const tipId = def ? `skill-tip-${uid}` : undefined
+  const [open, setOpen] = useState(false)
+
+  if (!def) {
+    return (
+      <span className="inline-flex min-h-9 items-center rounded-full border border-line-strong px-3.5 py-1.5 text-[13.5px] text-ink-soft md:text-[14.5px]">
         {name}
       </span>
-      {def && (
-        <span
-          id={tipId}
-          role="tooltip"
-          className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-2.5 -translate-y-full opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 z-30 w-[230px] md:w-[250px] text-left rounded-xl p-3 text-[13px] leading-[1.5] bg-note text-note-ink shadow-lift"
-        >
-          <span className="block">{def}</span>
-          <span className="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-3 h-3 rotate-45 bg-note" />
-        </span>
-      )}
+    )
+  }
+
+  return (
+    <span className={`relative inline-flex ${open ? 'z-20' : ''}`}>
+      <button
+        type="button"
+        aria-describedby={tipId}
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        onBlur={() => setOpen(false)}
+        className="skill-chip inline-flex min-h-9 cursor-help items-center rounded-full border border-line-strong px-3.5 py-1.5 text-[13.5px] text-ink-soft transition-colors md:text-[14.5px]"
+      >
+        {name}
+      </button>
+      <span
+        id={tipId}
+        role="tooltip"
+        className={`skill-tip pointer-events-none absolute left-1/2 top-0 z-30 w-[min(250px,calc(100vw-3rem))] -translate-x-1/2 -translate-y-[calc(100%+10px)] rounded-xl bg-note p-3 text-left text-[13px] leading-[1.5] text-note-ink shadow-lift transition-opacity duration-150 ${
+          open ? 'is-open' : ''
+        }`}
+      >
+        <span className="block">{def}</span>
+        <span className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-note" />
+      </span>
     </span>
   )
 }

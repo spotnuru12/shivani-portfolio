@@ -1,9 +1,9 @@
 'use client'
 
-import { useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 
-// Pointer-drag for polaroids. Position is mutated on the node during the
-// gesture so React does not re-render on every move.
+// Pointer-drag for polaroids. Disabled on coarse pointers so iPhone scroll
+// is not captured by touch-none.
 export default function Draggable({
   rotate,
   children,
@@ -23,6 +23,15 @@ export default function Draggable({
   const dragging = useRef(false)
   const [lifted, setLifted] = useState(false)
   const [z, setZ] = useState(zInit)
+  const [canDrag, setCanDrag] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const sync = () => setCanDrag(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   const paint = () => {
     const el = node.current
@@ -32,6 +41,7 @@ export default function Draggable({
   }
 
   const onDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!canDrag) return
     e.currentTarget.setPointerCapture(e.pointerId)
     start.current = { x: pos.current.x, y: pos.current.y, px: e.clientX, py: e.clientY }
     dragging.current = true
@@ -49,6 +59,7 @@ export default function Draggable({
     paint()
   }
   const onUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragging.current) return
     dragging.current = false
     setLifted(false)
     e.currentTarget.style.willChange = ''
@@ -67,7 +78,7 @@ export default function Draggable({
       onPointerMove={onMove}
       onPointerUp={onUp}
       onPointerCancel={onUp}
-      className={`absolute select-none cursor-grab touch-none ${lifted ? 'dragging' : ''} ${className}`}
+      className={`absolute select-none ${canDrag ? 'cursor-grab touch-none' : ''} ${lifted ? 'dragging' : ''} ${className}`}
       style={{
         ...style,
         transform: `translate(0px, 0px) rotate(${rotate}deg)`,

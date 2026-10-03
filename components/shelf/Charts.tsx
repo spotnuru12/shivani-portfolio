@@ -2,8 +2,8 @@ import type { Bar } from '@/lib/media-stats'
 import { lorenz } from '@/lib/media-stats'
 
 const INK = 'currentColor'
-const LINE = 'var(--card-line)'
-const ACCENT = '#e4571b'
+const LINE = 'var(--line)'
+const ACCENT = 'var(--orange)'
 
 export function HBars({ rows, max }: { rows: Bar[]; max?: number }) {
   const peak = max ?? Math.max(1, ...rows.map((r) => r.value))

@@ -73,10 +73,10 @@ export const EXPERIENCE: Experience[] = [
     blurb:
       'I built an engagement analytics dashboard that pulls campaign and web data out of Salesforce and GA4 into one view, plus Python reconciliation scripts that cut 5 to 6 hours of manual cleanup per cycle. I am also mapping data flows for the Salesforce to Data 360 migration.',
     bullets: [
-      'Built an engagement dashboard that pulls campaign and web data into one view',
+      'Built an engagement dashboard that puts Salesforce campaign data and GA4 in one view',
       'Wrote Python reconciliation scripts that cut 5 to 6 hours of cleanup per cycle',
       'Mapping data flows for the Salesforce to Data 360 migration',
-      'Piloting Tableau Next workflows for the analytics team',
+      'Piloting Tableau Next workflows with the analytics team',
     ],
     stack: ['Salesforce', 'GA4', 'Python', 'Tableau'],
   },
@@ -117,24 +117,6 @@ export const EXPERIENCE: Experience[] = [
       'Help teams carry user needs from discovery through delivery',
     ],
     stack: ['Leadership', 'Product', 'UX Strategy'],
-  },
-  {
-    role: 'AI/ML Project Intern',
-    org: 'Spectacle Health',
-    logo: '/logos/spectacle-health.png',
-    logoFit: 'cover',
-    dates: 'Jan 2025 – May 2025',
-    loc: 'Madison, WI',
-    url: 'https://spectacle.health/',
-    blurb:
-      'I built a document Q&A system over dense health insurance paperwork using Python, NLP, semantic search, and RAG, then traced its failure modes through edge case testing and shipped it to the client.',
-    bullets: [
-      'Built a Dockerized Weaviate vector database with Hugging Face embeddings',
-      'Set up retrieval across 20+ document schemas',
-      'Ran edge case testing that surfaced where retrieval returned the wrong section',
-      'Shipped the finished system to the client',
-    ],
-    stack: ['RAG', 'Weaviate', 'Hugging Face', 'Python', 'Docker'],
   },
   {
     role: 'Data Science Intern',
@@ -278,7 +260,7 @@ export const PROJECTS: Project[] = [
     tags: ['RAG', 'Weaviate', 'Hugging Face'],
     year: '2025',
     timeline: 'Jan 2025 – May 2025',
-    roleLabel: 'Project Engineer',
+    roleLabel: 'Cohort member',
     team: 'Cohort team',
     tools: ['Python', 'Weaviate', 'Hugging Face', 'Docker', 'FastAPI'],
     outcome: 'Shipped to client',
@@ -434,7 +416,7 @@ export const SKILL_DEFINITIONS: Record<string, string> = {
 
 export const SHELF_HEADING = "What I'm into lately"
 export const SHELF_BLURB =
-  "What I've been listening to, watching, and reading outside of class. Album art pulls in live (the films and books I keep by hand)."
+  "I like keeping a log of what I listen to and watch. Listening updates live. Films come from my Letterboxd diary."
 
 /**
  * Letterboxd handle, e.g. 'petezha' for letterboxd.com/petezha.
@@ -449,11 +431,11 @@ export interface Film {
   rating: number
 }
 export const FILMS: Film[] = [
-  { title: 'Everything Everywhere All at Once', year: '2022', rating: 5 },
-  { title: 'Past Lives', year: '2023', rating: 4.5 },
-  { title: 'Spirited Away', year: '2001', rating: 5 },
-  { title: 'Whiplash', year: '2014', rating: 4.5 },
-  { title: 'The Farewell', year: '2019', rating: 4 },
+  { title: 'The Housemaid', year: '2025', rating: 3.5 },
+  { title: 'Dhurandhar', year: '2025', rating: 3.5 },
+  { title: 'Eternal Sunshine of the Spotless Mind', year: '2004', rating: 4.5 },
+  { title: 'Call Me by Your Name', year: '2017', rating: 4 },
+  { title: 'Beautiful Boy', year: '2018', rating: 3.5 },
 ]
 
 export interface Book {

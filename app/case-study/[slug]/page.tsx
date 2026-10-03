@@ -32,17 +32,35 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
 
   return (
     <div className="max-w-content mx-auto px-6 md:px-10 py-14 md:py-20">
-      <Link href="/#projects" className="font-sans text-[12.5px] text-muted hover:text-orange-ink transition-colors">
+      <Link
+        href="/#projects"
+        className="inline-flex min-h-11 items-center font-sans text-[12.5px] text-muted hover:text-orange-ink transition-colors"
+      >
         ← back to projects
       </Link>
 
       {/* Breadcrumb (Caleb Wu style) */}
-      <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-line bg-panel/60 px-3.5 py-1.5 font-sans text-[12px]">
+      <div className="mt-6 inline-flex max-w-full items-center gap-2 rounded-full border border-line bg-panel/60 px-3.5 py-1.5 font-sans text-[12px]">
         <span className="text-orange-ink">📁</span>
-        <span>{project.title}</span>
+        <span className="truncate">{project.title}</span>
         <span className="text-muted">▸</span>
-        <span className="text-muted">case study</span>
+        <span className="shrink-0 text-muted">case study</span>
       </div>
+
+      <nav className="mt-6 md:hidden -mx-1 overflow-x-auto" aria-label="On this page">
+        <ul className="flex w-max gap-2 pb-1">
+          {toc.map((it) => (
+            <li key={it.id}>
+              <a
+                href={`#${it.id}`}
+                className="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border border-line px-3.5 text-[13px] text-ink-soft"
+              >
+                {it.heading}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <div className="mt-8 grid md:grid-cols-[200px_1fr] gap-10 md:gap-14">
         {/* Left TOC sidebar (Emmi Wu style) */}
@@ -51,7 +69,7 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
         {/* Body */}
         <article className="min-w-0">
           <section id="overview" className="scroll-mt-24">
-            <h1 className="font-display text-[38px] md:text-[52px] leading-[1.02] tracking-tight">
+            <h1 className="font-display text-[clamp(1.75rem,8vw,2.4rem)] md:text-[52px] leading-[1.05] tracking-tight">
               {project.title}
             </h1>
             <p className="mt-3 text-[18px] md:text-[20px] text-orange-ink">{project.sub}</p>

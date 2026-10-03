@@ -1,5 +1,5 @@
 import { Analytics } from '@vercel/analytics/next'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import { PROFILE, SITE_URL } from '@/lib/data'
@@ -50,6 +50,16 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: { card: 'summary_large_image', title: `${PROFILE.name} — Portfolio`, description },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fbfaf6' },
+    { media: '(prefers-color-scheme: dark)', color: '#00314f' },
+  ],
 }
 
 // Hydration watchdog: entrance animations render at opacity:0. If the JS

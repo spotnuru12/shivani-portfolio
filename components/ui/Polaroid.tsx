@@ -12,7 +12,7 @@ export default function Polaroid({
     <figure className={`polaroid ${className}`}>
       <div className="polaroid-photo relative overflow-hidden">
         {shot.src ? (
-          <Image src={shot.src} alt={shot.caption} fill className="object-cover" sizes="180px" />
+          <Image src={shot.src} alt={shot.caption} fill className="object-cover" sizes="(max-width: 768px) 156px, 188px" />
         ) : (
           <span className="absolute inset-0 grid place-items-center text-[10px] uppercase tracking-[0.16em] text-black/30">
             photo

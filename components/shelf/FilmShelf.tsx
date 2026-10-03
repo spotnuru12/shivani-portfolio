@@ -36,7 +36,7 @@ export default function FilmShelf({ data }: { data: LetterboxdData | null }) {
                 href={data.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 normal-case tracking-normal opacity-60 hover:opacity-100"
+                className="inline-flex min-h-8 shrink-0 items-center normal-case tracking-normal opacity-60 hover:opacity-100"
                 style={{ color: '#FF8000' }}
               >
                 Letterboxd →

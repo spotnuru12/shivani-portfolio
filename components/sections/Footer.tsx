@@ -13,7 +13,7 @@ const LINKS = [
 export default function Footer() {
   return (
     <footer className="closer border-t" style={{ borderColor: 'rgba(255, 239, 210, 0.16)' }}>
-      <div className="max-w-content mx-auto px-6 md:px-10 py-10 flex flex-wrap items-center justify-between gap-8">
+      <div className="max-w-content mx-auto px-6 md:px-10 pt-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] flex flex-wrap items-center justify-between gap-8">
         <div>
           <div className="font-display text-[16px] inline-flex items-center gap-2">
             Designed and built by {PROFILE.name}
@@ -32,14 +32,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex items-center gap-5" style={{ color: 'rgba(255, 239, 210, 0.85)' }}>
+        <div className="flex items-center gap-1" style={{ color: 'rgba(255, 239, 210, 0.85)' }}>
           {LINKS.map(({ href, label, Icon, external }) => (
             <a
               key={label}
               href={href}
               aria-label={label}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="hover:text-orange-ink transition-colors"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full hover:text-orange-ink transition-colors"
             >
               <Icon size={18} strokeWidth={1.75} />
             </a>

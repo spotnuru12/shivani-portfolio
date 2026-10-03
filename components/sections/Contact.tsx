@@ -7,11 +7,11 @@ export default function Contact() {
     <section id="contact" className="closer">
       <div className="max-w-content mx-auto px-6 md:px-10 py-24 md:py-32">
         <Reveal className="text-center">
-          <h2 className="font-display text-[52px] md:text-[72px] leading-[1.02] tracking-[-0.03em]">
+          <h2 className="font-display text-[clamp(2rem,8.5vw,3.25rem)] md:text-[72px] leading-[1.05] md:leading-[1.02] tracking-[-0.03em]">
             let&apos;s build
             <br />
             something <span className="word-cool text-[1.05em]">useful</span>
-            <span className="inline-block ml-2" style={{ verticalAlign: '-6px' }}>
+            <span className="inline-block ml-1.5 md:ml-2 align-[-4px] md:align-[-6px] [&_svg]:h-9 [&_svg]:w-9 md:[&_svg]:h-[52px] md:[&_svg]:w-[52px]">
               <SmileMascot size={52} />
             </span>
             .

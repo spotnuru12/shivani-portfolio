@@ -8,10 +8,10 @@ import { GlobeDoodle, HeadsetDoodle, PaperDoodle } from '@/components/ui/Doodles
 import PauseOffscreen from '@/components/ui/PauseOffscreen'
 
 const PHOTO_SPOTS = [
-  { left: '2%', top: '4%', rotate: -7, w: 188, z: 3 },
-  { left: '48%', top: '0%', rotate: 5, w: 188, z: 4 },
-  { left: '6%', top: '46%', rotate: 3, w: 188, z: 2 },
-  { left: '50%', top: '44%', rotate: -4, w: 188, z: 5 },
+  { left: '2%', top: '4%', rotate: -7, z: 3 },
+  { left: '48%', top: '0%', rotate: 5, z: 4 },
+  { left: '6%', top: '46%', rotate: 3, z: 2 },
+  { left: '50%', top: '44%', rotate: -4, z: 5 },
 ]
 
 export default function About() {
@@ -23,8 +23,8 @@ export default function About() {
 
       <div className="mt-11 grid md:grid-cols-2 gap-10 md:gap-14">
         <PauseOffscreen>
-        <Reveal className="flex flex-col gap-5 text-ink-soft leading-[1.6] max-w-[65ch]">
-          <p className="text-[20px] md:text-[22px] leading-[1.45]">
+        <Reveal className="flex flex-col gap-5 text-ink-soft leading-[1.6] max-w-[65ch] text-[17px]">
+          <p className="m-0 text-ink">
             Hi! I&apos;m Shivani. I work on software, data, and HCI research.
             I like building things end to end, and figuring out who they&apos;re actually for while I
             do it.
@@ -34,9 +34,9 @@ export default function About() {
             <span className="shrink-0 w-10 h-10 mt-[3px] text-orange" aria-hidden>
               <GlobeDoodle />
             </span>
-            <p className="m-0 text-[17px]">
-              My segue into tech was recognizing the digital divide: the gap
-              between who a technology is built for and who can actually use it. That&apos;s still
+            <p className="m-0">
+              I got into tech because of the digital divide, the gap between who a
+              technology is built for and who can actually use it. That&apos;s still
               what decides what I work on.
             </p>
           </div>
@@ -51,7 +51,7 @@ export default function About() {
             >
               <PaperDoodle />
             </a>
-            <p className="m-0 text-[17px]">
+            <p className="m-0">
               Then I co-authored my first paper with the{' '}
               <a
                 href="https://tech4good.soe.ucsc.edu/"
@@ -70,7 +70,7 @@ export default function About() {
             <span className="shrink-0 w-10 h-10 mt-[3px] text-orange" aria-hidden>
               <HeadsetDoodle />
             </span>
-            <p className="m-0 text-[17px]">
+            <p className="m-0">
               Now I care about innovation that doesn&apos;t leave people behind. Mixed reality is
               where software is heading, and at the{' '}
               <a
@@ -85,7 +85,7 @@ export default function About() {
             </p>
           </div>
 
-          <p className="m-0 text-[17px]">
+          <p className="m-0">
             Currently I&apos;m building <span className="font-semibold text-ink">Pharavo</span>, a medication
             companion for ESL patients and older adults, and working as a data operations intern at{' '}
             <a
@@ -114,7 +114,7 @@ export default function About() {
 
         <div>
           <Reveal>
-            <div className="relative h-[480px] md:h-[520px]">
+            <div className="relative h-[380px] md:h-[520px] touch-pan-y">
               {POLAROIDS.map((shot, i) => {
                 const spot = PHOTO_SPOTS[i]
                 if (!spot) return null
@@ -123,8 +123,8 @@ export default function About() {
                     key={shot.id}
                     rotate={spot.rotate}
                     z={spot.z}
-                    className="w-[188px]"
-                    style={{ left: spot.left, top: spot.top, width: spot.w }}
+                    className="w-[46%] max-w-[156px] md:w-[188px] md:max-w-none"
+                    style={{ left: spot.left, top: spot.top }}
                   >
                     <Polaroid shot={shot} className="w-full" />
                   </Draggable>
