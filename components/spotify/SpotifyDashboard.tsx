@@ -76,13 +76,13 @@ export default function SpotifyDashboard({ className = '' }: { className?: strin
           <span style={{ color: '#1DB954' }}>
             <SpotifyIcon size={17} />
           </span>
-          <span className="truncate text-[13px] font-semibold">Listening</span>
+          <span className="truncate text-caption font-semibold">Listening</span>
           <LiveDot live={data.live} loading={data.loading} label="Spotify" />
         </div>
         <div
           role="tablist"
           aria-label="Listening views"
-          className="flex shrink-0 items-center gap-1 self-start rounded-full p-1 text-[10px] font-semibold uppercase tracking-[0.12em] sm:self-auto"
+          className="flex shrink-0 items-center gap-1 self-start rounded-full p-1 text-micro font-semibold uppercase tracking-[0.12em] sm:self-auto"
           style={{ background: 'var(--card-line)' }}
         >
           {tabs.map(([key, label]) => (
@@ -92,7 +92,7 @@ export default function SpotifyDashboard({ className = '' }: { className?: strin
               role="tab"
               onClick={() => setTab(key)}
               aria-selected={tab === key}
-              className={`min-h-8 rounded-full px-2.5 py-1 transition-colors ${tab === key ? '' : 'opacity-60'}`}
+              className={`hit min-h-8 rounded-full px-2.5 py-1 transition-colors ${tab === key ? '' : 'opacity-60'}`}
               style={{
                 background: tab === key ? 'var(--card-ink)' : 'transparent',
                 color: tab === key ? 'var(--card-bg)' : undefined,
@@ -134,16 +134,16 @@ function NowPanel({ now, recent }: { now: NowPlayingDisplay; recent: RecentTrack
       <div className="mt-3 flex items-center gap-3">
         <AlbumCover src={now.cover} size={54} />
         <div className="min-w-0 flex-1">
-          <div className="truncate text-[15px] font-bold leading-tight">{now.song}</div>
-          <div className="truncate text-[12px] opacity-80">{now.artist}</div>
-          <div className="truncate text-[10px] opacity-55">{now.album}</div>
+          <div className="truncate text-small font-semibold leading-tight">{now.song}</div>
+          <div className="truncate text-caption opacity-80">{now.artist}</div>
+          <div className="truncate text-micro opacity-60">{now.album}</div>
         </div>
       </div>
 
       {recent.length > 0 && (
         <>
           <div
-            className="mt-4 border-t pt-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] opacity-55"
+            className="mt-4 border-t pt-3 text-micro font-semibold uppercase tracking-[0.16em] opacity-60"
             style={{ borderColor: 'var(--card-line)' }}
           >
             Recently
@@ -153,10 +153,10 @@ function NowPanel({ now, recent }: { now: NowPlayingDisplay; recent: RecentTrack
               <li key={`${t.song}-${i}`} className="flex items-center gap-3">
                 <AlbumCover src={t.cover} size={26} rounded="rounded" />
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[12px] font-semibold">{t.song}</div>
-                  <div className="truncate text-[10px] opacity-60">{t.artist}</div>
+                  <div className="truncate text-caption font-semibold">{t.song}</div>
+                  <div className="truncate text-micro opacity-60">{t.artist}</div>
                 </div>
-                <span className="shrink-0 text-[10px] tabular-nums opacity-50">{t.when}</span>
+                <span className="shrink-0 text-micro tabular-nums opacity-60">{t.when}</span>
               </li>
             ))}
           </ul>
@@ -179,15 +179,15 @@ function TopPanel({
       <ul className="mt-3 space-y-2">
         {topTracks.slice(0, 5).map((t, i) => (
           <li key={`${t.song}-${i}`} className="flex items-center gap-3">
-            <span className="w-4 shrink-0 text-[11px] font-semibold tabular-nums opacity-50">
+            <span className="w-4 shrink-0 text-micro font-semibold tabular-nums opacity-60">
               {String(i + 1).padStart(2, '0')}
             </span>
             <AlbumCover src={t.cover} size={26} rounded="rounded" />
             <div className="min-w-0 flex-1">
-              <div className="truncate text-[12px] font-semibold leading-tight">{t.song}</div>
-              <div className="truncate text-[10px] opacity-60">{t.artist}</div>
+              <div className="truncate text-caption font-semibold leading-tight">{t.song}</div>
+              <div className="truncate text-micro opacity-60">{t.artist}</div>
             </div>
-            <span className="shrink-0 text-[10px] tabular-nums opacity-50">{t.duration}</span>
+            <span className="shrink-0 text-micro tabular-nums opacity-60">{t.duration}</span>
           </li>
         ))}
       </ul>
@@ -206,8 +206,8 @@ function GenrePanel({ genres }: { genres: GenreSlice[] }) {
         {genres.slice(0, 5).map((g) => (
           <li key={g.name}>
             <div className="flex items-baseline justify-between gap-2">
-              <span className="truncate text-[12px] font-semibold">{g.name}</span>
-              <span className="shrink-0 text-[10px] tabular-nums opacity-50">{g.pct}%</span>
+              <span className="truncate text-caption font-semibold">{g.name}</span>
+              <span className="shrink-0 text-micro tabular-nums opacity-60">{g.pct}%</span>
             </div>
             <div
               className="mt-0.5 h-[3px] overflow-hidden rounded-full"
@@ -219,7 +219,7 @@ function GenrePanel({ genres }: { genres: GenreSlice[] }) {
               />
             </div>
             {g.artists.length > 0 && (
-              <div className="mt-0.5 truncate text-[10px] opacity-50">
+              <div className="mt-0.5 truncate text-micro opacity-60">
                 via {g.artists.join(', ')}
               </div>
             )}

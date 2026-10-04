@@ -15,20 +15,18 @@ export const PROFILE = {
   linkedin: 'https://linkedin.com/in/shivanipotnuru',
   resume:
     'https://1drv.ms/b/c/796c1c094714b749/IQBpbMNQIu_fTKxRTsmsHhXdAd6jGVWQFeYLjr3sCK_E8wg',
-  // Opening claim. Rotating domains live on the line under it.
+  // Opening claim. TODO(shivani): rewrite intro in my own words.
   lead:
     "A UW–Madison student studying Computer Science + Statistics, interested in technology-driven social impact — whether that's through code, data, or research.",
-  typing: [
-    'accessibility',
-    'credit unions',
-    'clinical trials',
-    'health insurance',
-    'assistive technology',
-    'public health data',
-    'civic technology',
-    'medication access',
-  ],
 } as const
+
+export const INTERESTS: { label: string; photo?: string; alt: string }[] = [
+  { label: 'concerts', photo: '/interests/concerts.jpg', alt: 'A concert' },
+  { label: 'stationery', photo: '/interests/stationery.jpg', alt: 'Stationery' },
+  { label: 'movies', alt: 'Movies' },
+  { label: 'trying new food', alt: 'Trying new food' },
+  { label: 'learning about new tech', alt: 'Learning about new tech' },
+]
 
 // Tilted Polaroids in About. `src` is optional so empty frames can sit as
 // placeholders until you drop photos in public/.
@@ -36,12 +34,25 @@ export interface PolaroidShot {
   id: string
   caption: string
   src?: string
+  behind?: { src: string; alt: string }
 }
 export const POLAROIDS: PolaroidShot[] = [
   { id: 'lab', caption: 'MadAbility Lab' },
-  { id: 'di', caption: 'Design Interactive', src: '/polaroids/design-interactive.jpg' },
-  { id: 'madison', caption: 'Madison' },
-  { id: 'pharavo', caption: 'Pharavo' },
+  {
+    id: 'di',
+    caption: 'Design Interactive',
+    src: '/polaroids/design-interactive.jpg',
+    behind: { src: '/polaroids/di-exec.jpg', alt: 'The Design Interactive exec board' },
+  },
+  {
+    id: 'madison',
+    caption: 'UW–Madison',
+    src: '/polaroids/capitol.jpg',
+    behind: {
+      src: '/polaroids/capitol-family.jpg',
+      alt: 'Me as a kid with my family inside the Wisconsin State Capitol',
+    },
+  },
 ]
 
 // ── Experience ───────────────────────────────────────────────────────────
@@ -170,7 +181,7 @@ export interface Project {
   tools: string[]
   outcome: string
   // Longer-form sections keyed for the sidebar TOC
-  sections: { id: string; heading: string; body: string[] }[]
+  sections: { id: string; heading: string; body: string[]; images?: { src: string; caption: string }[] }[]
 }
 
 export const PROJECTS: Project[] = [
@@ -211,6 +222,10 @@ export const PROJECTS: Project[] = [
           'MVP in active build. Next up: reminder scheduling and a caregiver view so families can help from a distance.',
         ],
       },
+      { id: 'problem', heading: 'Problem', body: [] },
+      { id: 'solution', heading: 'Solution', body: [] },
+      { id: 'impact', heading: 'Impact', body: [] },
+      { id: 'learned', heading: 'What I learned', body: [] },
     ],
   },
   {
@@ -249,6 +264,12 @@ export const PROJECTS: Project[] = [
           'Reached a System Usability Score of 91 — 23 points above the industry average — and recommendations were adopted in production.',
         ],
       },
+      { id: 'context', heading: 'Context', body: [] },
+      { id: 'problem', heading: 'Problem', body: [] },
+      { id: 'approach', heading: 'Approach', body: [] },
+      { id: 'solution', heading: 'Solution', body: [] },
+      { id: 'impact', heading: 'Impact', body: [] },
+      { id: 'learned', heading: 'What I learned', body: [] },
     ],
   },
   {
@@ -280,6 +301,11 @@ export const PROJECTS: Project[] = [
           'Delivered the production system to the client.',
         ],
       },
+      { id: 'context', heading: 'Context', body: [] },
+      { id: 'approach', heading: 'Approach', body: [] },
+      { id: 'solution', heading: 'Solution', body: [] },
+      { id: 'impact', heading: 'Impact', body: [] },
+      { id: 'learned', heading: 'What I learned', body: [] },
     ],
   },
   {
@@ -311,6 +337,12 @@ export const PROJECTS: Project[] = [
           'Modeled reappearance using logistic regression at 95% classification accuracy.',
         ],
       },
+      { id: 'context', heading: 'Context', body: [] },
+      { id: 'problem', heading: 'Problem', body: [] },
+      { id: 'approach', heading: 'Approach', body: [] },
+      { id: 'solution', heading: 'Solution', body: [] },
+      { id: 'impact', heading: 'Impact', body: [] },
+      { id: 'learned', heading: 'What I learned', body: [] },
     ],
   },
 ]

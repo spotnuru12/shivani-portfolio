@@ -17,7 +17,7 @@ export default function SectionHeading({
     <>
       <p className="eyebrow eyebrow-lg mb-4">{eyebrow}</p>
       <div className="flex items-end gap-5">
-        <h2 className="font-display text-[32px] sm:text-[42px] md:text-[60px] leading-[1.08] md:leading-[1.02]">
+        <h2 className="font-display text-h2">
           {title}
         </h2>
         {rule && (

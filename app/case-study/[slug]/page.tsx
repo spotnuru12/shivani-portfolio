@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { PROJECTS } from '@/lib/data'
 import CaseStudyNav from '@/components/CaseStudyNav'
@@ -18,34 +19,30 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
   const project = PROJECTS.find((p) => p.slug === params.slug)
   if (!project) notFound()
 
+  const visible = project.sections.filter((s) => s.body.length > 0)
   const toc = [
     { id: 'overview', heading: 'Overview' },
-    ...project.sections.map((s) => ({ id: s.id, heading: s.heading })),
+    ...visible.map((s) => ({ id: s.id, heading: s.heading })),
   ]
 
+  const idx = PROJECTS.findIndex((p) => p.slug === project.slug)
+  const next = PROJECTS[(idx + 1) % PROJECTS.length]
+
   const meta: [string, string | string[]][] = [
-    ['timeline', project.timeline],
-    ['role', project.roleLabel],
-    ['team', project.team],
-    ['tools', project.tools],
+    ['Role', project.roleLabel],
+    ['Timeline', project.timeline],
+    ['Team', project.team],
+    ['Tools', project.tools],
   ]
 
   return (
     <div className="max-w-content mx-auto px-6 md:px-10 py-14 md:py-20">
       <Link
         href="/#projects"
-        className="inline-flex min-h-11 items-center font-sans text-[12.5px] text-muted hover:text-orange-ink transition-colors"
+        className="inline-flex min-h-11 items-center text-caption text-muted hover:text-orange-ink transition-colors"
       >
         ← back to projects
       </Link>
-
-      {/* Breadcrumb (Caleb Wu style) */}
-      <div className="mt-6 inline-flex max-w-full items-center gap-2 rounded-full border border-line bg-panel/60 px-3.5 py-1.5 font-sans text-[12px]">
-        <span className="text-orange-ink">📁</span>
-        <span className="truncate">{project.title}</span>
-        <span className="text-muted">▸</span>
-        <span className="shrink-0 text-muted">case study</span>
-      </div>
 
       <nav className="mt-6 md:hidden -mx-1 overflow-x-auto" aria-label="On this page">
         <ul className="flex w-max gap-2 pb-1">
@@ -53,7 +50,7 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
             <li key={it.id}>
               <a
                 href={`#${it.id}`}
-                className="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border border-line px-3.5 text-[13px] text-ink-soft"
+                className="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border border-line px-3.5 text-caption text-ink-soft"
               >
                 {it.heading}
               </a>
@@ -63,23 +60,18 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
       </nav>
 
       <div className="mt-8 grid md:grid-cols-[200px_1fr] gap-10 md:gap-14">
-        {/* Left TOC sidebar (Emmi Wu style) */}
         <CaseStudyNav items={toc} />
 
-        {/* Body */}
         <article className="min-w-0">
           <section id="overview" className="scroll-mt-24">
-            <h1 className="font-display text-[clamp(1.75rem,8vw,2.4rem)] md:text-[52px] leading-[1.05] tracking-tight">
-              {project.title}
-            </h1>
-            <p className="mt-3 text-[18px] md:text-[20px] text-orange-ink">{project.sub}</p>
+            <h1 className="font-display text-h2">{project.title}</h1>
+            <p className="mt-3 text-body md:text-lead text-orange-ink">{project.sub}</p>
 
-            {/* Metadata row */}
             <dl className="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-6 border-y border-line py-7">
               {meta.map(([label, value]) => (
                 <div key={label}>
-                  <dt className="font-sans text-[11px] uppercase tracking-[0.16em] text-orange-ink">{label}</dt>
-                  <dd className="mt-2 text-[14px] text-ink-soft leading-snug">
+                  <dt className="text-caption text-muted">{label}</dt>
+                  <dd className="mt-2 text-small text-ink-soft">
                     {Array.isArray(value)
                       ? value.map((v) => <div key={v}>{v}</div>)
                       : value}
@@ -88,31 +80,46 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
               ))}
             </dl>
 
-            <p className="mt-8 text-[17px] md:text-[19px] text-ink-soft leading-relaxed max-w-prose">
+            <p className="mt-8 text-body text-ink-soft max-w-prose">
               {project.blurb}
             </p>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-orange-wash px-4 py-2 font-sans text-[12.5px] text-orange-ink"
-                 style={{ background: 'var(--orange-wash)' }}>
-              outcome · {project.outcome}
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-orange-wash px-4 py-2 text-caption text-orange-ink">
+              Outcome · {project.outcome}
             </div>
           </section>
 
-          {project.sections.map((s) => (
+          {visible.map((s) => (
             <section key={s.id} id={s.id} className="scroll-mt-24 mt-14">
-              <h2 className="font-display text-[26px] md:text-[30px] leading-tight">{s.heading}</h2>
+              <h2 className="font-display text-h3">{s.heading}</h2>
               <div className="mt-4 space-y-4 max-w-prose">
                 {s.body.map((para, i) => (
-                  <p key={i} className="text-[16px] md:text-[17px] text-ink-soft leading-relaxed">{para}</p>
+                  <p key={i} className="text-body text-ink-soft">{para}</p>
                 ))}
               </div>
+              {s.images?.map((img) => (
+                <figure key={img.src} className="mt-6">
+                  <div className="relative w-full overflow-hidden rounded-2xl">
+                    <Image
+                      src={img.src}
+                      alt={img.caption}
+                      width={1200}
+                      height={800}
+                      className="h-auto w-full rounded-2xl"
+                    />
+                  </div>
+                  <figcaption className="mt-2 text-caption text-muted">{img.caption}</figcaption>
+                </figure>
+              ))}
             </section>
           ))}
 
-          <div className="mt-16 border-t border-line pt-8">
-            <Link href="/#projects" className="font-sans text-[13px] text-orange-ink hover:underline">
-              ← all projects
-            </Link>
-          </div>
+          {next ? (
+            <div className="mt-16 border-t border-line pt-8">
+              <Link href={`/case-study/${next.slug}`} className="font-display text-h3 hover:text-orange-ink transition-colors">
+                Next project →
+              </Link>
+            </div>
+          ) : null}
         </article>
       </div>
     </div>

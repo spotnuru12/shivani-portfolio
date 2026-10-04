@@ -49,7 +49,7 @@ export default function CaseStudyNav({ items }: { items: { id: string; heading: 
           <li key={it.id}>
             <a
               href={`#${it.id}`}
-              className="font-sans text-[12.5px] transition-colors"
+              className="text-caption transition-colors"
               style={{ color: active === it.id ? 'var(--orange-ink)' : 'var(--muted)' }}
             >
               {active === it.id ? '→ ' : '   '}{it.heading}

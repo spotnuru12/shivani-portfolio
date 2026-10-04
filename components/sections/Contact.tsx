@@ -7,7 +7,7 @@ export default function Contact() {
     <section id="contact" className="closer">
       <div className="max-w-content mx-auto px-6 md:px-10 py-24 md:py-32">
         <Reveal className="text-center">
-          <h2 className="font-display text-[clamp(2rem,8.5vw,3.25rem)] md:text-[72px] leading-[1.05] md:leading-[1.02] tracking-[-0.03em]">
+          <h2 className="font-display text-h2">
             let&apos;s build
             <br />
             something <span className="word-cool text-[1.05em]">useful</span>
@@ -19,8 +19,7 @@ export default function Contact() {
 
           <a
             href={`mailto:${PROFILE.email}`}
-            className="mt-10 md:mt-12 inline-flex items-center gap-2 flex-wrap justify-center text-[22px] md:text-[32px] hover:opacity-90 transition-opacity"
-            style={{ fontWeight: 500 }}
+            className="mt-10 md:mt-12 inline-flex items-center gap-2 flex-wrap justify-center text-lead md:text-[32px] font-medium hover:opacity-90 transition-opacity"
           >
             spotnuru<span className="text-orange-ink">[@]</span>wisc.edu
             <span aria-hidden className="text-[0.75em] text-orange-ink">↗</span>

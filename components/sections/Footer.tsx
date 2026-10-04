@@ -12,14 +12,14 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="closer border-t" style={{ borderColor: 'rgba(255, 239, 210, 0.16)' }}>
+    <footer className="closer border-t border-cream/15">
       <div className="max-w-content mx-auto px-6 md:px-10 pt-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] flex flex-wrap items-center justify-between gap-8">
         <div>
-          <div className="font-display text-[16px] inline-flex items-center gap-2">
+          <div className="text-small font-semibold inline-flex items-center gap-2">
             Designed and built by {PROFILE.name}
             <Smile size={17} strokeWidth={2} className="text-orange" />
           </div>
-          <div className="mt-1.5 text-[13.5px]" style={{ color: 'rgba(255, 239, 210, 0.82)' }}>
+          <div className="mt-1.5 text-caption text-cream/80">
             Built with{' '}
             {BUILT_WITH.map((tech, i) => (
               <span key={tech}>
@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex items-center gap-1" style={{ color: 'rgba(255, 239, 210, 0.85)' }}>
+        <div className="flex items-center gap-1 text-cream/85">
           {LINKS.map(({ href, label, Icon, external }) => (
             <a
               key={label}

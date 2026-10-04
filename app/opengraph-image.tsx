@@ -18,7 +18,7 @@ export default function OpenGraphImage() {
           background: '#00314f',
           color: '#ffefd2',
           padding: '72px 80px',
-          fontFamily: 'Georgia, Times New Roman, serif',
+          fontFamily: 'system-ui, sans-serif',
         }}
       >
         <div

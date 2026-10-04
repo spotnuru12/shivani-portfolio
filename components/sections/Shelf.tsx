@@ -27,7 +27,7 @@ export default async function Shelf() {
     <section id="media" className="max-w-content mx-auto px-6 md:px-10 py-20 md:py-24">
       <Reveal>
         <SectionHeading eyebrow="media" title={SHELF_HEADING} />
-        <p className="mt-4 max-w-prose text-[16px] text-ink-soft leading-relaxed">{SHELF_BLURB}</p>
+        <p className="mt-4 max-w-prose text-body text-ink-soft">{SHELF_BLURB}</p>
       </Reveal>
 
       <SpotifyProvider>

@@ -10,7 +10,7 @@ export default function Work() {
         <SectionHeading eyebrow="experience" title="Where I've worked" />
       </Reveal>
 
-      <div className="relative mt-14">
+      <div className="relative mt-heading">
         <div className="timeline-line hidden md:block" style={{ left: 196 }} aria-hidden />
         <div className="timeline-line md:hidden" style={{ left: 7 }} aria-hidden />
 
@@ -33,11 +33,11 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
   return (
     <article className="relative flex flex-col md:flex-row md:items-start gap-3 md:gap-8">
       <div className="hidden md:block w-[180px] shrink-0 pt-7 text-right pr-4">
-        <div className="font-display text-[22px] leading-[1.15]">{start}</div>
-        <div className="mt-0.5 text-[15px] text-muted">→ {end}</div>
+        <div className="font-display text-h3">{start}</div>
+        <div className="mt-0.5 text-small text-muted">→ {end}</div>
       </div>
 
-      <div className="md:hidden pl-8 text-[14px] font-display">
+      <div className="md:hidden pl-8 text-caption font-semibold">
         {start} <span className="font-sans font-normal text-muted">→ {end}</span>
       </div>
 
@@ -64,10 +64,10 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
           <Mark logo={job.logo} fit={job.logoFit} initials={initials} />
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-4 flex-wrap">
-              <h3 className="font-display text-[20px] md:text-[24px] leading-[1.15]">{job.role}</h3>
-              <div className="text-[13.5px] opacity-65">{job.loc}</div>
+              <h3 className="font-display text-h3">{job.role}</h3>
+              <div className="text-caption opacity-75">{job.loc}</div>
             </div>
-            <div className="mt-0.5 text-[16px] md:text-[18px] font-medium" style={{ color: 'var(--orange-ink)' }}>
+            <div className="mt-0.5 text-body font-medium" style={{ color: 'var(--orange-ink)' }}>
               {job.url ? (
                 <a href={job.url} target="_blank" rel="noopener noreferrer" className="orglink">
                   {job.org}{' '}
@@ -80,7 +80,7 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
               )}
             </div>
 
-            <ul className="mt-3.5 pl-[18px] text-[15px] leading-[1.6] opacity-90 list-disc">
+            <ul className="mt-4 pl-4 text-small opacity-90 list-disc">
               {job.bullets.map((item) => (
                 <li key={item} className="mt-1">
                   {item}
@@ -92,7 +92,7 @@ function TimelineRow({ job, present }: { job: Experience; present: boolean }) {
               {job.stack.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md px-3 py-1.5 text-[13px] font-medium"
+                  className="rounded-md px-3 py-1.5 text-caption font-medium"
                   style={{ background: 'var(--work-chip)', color: 'var(--work-chip-ink)' }}
                 >
                   {tag}
@@ -126,7 +126,7 @@ function Mark({
           sizes="52px"
         />
       ) : (
-        <span className="grid h-full w-full place-items-center font-display text-[15px]">
+        <span className="grid h-full w-full place-items-center text-small font-semibold">
           {initials}
         </span>
       )}

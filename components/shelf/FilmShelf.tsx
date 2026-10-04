@@ -22,7 +22,7 @@ export default function FilmShelf({ data }: { data: LetterboxdData | null }) {
       <div className="shelf-card-head">
         <div className="flex min-w-0 items-center gap-2">
           <LetterboxdIcon size={30} />
-          <span className="truncate text-[13px] font-semibold">Watching</span>
+          <span className="truncate text-caption font-semibold">Watching</span>
           <LiveDot live={!!data} label="Letterboxd" />
         </div>
       </div>
@@ -36,7 +36,7 @@ export default function FilmShelf({ data }: { data: LetterboxdData | null }) {
                 href={data.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-8 shrink-0 items-center normal-case tracking-normal opacity-60 hover:opacity-100"
+                className="hit inline-flex min-h-8 shrink-0 items-center normal-case tracking-normal"
                 style={{ color: '#FF8000' }}
               >
                 Letterboxd →
@@ -49,13 +49,13 @@ export default function FilmShelf({ data }: { data: LetterboxdData | null }) {
               <li key={`${film.title}-${i}`} className="flex items-center gap-3">
                 <Poster src={film.poster} />
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[12px] font-semibold leading-tight">
+                  <div className="truncate text-caption font-semibold leading-tight">
                     {film.title}
                   </div>
-                  <div className="truncate text-[10px] opacity-55">{film.year}</div>
+                  <div className="truncate text-micro opacity-60">{film.year}</div>
                 </div>
                 <span
-                  className="shrink-0 text-[11px] leading-none"
+                  className="shrink-0 text-micro leading-none"
                   style={{ color: '#00E054' }}
                   aria-label={film.rating ? `${film.rating} out of 5` : 'unrated'}
                 >

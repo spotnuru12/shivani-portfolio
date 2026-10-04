@@ -10,7 +10,7 @@ export default function Toolkit() {
         <SectionHeading eyebrow="stack" title="Toolkit" />
       </Reveal>
 
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+      <div className="mt-heading grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
         {Object.entries(SKILLS).map(([category, list], i) => (
           <Reveal key={category} as="div" delay={i * 60}>
             <div className="eyebrow mb-4">{category}</div>

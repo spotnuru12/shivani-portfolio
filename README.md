@@ -2,8 +2,7 @@
 
 A warm, minimal personal site built with Next.js (App Router), TypeScript, and
 Tailwind. Self-hosted variable fonts, so there's no runtime Google Fonts call:
-**League Spartan** for display/headings, **Inter** for body and UI, **Caveat**
-for Polaroid captions.
+**League Spartan** for display/headings, **Inter** for everything else.
 
 ## Run it
 
@@ -30,7 +29,7 @@ components/
   sections/              Hero, Work, About, Projects, Shelf, Contact, Footer
   shelf/                 FilmShelf (Letterboxd), BookShelf
   spotify/               SpotifyDashboard + its data hook
-  ui/                    Typewriter, HeroPortrait, Reveal, Polaroid, Icons
+  ui/                    HeroPortrait, Reveal, Polaroid, Icons
 lib/
   data.ts                ALL content lives here — edit this to update the site
   spotify.ts             Listening types + sample fallback

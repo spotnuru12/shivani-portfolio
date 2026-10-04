@@ -96,7 +96,7 @@ export default function Navbar() {
             href={PROFILE.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-1 inline-flex h-11 items-center rounded-full bg-ink text-bg px-3 sm:px-4 text-[14px] sm:text-[15px] font-medium hover:bg-orange hover:text-ink transition-colors"
+            className="ml-1 inline-flex h-11 items-center rounded-full bg-ink text-bg px-3 sm:px-4 text-small font-medium hover:bg-orange hover:text-charcoal transition-colors"
           >
             Resume
           </a>
@@ -149,7 +149,7 @@ function NavLink({
       href={`#${id}`}
       aria-current={active === id ? 'true' : undefined}
       onClick={onClick}
-      className={`${block ? 'flex min-h-11 items-center px-1 py-2.5 text-[17px]' : 'relative text-[14px] px-2.5 py-1.5 rounded-md'} transition-colors hover:text-orange-ink ${
+      className={`${block ? 'flex min-h-11 items-center px-1 py-3 text-body' : 'hit relative text-caption px-2.5 py-1.5 rounded-md'} transition-colors hover:text-orange-ink ${
         active === id ? 'text-orange-ink' : 'text-ink-soft'
       }`}
     >

@@ -8,6 +8,20 @@
    Orange keeps its identity in both, only shifting lightness enough to stay
    legible on each background.
    ─────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Type scale. Responsive sizes live here so each role is one Tailwind
+     class (text-h2) instead of three breakpoints repeated per file. */
+  --fs-display: clamp(2.4rem, 11vw, 3.5rem);
+  --fs-h2: 32px;
+  --fs-h3: 22px;
+}
+@media (min-width: 640px) {
+  :root { --fs-h2: 42px; }
+}
+@media (min-width: 768px) {
+  :root { --fs-display: 84px; --fs-h2: 60px; --fs-h3: 24px; }
+}
+
 :root,
 .theme-light {
   --bg: #fbfaf6;          /* page background — warm paper white */
@@ -140,23 +154,13 @@ section[id] {
   font-size: 20px;
 }
 
-/* One italic serif word — "cool" in the closer. Georgia so we don't load a
-   fourth webfont for a single glyph. !important beats the heading's display font. */
+/* The accent word in the Contact closer. Inherits the heading's League
+   Spartan; color carries the emphasis. */
 .word-cool {
-  font-family: Georgia, 'Times New Roman', serif !important;
-  font-style: italic !important;
-  font-weight: 400 !important;
   letter-spacing: 0;
-  color: var(--orange);
+  color: var(--orange-ink);
 }
 .closer .word-cool {
-  color: #ffefd2;
-}
-
-.word-em {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 400;
   color: var(--orange-ink);
 }
 
@@ -177,17 +181,6 @@ section[id] {
   display: inline-block;
   opacity: 0.5;
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
-}
-
-.hl {
-  background-image: linear-gradient(rgba(228, 87, 27, 0.38), rgba(228, 87, 27, 0.38));
-  background-repeat: no-repeat;
-  background-position: 0 88%;
-  background-size: 0% 42%;
-  transition: background-size 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.hl.on {
-  background-size: 100% 42%;
 }
 
 @keyframes merid {
@@ -220,8 +213,7 @@ section[id] {
 .offscreen .merid,
 .offscreen .flap,
 .offscreen .scan,
-.offscreen .bobarrow,
-.offscreen.caret::after {
+.offscreen .bobarrow {
   animation-play-state: paused;
 }
 @keyframes bob {
@@ -249,22 +241,6 @@ section[id] {
 .theme-dark .closer {
   background: #001e32;
   box-shadow: inset 0 1px 0 rgba(255, 239, 210, 0.14);
-}
-
-/* ── Typing caret ──────────────────────────────────────────────────────── */
-.caret::after {
-  content: '';
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  margin-left: 2px;
-  vertical-align: -0.12em;
-  background: var(--orange);
-  animation: blink 1s steps(1) infinite;
-}
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  50.01%, 100% { opacity: 0; }
 }
 
 /* ── Reveal-on-scroll ──────────────────────────────────────────────────── */
@@ -361,46 +337,6 @@ section[id] {
   border-color: var(--orange);
 }
 
-.jobmore {
-  display: grid;
-  grid-template-rows: 0fr;
-  visibility: hidden;
-  transition: grid-template-rows 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.jobmore.open {
-  grid-template-rows: 1fr;
-  visibility: visible;
-}
-.jobmore-inner {
-  overflow: hidden;
-}
-.morebtn {
-  margin-left: 4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 22px;
-  width: 22px;
-  padding: 0;
-  border-radius: 999px;
-  border: 1.5px solid var(--orange);
-  background: transparent;
-  color: var(--orange);
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-.morebtn.open {
-  background: var(--orange);
-  color: var(--work-card);
-}
-.morebtn .movbar {
-  transform-origin: 50% 50%;
-  transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.morebtn.open .movbar {
-  transform: rotate(90deg);
-}
-
 .reveal-cta {
   position: absolute;
   z-index: 20;
@@ -409,10 +345,10 @@ section[id] {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-family: var(--font-league), sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  color: #1b1a18;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #1b1a17;
   pointer-events: none;
   transition: color 0.35s ease;
 }
@@ -443,12 +379,44 @@ section[id] {
     );
 }
 .polaroid-caption {
-  font-family: var(--font-caveat), 'Bradley Hand', cursive;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.2;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.3;
   padding: 10px 4px 12px;
   text-align: center;
+}
+
+.polaroid-stack {
+  position: relative;
+}
+.polaroid-behind {
+  position: absolute;
+  z-index: 0;
+  width: 90%;
+  top: -10px;
+  left: 14px;
+  overflow: hidden;
+  transform: rotate(6deg);
+  box-shadow:
+    0 1px 1px rgba(27, 26, 23, 0.06),
+    0 12px 28px rgba(27, 26, 23, 0.16);
+  transition: transform 280ms ease;
+}
+.polaroid-behind img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.interest-polaroid {
+  opacity: 0;
+  transform: translateY(10px) rotate(-8deg);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+.interest-polaroid.in {
+  opacity: 1;
+  transform: translateY(0) rotate(-8deg);
 }
 
 /* ── Project cover reveal ──────────────────────────────────────────────── */
@@ -488,6 +456,9 @@ section[id] {
       0 2px 2px rgba(27, 26, 23, 0.08),
       0 18px 36px rgba(27, 26, 23, 0.22);
   }
+  .polaroid-stack:hover .polaroid-behind {
+    transform: rotate(6deg) translate(6px, -4px);
+  }
   .reveal-trigger:hover .reveal-cover {
     transform: translateY(-100%);
   }
@@ -503,13 +474,6 @@ section[id] {
   .reveal-trigger:hover .reveal-cta .cta-open {
     display: inline;
   }
-  .link-underline:hover {
-    background-size: 100% 1.5px;
-  }
-  .morebtn:hover {
-    background: var(--orange);
-    color: var(--work-card);
-  }
   .skill-chip:hover,
   .skill-chip:focus-visible {
     color: var(--orange-ink);
@@ -519,16 +483,6 @@ section[id] {
   .skill-chip:focus-visible + .skill-tip {
     opacity: 1;
   }
-}
-
-/* ── Marquee-free utility: subtle underline sweep on links ─────────────── */
-.link-underline {
-  background-image: linear-gradient(var(--orange), var(--orange));
-  background-size: 0% 1.5px;
-  background-repeat: no-repeat;
-  background-position: left 100%;
-  transition: background-size 0.3s ease;
-  padding-bottom: 1px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -541,6 +495,10 @@ section[id] {
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .interest-polaroid,
+  .interest-polaroid.in {
+    transform: rotate(-8deg);
+  }
 }
 
 .skill-chip:focus-visible,
@@ -554,6 +512,14 @@ section[id] {
 .skill-chip:focus-visible + .skill-tip,
 .skill-tip.is-open {
   opacity: 1;
+}
+
+/* Extends the tap area to 44px without changing how the element looks. */
+.hit { position: relative; }
+.hit::after {
+  content: '';
+  position: absolute;
+  inset: min(0px, calc((100% - 44px) / 2));
 }
 
 /* Skip link */

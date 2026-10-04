@@ -21,10 +21,10 @@ export default function MediaMix({ films, filmsLive }: { films: Film[]; filmsLiv
     movies.rewatchPct !== null ? `${Math.round(movies.rewatchPct * 100)}%` : '—'
 
   return (
-    <div className="max-w-prose text-[15px] leading-[1.7] text-ink-soft">
+    <div className="max-w-prose text-small text-ink-soft">
       <div className="flex items-baseline gap-2.5">
-        <h3 className="font-display text-[22px] md:text-[24px] leading-none text-ink">Stats</h3>
-        <span className="text-[12px] text-muted">
+        <h3 className="font-display text-h3 leading-none text-ink">Stats</h3>
+        <span className="text-caption text-muted">
           {live.live && filmsLive ? 'live' : live.loading ? 'loading' : 'sample'}
         </span>
       </div>
@@ -43,7 +43,7 @@ export default function MediaMix({ films, filmsLive }: { films: Film[]; filmsLiv
         </p>
       </div>
 
-      <div className="mt-3.5">
+      <div className="mt-4">
         <div className="font-medium text-ink">Film</div>
         <p className="mt-1">
           mean year <Pill>{meanYear}</Pill>
@@ -54,7 +54,7 @@ export default function MediaMix({ films, filmsLive }: { films: Film[]; filmsLiv
         </p>
       </div>
 
-      <p className="mt-3.5 text-[14px]">
+      <p className="mt-4 text-caption">
         {replayHeavier
           ? 'I replay more than I rewatch. Rank-weight, last four weeks, against the public diary.'
           : 'The diary bunches by era more than the top 10 bunches by artist. Rank-weight, last four weeks, against the public diary.'}

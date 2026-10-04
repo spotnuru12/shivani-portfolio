@@ -11,7 +11,7 @@ export default function SkillChip({ name }: { name: string }) {
 
   if (!def) {
     return (
-      <span className="inline-flex min-h-9 items-center rounded-full border border-line-strong px-3.5 py-1.5 text-[13.5px] text-ink-soft md:text-[14.5px]">
+      <span className="hit inline-flex min-h-9 items-center rounded-full border border-line-strong px-3.5 py-1.5 text-caption text-ink-soft md:text-small">
         {name}
       </span>
     )
@@ -25,14 +25,14 @@ export default function SkillChip({ name }: { name: string }) {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         onBlur={() => setOpen(false)}
-        className="skill-chip inline-flex min-h-9 cursor-help items-center rounded-full border border-line-strong px-3.5 py-1.5 text-[13.5px] text-ink-soft transition-colors md:text-[14.5px]"
+        className="skill-chip hit inline-flex min-h-9 cursor-help items-center rounded-full border border-line-strong px-3.5 py-1.5 text-caption text-ink-soft transition-colors md:text-small"
       >
         {name}
       </button>
       <span
         id={tipId}
         role="tooltip"
-        className={`skill-tip pointer-events-none absolute left-1/2 top-0 z-30 w-[min(250px,calc(100vw-3rem))] -translate-x-1/2 -translate-y-[calc(100%+10px)] rounded-xl bg-note p-3 text-left text-[13px] leading-[1.5] text-note-ink shadow-lift transition-opacity duration-150 ${
+        className={`skill-tip pointer-events-none absolute left-1/2 top-0 z-30 w-[min(250px,calc(100vw-3rem))] -translate-x-1/2 -translate-y-[calc(100%+10px)] rounded-xl bg-note p-3 text-left text-caption text-note-ink shadow-lift transition-opacity duration-150 ${
           open ? 'is-open' : ''
         }`}
       >
