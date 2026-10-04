@@ -2,7 +2,6 @@ import { Github, Linkedin, Mail } from 'lucide-react'
 import { PROFILE } from '@/lib/data'
 import Reveal from '@/components/ui/Reveal'
 import HeroPortrait from '@/components/ui/HeroPortrait'
-import Interests from '@/components/ui/Interests'
 import PauseOffscreen from '@/components/ui/PauseOffscreen'
 
 const SOCIALS = [
@@ -24,8 +23,7 @@ export default function Hero() {
             <p className="mt-6 max-w-[33em] text-body md:text-lead text-ink">
               {PROFILE.lead}
             </p>
-            <p className="mt-4 text-small font-medium text-ink">Open to Summer 2027 internships in software engineering and data.</p>
-            <Interests />
+            <p className="mt-4 text-small font-medium italic text-orange-ink">Open to Summer 2027 internships in software engineering and data.</p>
             <p className="mt-4 text-body text-ink-soft">
               Feel free to reach me at{' '}
               <a href={`mailto:${PROFILE.email}`} className="text-ink font-medium orglink">

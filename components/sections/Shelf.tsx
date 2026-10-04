@@ -41,7 +41,7 @@ export default async function Shelf() {
         </div>
 
         <Reveal className="mt-10">
-          <MediaMix films={films} filmsLive={!!letterboxd} />
+          <MediaMix films={films} />
         </Reveal>
       </SpotifyProvider>
     </section>

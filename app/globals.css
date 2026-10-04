@@ -8,18 +8,18 @@
    Orange keeps its identity in both, only shifting lightness enough to stay
    legible on each background.
    ─────────────────────────────────────────────────────────────────────── */
-:root {
-  /* Type scale. Responsive sizes live here so each role is one Tailwind
-     class (text-h2) instead of three breakpoints repeated per file. */
-  --fs-display: clamp(2.4rem, 11vw, 3.5rem);
-  --fs-h2: 32px;
-  --fs-h3: 22px;
-}
-@media (min-width: 640px) {
-  :root { --fs-h2: 42px; }
-}
-@media (min-width: 768px) {
-  :root { --fs-display: 84px; --fs-h2: 60px; --fs-h3: 24px; }
+/* Heading sizes. Plain utilities (no CSS variables) so they can't
+   silently fall back to body size. */
+@layer utilities {
+  .text-display { font-size: clamp(2.4rem, 11vw, 3.5rem); line-height: 0.92; letter-spacing: -0.03em; }
+  .text-h2 { font-size: 32px; line-height: 1.08; }
+  .text-h3 { font-size: 22px; line-height: 1.15; }
+  @media (min-width: 640px) { .text-h2 { font-size: 42px; } }
+  @media (min-width: 768px) {
+    .text-display { font-size: 84px; }
+    .text-h2 { font-size: 60px; line-height: 1.02; }
+    .text-h3 { font-size: 24px; }
+  }
 }
 
 :root,
@@ -154,14 +154,16 @@ section[id] {
   font-size: 20px;
 }
 
-/* The accent word in the Contact closer. Inherits the heading's League
-   Spartan; color carries the emphasis. */
+/* The accent word in the Contact closer. Georgia italic, cream on navy. */
 .word-cool {
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
   letter-spacing: 0;
-  color: var(--orange-ink);
+  color: var(--orange);
 }
 .closer .word-cool {
-  color: var(--orange-ink);
+  color: #ffefd2;
 }
 
 /* Cream/white cards keep the darker ink even in dark mode.
@@ -299,16 +301,6 @@ section[id] {
   letter-spacing: 0.16em;
 }
 
-.stat-pill {
-  display: inline-block;
-  padding: 0.08em 0.42em;
-  border-radius: 5px;
-  background: var(--bg-panel);
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-  font-weight: 600;
-}
-
 /* ── Work timeline ─────────────────────────────────────────────────────── */
 .timeline-line {
   position: absolute;
@@ -379,44 +371,12 @@ section[id] {
     );
 }
 .polaroid-caption {
-  font-family: var(--font-inter), sans-serif;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 1.3;
+  font-family: var(--font-caveat), 'Bradley Hand', cursive;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.2;
   padding: 10px 4px 12px;
   text-align: center;
-}
-
-.polaroid-stack {
-  position: relative;
-}
-.polaroid-behind {
-  position: absolute;
-  z-index: 0;
-  width: 90%;
-  top: -10px;
-  left: 14px;
-  overflow: hidden;
-  transform: rotate(6deg);
-  box-shadow:
-    0 1px 1px rgba(27, 26, 23, 0.06),
-    0 12px 28px rgba(27, 26, 23, 0.16);
-  transition: transform 280ms ease;
-}
-.polaroid-behind img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-}
-.interest-polaroid {
-  opacity: 0;
-  transform: translateY(10px) rotate(-8deg);
-  transition: opacity 250ms ease, transform 250ms ease;
-}
-.interest-polaroid.in {
-  opacity: 1;
-  transform: translateY(0) rotate(-8deg);
 }
 
 /* ── Project cover reveal ──────────────────────────────────────────────── */
@@ -456,9 +416,6 @@ section[id] {
       0 2px 2px rgba(27, 26, 23, 0.08),
       0 18px 36px rgba(27, 26, 23, 0.22);
   }
-  .polaroid-stack:hover .polaroid-behind {
-    transform: rotate(6deg) translate(6px, -4px);
-  }
   .reveal-trigger:hover .reveal-cover {
     transform: translateY(-100%);
   }
@@ -495,10 +452,6 @@ section[id] {
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
-  .interest-polaroid,
-  .interest-polaroid.in {
-    transform: rotate(-8deg);
-  }
 }
 
 .skill-chip:focus-visible,

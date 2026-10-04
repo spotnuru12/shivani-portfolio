@@ -11,7 +11,7 @@ export default function Contact() {
             let&apos;s build
             <br />
             something <span className="word-cool text-[1.05em]">useful</span>
-            <span className="inline-block ml-1.5 md:ml-2 align-[-4px] md:align-[-6px] [&_svg]:h-9 [&_svg]:w-9 md:[&_svg]:h-[52px] md:[&_svg]:w-[52px]">
+            <span className="inline-block align-baseline ml-[0.12em] [&_svg]:block [&_svg]:h-[0.7em] [&_svg]:w-[0.7em]">
               <SmileMascot size={52} />
             </span>
             .

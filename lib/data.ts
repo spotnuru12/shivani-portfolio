@@ -20,9 +20,9 @@ export const PROFILE = {
     "A UW–Madison student studying Computer Science + Statistics, interested in technology-driven social impact — whether that's through code, data, or research.",
 } as const
 
-export const INTERESTS: { label: string; photo?: string; alt: string }[] = [
-  { label: 'concerts', photo: '/interests/concerts.jpg', alt: 'A concert' },
-  { label: 'stationery', photo: '/interests/stationery.jpg', alt: 'Stationery' },
+export const INTERESTS: { label: string; photo?: string; alt: string; note?: string }[] = [
+  { label: 'concerts', photo: '/interests/concerts.jpg', alt: 'A concert', note: 'hi asap' },
+  { label: 'stationery', photo: '/interests/stationery.jpg', alt: 'Stationery', note: 'staedtler 925 25 🫡' },
   { label: 'movies', alt: 'Movies' },
   { label: 'trying new food', alt: 'Trying new food' },
   { label: 'learning about new tech', alt: 'Learning about new tech' },
@@ -32,27 +32,18 @@ export const INTERESTS: { label: string; photo?: string; alt: string }[] = [
 // placeholders until you drop photos in public/.
 export interface PolaroidShot {
   id: string
+  // Handwritten caption under the photo. Leave '' for none (frame keeps its bottom strip).
   caption: string
   src?: string
-  behind?: { src: string; alt: string }
+  position?: string
+  alt?: string
 }
 export const POLAROIDS: PolaroidShot[] = [
-  { id: 'lab', caption: 'MadAbility Lab' },
-  {
-    id: 'di',
-    caption: 'Design Interactive',
-    src: '/polaroids/design-interactive.jpg',
-    behind: { src: '/polaroids/di-exec.jpg', alt: 'The Design Interactive exec board' },
-  },
-  {
-    id: 'madison',
-    caption: 'UW–Madison',
-    src: '/polaroids/capitol.jpg',
-    behind: {
-      src: '/polaroids/capitol-family.jpg',
-      alt: 'Me as a kid with my family inside the Wisconsin State Capitol',
-    },
-  },
+  { id: 'madison', caption: '', src: '/polaroids/capitol.jpg', position: '50% 40%', alt: 'The Wisconsin State Capitol on a sunny day' },
+  { id: 'di', caption: '', src: '/polaroids/design-interactive.jpg', alt: 'Design Interactive members at the Design Showcase' },
+  { id: 'family', caption: '', src: '/polaroids/capitol-family.jpg', position: '30% 50%', alt: 'Me as a kid with my family inside the Wisconsin State Capitol' },
+  { id: 'di-exec', caption: '', src: '/polaroids/di-exec.jpg', position: '50% 35%', alt: 'The Design Interactive executive board on a staircase' },
+  // { id: 'lab', caption: 'MadAbility Lab', src: '/polaroids/lab.jpg' },
 ]
 
 // ── Experience ───────────────────────────────────────────────────────────

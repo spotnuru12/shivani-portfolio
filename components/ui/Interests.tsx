@@ -1,28 +1,23 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
 import { INTERESTS } from '@/lib/data'
+import { useInterests } from '@/components/ui/InterestsContext'
+import InterestShowcase from '@/components/ui/InterestShowcase'
 
 function finePointer() {
   return typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches
 }
 
+// Last About paragraph. Each interest italicizes on hover/focus/tap; ones with
+// a photo show it in the box under the school block (desktop) or right under
+// this paragraph (mobile).
 export default function Interests() {
-  const [active, setActive] = useState<string | null>(null)
-  const [slot, setSlot] = useState<HTMLElement | null>(null)
-
-  useEffect(() => {
-    setSlot(document.getElementById('hero-portrait'))
-  }, [])
-
-  const current = INTERESTS.find((item) => item.label === active)
-  const showPhoto = Boolean(current?.photo)
+  const { active, setActive } = useInterests()
 
   return (
     <>
-      <p className="mt-4 text-body text-ink-soft">
-        Off the clock:{' '}
+      <p className="m-0">
+        Outside of all this, I like{' '}
         {INTERESTS.map((item, i) => {
           const isLast = i === INTERESTS.length - 1
           const isActive = active === item.label
@@ -43,9 +38,7 @@ export default function Interests() {
                 onFocus={() => setActive(item.label)}
                 onBlur={() => setActive(null)}
                 onClick={() => {
-                  if (!finePointer()) {
-                    setActive((prev) => (prev === item.label ? null : item.label))
-                  }
+                  if (!finePointer()) setActive((prev) => (prev === item.label ? null : item.label))
                 }}
               >
                 {item.label}
@@ -55,22 +48,7 @@ export default function Interests() {
           )
         })}
       </p>
-      {slot &&
-        showPhoto &&
-        current?.photo &&
-        createPortal(
-          <figure
-            aria-hidden
-            className={`interest-polaroid polaroid pointer-events-none absolute -left-3 bottom-[-12px] z-10 w-[44%] max-w-[148px] md:-left-8 ${
-              showPhoto ? 'in' : ''
-            }`}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={current.photo} alt="" className="aspect-square w-full object-cover" />
-            <figcaption className="polaroid-caption">{current.label}</figcaption>
-          </figure>,
-          slot,
-        )}
+      <InterestShowcase className="relative mt-2 md:hidden" />
     </>
   )
 }

@@ -6,11 +6,15 @@ import Draggable from '@/components/ui/Draggable'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { GlobeDoodle, HeadsetDoodle, PaperDoodle } from '@/components/ui/Doodles'
 import PauseOffscreen from '@/components/ui/PauseOffscreen'
+import Interests from '@/components/ui/Interests'
+import InterestShowcase from '@/components/ui/InterestShowcase'
+import { InterestsProvider } from '@/components/ui/InterestsContext'
 
 const PHOTO_SPOTS = [
   { left: '2%', top: '4%', rotate: -7, z: 3 },
   { left: '48%', top: '0%', rotate: 5, z: 4 },
   { left: '6%', top: '46%', rotate: 3, z: 2 },
+  { left: '50%', top: '44%', rotate: -4, z: 5 },
 ]
 
 export default function About() {
@@ -20,6 +24,7 @@ export default function About() {
         <SectionHeading eyebrow="about" title="About me" />
       </Reveal>
 
+      <InterestsProvider>
       <div className="mt-heading grid md:grid-cols-2 gap-10 md:gap-14">
         <PauseOffscreen>
         <Reveal className="flex flex-col gap-5 text-body text-ink-soft max-w-[65ch]">
@@ -118,14 +123,11 @@ export default function About() {
             , a design org on campus that works with local community partners on their products.
           </p>
 
-          <p className="m-0">
-            Outside of all this, I make way too many Spotify playlists and love finding new coffee
-            shops.
-          </p>
+          <Interests />
         </Reveal>
         </PauseOffscreen>
 
-        <div>
+        <div className="relative">
           <Reveal>
             <div className="relative h-[380px] md:h-[520px] touch-pan-y">
               {POLAROIDS.map((shot, i) => {
@@ -164,8 +166,13 @@ export default function About() {
               </p>
             </div>
           </Reveal>
+
+          {/* Floats under the school block without adding height, so the
+              section's bottom spacing matches the others. */}
+          <InterestShowcase reserve className="absolute left-[68px] top-full z-10 mt-5 hidden !w-[180px] md:block" />
         </div>
       </div>
+      </InterestsProvider>
     </section>
   )
 }

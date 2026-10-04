@@ -14,13 +14,10 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['var(--font-league)', 'var(--font-inter)', 'sans-serif'],
+        hand: ['var(--font-caveat)', 'ui-sans-serif', 'cursive'],
       },
-      // Responsive sizes live in CSS variables (globals.css) so each role is
-      // one class instead of three breakpoints repeated per file.
+      // Fixed sizes. Responsive heading sizes (text-display/h2/h3) live in globals.css.
       fontSize: {
-        display: ['var(--fs-display)', { lineHeight: '0.92', letterSpacing: '-0.03em' }],
-        h2: ['var(--fs-h2)', { lineHeight: '1.02' }],
-        h3: ['var(--fs-h3)', { lineHeight: '1.15' }],
         lead: ['22px', { lineHeight: '1.45' }],
         body: ['17px', { lineHeight: '1.6' }],
         small: ['15px', { lineHeight: '1.6' }],

@@ -8,7 +8,8 @@ import Footer from '@/components/sections/Footer'
 import { ThemeProvider } from '@/components/ui/ThemeProvider'
 
 // Self-hosted variable fonts (no runtime Google dependency). Files live in
-// app/fonts. League Spartan = display; Inter = body/UI.
+// app/fonts. League Spartan = bold display; Inter = body/UI; Caveat = the
+// handwritten sticky notes.
 const league = localFont({
   src: './fonts/LeagueSpartan.woff2',
   variable: '--font-league',
@@ -21,6 +22,14 @@ const inter = localFont({
   variable: '--font-inter',
   display: 'swap',
   weight: '100 900',
+})
+
+const caveat = localFont({
+  src: './fonts/Caveat.woff2',
+  variable: '--font-caveat',
+  display: 'swap',
+  weight: '400 700',
+  preload: false,
 })
 
 const description = `${PROFILE.name} is a CS and Statistics student at ${PROFILE.school} building accessible, data-driven tools.`
@@ -61,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${league.variable} ${inter.variable}`}
+      className={`${league.variable} ${inter.variable} ${caveat.variable}`}
       suppressHydrationWarning
     >
       <head>
