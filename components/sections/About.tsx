@@ -127,7 +127,7 @@ export default function About() {
         </Reveal>
         </PauseOffscreen>
 
-        <div className="relative">
+        <div>
           <Reveal>
             <div className="relative h-[380px] md:h-[520px] touch-pan-y">
               {POLAROIDS.map((shot, i) => {
@@ -148,28 +148,29 @@ export default function About() {
             </div>
           </Reveal>
 
-          <Reveal delay={80} className="mt-2 flex items-start gap-4">
-            <div className="relative h-[52px] w-[52px] shrink-0 overflow-hidden rounded-[14px]">
-              <Image src={EDUCATION.logo} alt="" fill className="object-cover" sizes="52px" />
-            </div>
-            <div className="pt-0.5">
-              <h3 className="font-display text-h3">
-                {EDUCATION.school} <span aria-hidden>🦡</span>
-              </h3>
-              <p className="mt-1.5 text-small text-orange-ink font-medium">{EDUCATION.degree}</p>
-              <p className="mt-1 text-caption text-muted">
-                {EDUCATION.dates} · {EDUCATION.honors}
-              </p>
-              <p className="mt-4 text-caption text-muted max-w-[46ch]">
-                <span className="text-ink-soft font-medium">Coursework</span> -{' '}
-                {EDUCATION.coursework.join(', ')}
-              </p>
-            </div>
-          </Reveal>
+          <div className="relative">
+            <Reveal delay={80} className="mt-2 flex items-start gap-4">
+              <div className="relative h-[52px] w-[52px] shrink-0 overflow-hidden rounded-[14px]">
+                <Image src={EDUCATION.logo} alt="" fill className="object-cover" sizes="52px" />
+              </div>
+              <div className="pt-0.5">
+                <h3 className="font-display text-h3">
+                  {EDUCATION.school} <span aria-hidden>🦡</span>
+                </h3>
+                <p className="mt-1.5 text-small text-orange-ink font-medium">{EDUCATION.degree}</p>
+                <p className="mt-1 text-caption text-muted">
+                  {EDUCATION.dates} · {EDUCATION.honors}
+                </p>
+                <p className="mt-4 text-caption text-muted max-w-[46ch]">
+                  <span className="text-ink-soft font-medium">Coursework</span> -{' '}
+                  {EDUCATION.coursework.join(', ')}
+                </p>
+              </div>
+            </Reveal>
 
-          {/* Floats under the school block without adding height, so the
-              section's bottom spacing matches the others. */}
-          <InterestShowcase reserve className="absolute left-[68px] top-full z-10 mt-5 hidden !w-[180px] md:block" />
+            {/* Sits right under the school block, floating so it adds no height. */}
+            <InterestShowcase reserve className="absolute left-[68px] top-full z-10 mt-6 hidden !w-[180px] md:block" />
+          </div>
         </div>
       </div>
       </InterestsProvider>

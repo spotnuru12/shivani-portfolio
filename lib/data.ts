@@ -17,7 +17,7 @@ export const PROFILE = {
     'https://1drv.ms/b/c/796c1c094714b749/IQBpbMNQIu_fTKxRTsmsHhXdAd6jGVWQFeYLjr3sCK_E8wg',
   // Opening claim. TODO(shivani): rewrite intro in my own words.
   lead:
-    "A UW–Madison student studying Computer Science + Statistics, interested in technology-driven social impact — whether that's through code, data, or research.",
+    "A UW–Madison student studying Computer Science + Statistics, interested in technology-driven social impact, whether that's through code, data, or research.",
 } as const
 
 export const INTERESTS: { label: string; photo?: string; alt: string; note?: string }[] = [
